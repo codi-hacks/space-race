@@ -36,4 +36,10 @@ objects.ground.end_contact = function(self)
     print('ground bonk')
 end
 
+objects.bullet = {}
+objects.bullet.body = love.physics.newBody(world, 200, 200, 'dynamic')
+objects.bullet.shape = love.physics.newRectangleShape(40, 20)
+objects.bullet.fixture = love.physics.newFixture(objects.bullet.body, objects.bullet.shape)
+
+
 return objects
