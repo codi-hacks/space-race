@@ -1,3 +1,5 @@
+require('player')
+
 objects = {}
 
 local keepThingsOnScreen = function(self)
@@ -13,19 +15,8 @@ local keepThingsOnScreen = function(self)
     end
 end
 
--- objects.square dude
-objects.square = {}
-objects.square.size = 25
-objects.square.body = love.physics.newBody(world, 350, 350, 'dynamic')
-objects.square.shape = love.physics.newRectangleShape(objects.square.size * 2, objects.square.size * 2)
-objects.square.fixture = love.physics.newFixture(objects.square.body, objects.square.shape)
-objects.square.fixture:setRestitution(0.5)
-objects.square.fixture:setUserData('SQUARE')
-objects.square.update = keepThingsOnScreen
-objects.square.end_contact = function(self)
-    objects.square.body:applyForce(400, 0)
-    print('square bonk')
-end
+objects.player = player
+objects.square = player
 
 --objects.circle dude
 objects.circle = {}
