@@ -11,7 +11,7 @@ keyboard.key_map = {
 
 function keyboard.move(time, obj)
     -- Move object via wasd with force
-    local movementForce = 300
+    local movementForce = 100
     if love.keyboard.isDown('w') then
         obj.body:applyForce(0, -movementForce)
     end
@@ -23,6 +23,30 @@ function keyboard.move(time, obj)
     end
     if love.keyboard.isDown('a') then
         obj.body:applyForce(-movementForce, 0)
+    end
+
+    -- Fly spaceship!
+    bottomx, bottomy = objects.square.body:getWorldPoint(0, 25)
+    topx, topy = objects.square.body:getWorldPoint(0, -25)
+    ratiox = math.abs(topx/bottomx)
+    ratioy = math.abs(topy/bottomy)
+    if love.keyboard.isDown('g') then
+        if ratioy > 1 then
+            obj.body:applyForce(0, ratioy * movementForce)
+        elseif ratioy < 1 then
+            obj.body:applyForce(0, ratioy * -movementForce)
+        end
+        if ratiox > 1 then
+            obj.body:applyForce(movementForce, 0)
+        elseif ratiox < 1 then
+            obj.body:applyForce(-movementForce, 0)
+        end
+    end
+    if love.keyboard.isDown('f') then
+        obj.body:applyTorque(-movementForce - 500)
+    end
+    if love.keyboard.isDown('h') then
+        obj.body:applyTorque(movementForce + 500)
     end
 
     -- Move using arrow keys (while holding shift) with "teleportation".

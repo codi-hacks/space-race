@@ -30,14 +30,19 @@ love.keypressed = function(pressed_key)
 end
 
 love.draw = function()
-	love.graphics.setColor({1, 0, 0, 1})
-    love.graphics.polygon("fill", obj.square.body:getWorldPoints(obj.square.shape:getPoints()))
-    love.graphics.setColor({0, 0, 1, 1})
-    love.graphics.circle("line", obj.circle.body:getX(), obj.circle.body:getY(), obj.circle.size)
-    love.graphics.setColor({1, 1, 0, 1})
-    love.graphics.polygon("fill", objects.bullet.body:getWorldPoints(objects.bullet.shape:getPoints()))
     love.graphics.setColor({1, 1, 1, 1})
+    localX, localY = obj.square.body:getWorldPoint(0, 25)
+    love.graphics.circle('fill', localX, localY, 10)
+	love.graphics.setColor({1, 0, 0, 1})
+    love.graphics.polygon('fill', obj.square.body:getWorldPoints(obj.square.shape:getPoints()))
 
+    love.graphics.setColor({0, 0, 1, 1})
+    love.graphics.circle('line', obj.circle.body:getX(), obj.circle.body:getY(), obj.circle.size)
+
+    love.graphics.setColor({1, 1, 0, 1})
+    love.graphics.polygon('fill', objects.bullet.body:getWorldPoints(objects.bullet.shape:getPoints()))
+
+    love.graphics.setColor({1, 1, 1, 1})
     if debugOn then debug() end
 end
 
