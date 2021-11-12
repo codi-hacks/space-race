@@ -7,7 +7,7 @@ love.physics.setMeter(64)
   if entity_b.end_contact then entity_b:end_contact() end
 end
 ]]--
-world = love.physics.newWorld(0, 200)
+world = love.physics.newWorld(0, 0)
 
 world:setCallbacks(nil, nil, nil, nil)
 
