@@ -16,10 +16,9 @@ function keyboard.move(time, obj)
     end
     local movementForce = 100
 
-    bottomx, bottomy = objects.square.body:getWorldPoint(0, 25)
-    topx, topy = objects.square.body:getWorldPoint(0, -25)
-    ratiox = (topx - obj.body:getX()) * 0.04
-    ratioy = (topy - obj.body:getY()) * 0.04
+    local topx, topy = objects.square.body:getWorldPoint(0, -25)
+    local ratiox = (topx - obj.body:getX()) * 0.04
+    local ratioy = (topy - obj.body:getY()) * 0.04
 
     -- Fly spaceship!
     if love.keyboard.isDown('t') then
@@ -28,8 +27,8 @@ function keyboard.move(time, obj)
     if love.keyboard.isDown('g') then
         obj.body:applyForce(ratiox * movementForce * -0.25, ratioy * movementForce * -0.25)
     end
-    angVel = player.body:getAngularVelocity()
-    maxAngVel = 2
+    local angVel = player.body:getAngularVelocity()
+    local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isDown('f') then
             obj.body:applyTorque(-600)

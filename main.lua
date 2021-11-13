@@ -21,11 +21,10 @@ function debug()
 	local ypos = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
 	love.graphics.print(ypos, 0, 50, 0, 2, 2)
 
-    bottomx, bottomy = objects.square.body:getWorldPoint(0, 25)
     topx, topy = objects.square.body:getWorldPoint(0, -25)
     --ratiox = (topx/bottomx - 1) * 6.666666
-    ratiox = (topx - objects.player.body:getX()) * 0.04
-    ratioy = (topy - objects.player.body:getY()) * 0.04
+    local ratiox = (topx - objects.player.body:getX()) * 0.04
+    local ratioy = (topy - objects.player.body:getY()) * 0.04
     local ratios = 'Ratios: ' .. roundOff(ratiox) .. ':' .. roundOff(ratioy)
 	love.graphics.print(ratios, 0, 75, 0, 2, 2)
 
@@ -62,7 +61,7 @@ love.update = function(dt)
 	seconds = seconds + dt
     keyboard.move(dt, objects.square)
 
-    keptObjects = {'square', 'bullet', 'circle'}
+    local keptObjects = {'square', 'bullet', 'circle'}
     for _,v in ipairs(keptObjects) do
         objects[v].update(objects[v])
     end
