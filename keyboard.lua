@@ -11,30 +11,22 @@ keyboard.key_map = {
 
 function keyboard.move(time, obj)
     --optional debug button
-    if love.keyboard.isDown('up') then
+    if love.keyboard.isDown('p') then
         obj.body:setAngularVelocity(20)
     end
     local movementForce = 100
 
     bottomx, bottomy = objects.square.body:getWorldPoint(0, 25)
     topx, topy = objects.square.body:getWorldPoint(0, -25)
-    ratiox = (topx/bottomx - 1) * 6.66666
-    ratioy = (topy/bottomy - 1) * 6.66666
+    ratiox = (topx - obj.body:getX()) * 0.04
+    ratioy = (topy - obj.body:getY()) * 0.04
+
     -- Fly spaceship!
-    if love.keyboard.isDown('g') then
+    if love.keyboard.isDown('t') then
         obj.body:applyForce(ratiox * movementForce, ratioy * movementForce)
-        --[[
-        if ratioy > 1 then
-            obj.body:applyForce(0, ratioy * movementForce)
-        elseif ratioy < 1 then
-            obj.body:applyForce(0, ratioy * -movementForce)
-        end
-        if ratiox > 1 then
-            obj.body:applyForce(movementForce, 0)
-        elseif ratiox < 1 then
-            obj.body:applyForce(-movementForce, 0)
-        end
-        --]]
+    end
+    if love.keyboard.isDown('g') then
+        obj.body:applyForce(ratiox * movementForce * -0.25, ratioy * movementForce * -0.25)
     end
     angVel = player.body:getAngularVelocity()
     maxAngVel = 2

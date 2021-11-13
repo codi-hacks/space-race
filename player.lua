@@ -19,15 +19,15 @@ player.update = function(self)
     end
 
     -- Copy from keepThingsOnScreen
-    if player.body:getX() < -25 then
-        player.body:setX(825)
-    elseif player.body:getX() > 825 then
-        player.body:setX(-25)
+    if self.body:getX() < -25 then
+        self.body:setX(825)
+    elseif self.body:getX() > 825 then
+        self.body:setX(-25)
     end
-    if player.body:getY() < -26 then
-        player.body:setY(625)
-    elseif player.body:getY() > 626 then
-        player.body:setY(-25)
+    if self.body:getY() < -26 then
+        self.body:setY(625)
+    elseif self.body:getY() > 626 then
+        self.body:setY(-25)
     end
 end
 
