@@ -36,7 +36,7 @@ player.update = function(self)
     elseif self.body:getX() > 825 then
         self.body:setX(-25)
     end
-    if self.body:getY() < -26 then
+    if self.body:getY() < -25 then
         self.body:setY(625)
     elseif self.body:getY() > 626 then
         self.body:setY(-25)

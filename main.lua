@@ -26,7 +26,6 @@ function debug()
 	love.graphics.print(ypos, 0, 50, 0, 2, 2)
 
     topx, topy = objects.square.body:getWorldPoint(0, -25)
-    --ratiox = (topx/bottomx - 1) * 6.666666
     local ratiox = (topx - objects.player.body:getX()) * 0.04
     local ratioy = (topy - objects.player.body:getY()) * 0.04
     local ratios = 'Ratios: ' .. roundOff(ratiox) .. ':' .. roundOff(ratioy)
@@ -38,10 +37,14 @@ function debug()
     -- Direction line
     local lastColor = {love.graphics.getColor()}
     love.graphics.setColor({1, 0, 0, 1})
+    for _,value in pairs(objects) do
+        local currentVelocity = {value.body:getLinearVelocity()}
+        local velocityArrow = {value.body:getX() + currentVelocity[1], value.body:getY() + currentVelocity[2]}
+        love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
+    end
+    
     velocityArrow = {objects.square.body:getX() + currentVelocity[1], objects.square.body:getY() + currentVelocity[2]}
-    love.graphics.line(objects.square.body:getX(), objects.square.body:getY(), velocityArrow[1], velocityArrow[2])
     love.graphics.setColor(lastColor)
-
 	love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), 0, 125, 0, 2, 2)
 end
 
@@ -74,9 +77,8 @@ love.update = function(dt)
 	seconds = seconds + dt
     keyboard.move(dt, objects.square)
 
-    -- Which objects to keep inbound on the screen
-    local keptObjects = {'square', 'bullet', 'circle'}
-    for _,v in ipairs(keptObjects) do
-        objects[v].update(objects[v])
+    -- Keep objects inbound on the screen
+    for _,value in pairs(objects) do
+        value.update(value)
     end
 end
