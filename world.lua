@@ -9,8 +9,8 @@ end
 ]]--
 
 local end_contact_callback = function(fixture_a, fixture_b, contact)
-    sound = love.audio.newSource("bonk.mp3", "stream")
-    love.audio.play(sound)
+  -- Extremely useful and essential sound effect
+    love.audio.play(bonkSound)
     print('bonk')
 end
 

@@ -1,14 +1,17 @@
 require('keyboard')
 require('world')
-local objects = require('objects')
+require('objects')
 
 love.load = function()
     seconds = 0
     debugOn = false
     love.window.setMode(800, 600)
+    bonkSound = love.audio.newSource("bonk.mp3", "stream")
+    engineSound = love.audio.newSource("engine.mp3", "stream")
 end
 
 function debug()
+    -- Displays certain values useful for debugging movement
     function roundOff(value)
         return math.floor(value * 100) / 100
     end
@@ -61,6 +64,7 @@ love.update = function(dt)
 	seconds = seconds + dt
     keyboard.move(dt, objects.square)
 
+    -- Which objects to keep inbound on the screen
     local keptObjects = {'square', 'bullet', 'circle'}
     for _,v in ipairs(keptObjects) do
         objects[v].update(objects[v])
