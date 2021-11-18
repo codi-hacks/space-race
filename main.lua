@@ -15,6 +15,7 @@ function debug()
     function roundOff(value)
         return math.floor(value * 100) / 100
     end
+
     love.graphics.setColor({1, 1, 1, 1})
     local clock_display = 'Time: ' .. roundOff(seconds)
 	love.graphics.print(clock_display, 0, 0, 0, 2, 2)
@@ -33,6 +34,15 @@ function debug()
 
     angVel = player.body:getAngularVelocity()
 	love.graphics.print('Angular Velocity: ' .. roundOff(angVel), 0, 100, 0, 2, 2)
+
+    -- Direction line
+    local lastColor = {love.graphics.getColor()}
+    love.graphics.setColor({1, 0, 0, 1})
+    velocityArrow = {objects.square.body:getX() + currentVelocity[1], objects.square.body:getY() + currentVelocity[2]}
+    love.graphics.line(objects.square.body:getX(), objects.square.body:getY(), velocityArrow[1], velocityArrow[2])
+    love.graphics.setColor(lastColor)
+
+	love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), 0, 125, 0, 2, 2)
 end
 
 
@@ -48,7 +58,7 @@ love.draw = function()
     localX, localY = objects.square.body:getWorldPoint(0, 25)
     love.graphics.circle('fill', localX, localY, 10)
 	love.graphics.setColor({0, 1, 0.5, 1})
-    love.graphics.polygon('fill', objects.square.body:getWorldPoints(objects.square.shape:getPoints()))    
+    love.graphics.polygon('fill', objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
     love.graphics.setColor({0, 0, 1, 1})
     love.graphics.circle('line', objects.circle.body:getX(), objects.circle.body:getY(), objects.circle.size)
 
