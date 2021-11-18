@@ -6,8 +6,8 @@ love.load = function()
     seconds = 0
     debugOn = false
     love.window.setMode(800, 600)
-    bonkSound = love.audio.newSource("bonk.mp3", "stream")
-    engineSound = love.audio.newSource("engine.mp3", "stream")
+    bonkSound = love.audio.newSource("sounds/bonk.mp3", "stream")
+    engineSound = love.audio.newSource("sounds/engine.mp3", "stream")
 end
 
 function debug()

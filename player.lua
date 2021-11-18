@@ -22,7 +22,7 @@ player.update = function(self)
     end
 
     -- Engine sound effect (also hardcodes movement keys)
-    if love.keyboard.isDown('w', 'a', 's', 'd') then
+    if love.keyboard.isDown('w', 's') then
         if not engineSound:isPlaying() then
             love.audio.play(engineSound)
         end
