@@ -14,7 +14,7 @@ player.update = function(self)
     -- This slows player left/right spin to a halt once they are not holding the button
     -- Caution: This hardcodes the left/right buttons and should probably be reworked
     -- so that it doesn't need to.
-    if not love.keyboard.isDown('a', 'd') or math.abs(angVel) > maxAngVel then
+    if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
         if angVel < 0 then
             player.body:applyAngularImpulse(10)
         elseif angVel > 0 then
@@ -23,9 +23,10 @@ player.update = function(self)
     end
 
     -- Engine sound effect (also hardcodes movement keys)
-    if love.keyboard.isDown('w', 's') then
+    if love.keyboard.isScancodeDown('w', 's') then
         if not engineSound:isPlaying() then
-            love.audio.play(sounds.engine)
+            engineSound:setLooping(true)
+            love.audio.play(engineSound)
         end
     else
         love.audio.stop(engineSound)
