@@ -15,7 +15,7 @@ function keyboard.move(time, obj)
 
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
-    local topx, topy = objects.square.body:getWorldPoint(0, -25)
+    local topx, topy = objects.player.body:getWorldPoint(0, -25)
     local ratiox = (topx - obj.body:getX()) * 0.04
     local ratioy = (topy - obj.body:getY()) * 0.04
 

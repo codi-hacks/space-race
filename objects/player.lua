@@ -1,7 +1,8 @@
 -- .player dude
 player = {}
 player.size = 25
-player.body = love.physics.newBody(world, 350, 350, 'dynamic')
+player.position = {x = 350, y = 350}
+player.body = love.physics.newBody(world, 0, 0, 'dynamic')
 player.shape = love.physics.newRectangleShape(player.size * 2, player.size * 2)
 player.fixture = love.physics.newFixture(player.body, player.shape)
 player.fixture:setRestitution(0.5)
@@ -24,7 +25,7 @@ player.update = function(self)
     -- Engine sound effect (also hardcodes movement keys)
     if love.keyboard.isDown('w', 's') then
         if not engineSound:isPlaying() then
-            love.audio.play(engineSound)
+            love.audio.play(sounds.engine)
         end
     else
         love.audio.stop(engineSound)

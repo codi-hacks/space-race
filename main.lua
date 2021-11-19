@@ -1,13 +1,18 @@
 require('keyboard')
 require('world')
-require('objects')
+objects = require('objects_old')
+require('systems')
+require('sounds')
 
 love.load = function()
     seconds = 0
     debugOn = false
     love.window.setMode(800, 600)
-    bonkSound = love.audio.newSource("sounds/bonk.mp3", "stream")
-    engineSound = love.audio.newSource("sounds/engine.mp3", "stream")
+    sounds.loadSounds()
+
+    for i, object in ipairs(objects) do
+        systems.spawnObjects(object)
+    end
 end
 
 function debug()
