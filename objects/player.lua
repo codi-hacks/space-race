@@ -12,31 +12,8 @@ player.shape = love.physics.newRectangleShape(player.size * 2, player.size * 2)
 player.fixture = love.physics.newFixture(player.body, player.shape)
 player.fixture:setRestitution(0.5)
 player.fixture:setUserData('player')
+player.body:setMass(1)
 player.update = function()
-    angVel = player.body:getAngularVelocity()
-    maxAngVel = 2
-
-    -- This slows player left/right spin to a halt once they are not holding the button
-    -- Caution: This hardcodes the left/right buttons and should probably be reworked
-    -- so that it doesn't need to.
-    if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
-        if angVel < 0 then
-            player.body:applyAngularImpulse(10)
-        elseif angVel > 0 then
-            player.body:applyAngularImpulse(-10)
-        end
-    end
-
-    -- Engine sound effect (also hardcodes movement keys)
-    if love.keyboard.isScancodeDown('w', 's') then
-        if not sounds.engine:isPlaying() then
-            sounds.engine:setLooping(true)
-            love.audio.play(sounds.engine)
-        end
-    else
-        love.audio.stop(sounds.engine)
-    end
-
     -- Copy from keepThingsOnScreen
     if player.body:getX() < -25 then
         player.body:setX(825)

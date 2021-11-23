@@ -31,7 +31,7 @@ keyboard.move = function (body, time)
     end
 
     -- Steer spaceship left and right
-    local angVel = player.body:getAngularVelocity()
+    local angVel = body:getAngularVelocity()
     local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isScancodeDown('a') then
@@ -41,6 +41,30 @@ keyboard.move = function (body, time)
             body:applyTorque(600)
         end
     end
+
+    -- This slows player left/right spin to a halt once they are not holding the button
+    -- Caution: This hardcodes the left/right buttons and should probably be reworked
+    -- so that it doesn't need to.
+    if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
+        if angVel < 0 then
+            body:applyAngularImpulse(10)
+        elseif angVel > 0 then
+            body:applyAngularImpulse(-10)
+        end
+    end
+
+    -- Engine sound effect (also hardcodes movement keys)
+    if love.keyboard.isScancodeDown('w', 's') then
+        if not sounds.engine:isPlaying() then
+            sounds.engine:setLooping(true)
+            love.audio.play(sounds.engine)
+        end
+    else
+        love.audio.stop(sounds.engine)
+    end
+
+
+
 
     -- The rest of this function is completely optional
     -- (and was left in because it may be useful during development)
