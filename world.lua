@@ -10,7 +10,7 @@ end
 
 local end_contact_callback = function(fixture_a, fixture_b, contact)
   -- Extremely useful and essential sound effect
-    love.audio.play(bonkSound)
+    love.audio.play(sounds.bonk)
 end
 
 world = love.physics.newWorld(0, 0)

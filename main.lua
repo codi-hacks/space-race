@@ -1,18 +1,16 @@
 require('keyboard')
 require('world')
-objects = require('objects_old')
-require('systems')
+objects = require('objects')
+systems = require('systems')
 require('sounds')
 
 love.load = function()
     seconds = 0
-    debugOn = false
+    debugOn = true
     love.window.setMode(800, 600)
     sounds.loadSounds()
 
-    for i, object in ipairs(objects) do
-        systems.spawnObjects(object)
-    end
+    systems.call('spawnObjects')
 end
 
 function debug()
@@ -21,36 +19,42 @@ function debug()
         return math.floor(value * 100) / 100
     end
 
-    love.graphics.setColor({1, 1, 1, 1})
-    local clock_display = 'Time: ' .. roundOff(seconds)
-	love.graphics.print(clock_display, 0, 0, 0, 2, 2)
-	local xpos = 'X/Y Pos: ' .. roundOff(objects.square.body:getX()) .. '/' .. roundOff(objects.square.body:getY())
-	love.graphics.print(xpos, 0, 25, 0, 2, 2)
-    local currentVelocity = {objects.square.body:getLinearVelocity()}
-	local ypos = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
-	love.graphics.print(ypos, 0, 50, 0, 2, 2)
+    for _, entity in ipairs(objects) do
+        if entity.name == 'player' then
 
-    topx, topy = objects.square.body:getWorldPoint(0, -25)
-    local ratiox = (topx - objects.player.body:getX()) * 0.04
-    local ratioy = (topy - objects.player.body:getY()) * 0.04
-    local ratios = 'Ratios: ' .. roundOff(ratiox) .. ':' .. roundOff(ratioy)
-	love.graphics.print(ratios, 0, 75, 0, 2, 2)
+            love.graphics.setColor({1, 1, 1, 1})
+            local clock_display = 'Time: ' .. roundOff(seconds)
+            love.graphics.print(clock_display, 0, 0, 0, 2, 2)
+            
+            local xpos = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
+            love.graphics.print(xpos, 0, 25, 0, 2, 2)
+            local currentVelocity = {entity.body:getLinearVelocity()}
+            local ypos = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
+            love.graphics.print(ypos, 0, 50, 0, 2, 2)
 
-    angVel = player.body:getAngularVelocity()
-	love.graphics.print('Angular Velocity: ' .. roundOff(angVel), 0, 100, 0, 2, 2)
+            topx, topy = entity.body:getWorldPoint(0, -25)
+            local ratiox = (topx - entity.body:getX()) * 0.04
+            local ratioy = (topy - entity.body:getY()) * 0.04
+            local ratios = 'Ratios: ' .. roundOff(ratiox) .. ':' .. roundOff(ratioy)
+            love.graphics.print(ratios, 0, 75, 0, 2, 2)
 
-    -- Direction line
-    local lastColor = {love.graphics.getColor()}
-    love.graphics.setColor({1, 0, 0, 1})
-    for _,value in pairs(objects) do
-        local currentVelocity = {value.body:getLinearVelocity()}
-        local velocityArrow = {value.body:getX() + currentVelocity[1], value.body:getY() + currentVelocity[2]}
-        love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
+            angVel = player.body:getAngularVelocity()
+            love.graphics.print('Angular Velocity: ' .. roundOff(angVel), 0, 100, 0, 2, 2)
+
+            -- Direction line
+            local lastColor = {love.graphics.getColor()}
+            love.graphics.setColor({1, 0, 0, 1})
+            for _,value in pairs(objects) do
+                local currentVelocity = {value.body:getLinearVelocity()}
+                local velocityArrow = {value.body:getX() + currentVelocity[1], value.body:getY() + currentVelocity[2]}
+                love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
+            end
+            
+            velocityArrow = {entity.body:getX() + currentVelocity[1], entity.body:getY() + currentVelocity[2]}
+            love.graphics.setColor(lastColor)
+            love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), 0, 125, 0, 2, 2)
+        end
     end
-    
-    velocityArrow = {objects.square.body:getX() + currentVelocity[1], objects.square.body:getY() + currentVelocity[2]}
-    love.graphics.setColor(lastColor)
-	love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), 0, 125, 0, 2, 2)
 end
 
 
@@ -62,17 +66,8 @@ love.keypressed = function(pressed_key)
 end
 
 love.draw = function()
-    love.graphics.setColor({1, 0, 0, 1})
-    localX, localY = objects.square.body:getWorldPoint(0, 25)
-    love.graphics.circle('fill', localX, localY, 10)
-	love.graphics.setColor({0, 1, 0.5, 1})
-    love.graphics.polygon('fill', objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
-    love.graphics.setColor({0, 0, 1, 1})
-    love.graphics.circle('line', objects.circle.body:getX(), objects.circle.body:getY(), objects.circle.size)
-
-    love.graphics.setColor({1, 1, 0, 1})
-    love.graphics.polygon('fill', objects.bullet.body:getWorldPoints(objects.bullet.shape:getPoints()))
-
+    systems.call('drawObjects')
+    --
     love.graphics.setColor({1, 1, 1, 1})
     if debugOn then debug() end
 end
@@ -80,10 +75,7 @@ end
 love.update = function(dt)
     world:update(dt)
 	seconds = seconds + dt
-    keyboard.move(dt, objects.square)
+    systems.call('controlPlayer')
 
-    -- Keep objects inbound on the screen
-    for _,value in pairs(objects) do
-        value.update(value)
-    end
+    systems.call('updateObjects')
 end

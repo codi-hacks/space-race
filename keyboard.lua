@@ -1,3 +1,5 @@
+system = require('lib/system')
+
 keyboard = {}
 
 keyboard.key_map = {
@@ -9,22 +11,23 @@ keyboard.key_map = {
     end
 }
 
-function keyboard.move(time, obj)
+
+keyboard.move = function (body, time)
     -- Standard amount of force to base movement off of
     local movementForce = 100
 
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
-    local topx, topy = objects.player.body:getWorldPoint(0, -25)
-    local ratiox = (topx - obj.body:getX()) * 0.04
-    local ratioy = (topy - obj.body:getY()) * 0.04
+    local topx, topy = body:getWorldPoint(0, -25)
+    local ratiox = (topx - body:getX()) * 0.04
+    local ratioy = (topy - body:getY()) * 0.04
 
     -- Fly spaceship forwards and backwards
     if love.keyboard.isScancodeDown('w') then
-        obj.body:applyForce(ratiox * movementForce, ratioy * movementForce)
+        body:applyForce(ratiox * movementForce, ratioy * movementForce)
     end
     if love.keyboard.isScancodeDown('s') then
-        obj.body:applyForce(ratiox * movementForce * -0.25, ratioy * movementForce * -0.25)
+        body:applyForce(ratiox * movementForce * -0.25, ratioy * movementForce * -0.25)
     end
 
     -- Steer spaceship left and right
@@ -32,10 +35,10 @@ function keyboard.move(time, obj)
     local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isScancodeDown('a') then
-            obj.body:applyTorque(-600)
+            body:applyTorque(-600)
         end
         if love.keyboard.isScancodeDown('d') then
-            obj.body:applyTorque(600)
+            body:applyTorque(600)
         end
     end
 
@@ -43,26 +46,26 @@ function keyboard.move(time, obj)
     -- (and was left in because it may be useful during development)
     -- Move object via arrow keys with directional force
     if love.keyboard.isScancodeDown('up') then
-        obj.body:applyForce(0, -movementForce)
+        body:applyForce(0, -movementForce)
     end
     if love.keyboard.isScancodeDown('down') then
-        obj.body:applyForce(0, movementForce)
+        body:applyForce(0, movementForce)
     end
     if love.keyboard.isScancodeDown('right') then
-        obj.body:applyForce(movementForce, 0)
+        body:applyForce(movementForce, 0)
     end
     if love.keyboard.isScancodeDown('left') then
-        obj.body:applyForce(-movementForce, 0)
+        body:applyForce(-movementForce, 0)
     end
 
     -- Move using arrow keys (while holding shift) with "teleportation".
     -- A.K.A. adjusting the x/y of an object.
     if love.keyboard.isScancodeDown('lshift') then
-        obj.body:setLinearVelocity(0, 0)
-        obj.body:setAngularVelocity(0)
+        body:setLinearVelocity(0, 0)
+        body:setAngularVelocity(0)
         local movespeed = 200
-        local xpos = obj.body:getX()
-        local ypos = obj.body:getY()
+        local xpos = body:getX()
+        local ypos = body:getY()
         if love.keyboard.isScancodeDown('up') then
             ypos = ypos - time * movespeed
         end
@@ -76,13 +79,13 @@ function keyboard.move(time, obj)
             xpos = xpos + time * movespeed
         end
 
-        obj.body:setX(xpos)
-        obj.body:setY(ypos)
+        body:setX(xpos)
+        body:setY(ypos)
     end
 
     -- Induce crazy spin
     if love.keyboard.isScancodeDown('p') then
-        obj.body:setAngularVelocity(20)
+        body:setAngularVelocity(20)
     end
 end
 
