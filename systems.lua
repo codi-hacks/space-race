@@ -1,5 +1,6 @@
 local System = require('lib/system')
 require('objects')
+local Camera = require('camera')
 
 systems = {}
 
@@ -10,7 +11,7 @@ systems = {}
         - Typically used as generic functions for interacting with table of entities
         - These are denoted by having lowercase first letters
     2. Use systems.call('foo', {bar})
-        - Typicalled used as game-interacting functions
+        - Typically used as game-interacting functions
         - These are denoted by having uppercase first letters
         - To pass an agrument (if necessary), wrap the arg(s) in some curly bois.
 ]]
@@ -37,6 +38,11 @@ systems.grab = function(selectedName)
             return entity
         end
     end
+end
+
+-- Insert entity into table (pure laziness function at this point)
+systems.insert = function(insertedObject)
+    table.insert(objects, insertedObject)
 end
 
 -- Spawn objects at their first position
@@ -66,11 +72,47 @@ systems.UpdateObjects = System(
 
 -- Controls all objects with self.isControlled = true (typically just the player)
 systems.ControlPlayer = System(
-    {'isControlled', 'body'},
-    function(isControlled, body)
-        if isControlled then
-            keyboard.move(body, love.timer.getDelta())
+    {'-isControlled', 'body'},
+    function(body)
+        keyboard.move(body, love.timer.getDelta())
+    end
+)
+
+systems.UpdateCamera = System(
+    {'-isControlled', 'body', 'size'},
+    function(body, size)
+        local player_pos_x, player_pos_y = body:getPosition()
+        local player_height = size
+        local player_width = size
+        local camera_pos_x, camera_pos_y = Camera.get_position()
+
+        local boundary_bottom = Camera.get_boundary_bottom()
+        local boundary_top = Camera.get_boundary_top()
+        local boundary_left = Camera.get_boundary_left()
+        local boundary_right = Camera.get_boundary_right()
+
+        camera_pos_y = player_pos_y - 300
+        camera_pos_x = player_pos_x - 400
+        --[[ Keep these in for when a map boundary is put in place!
+        if player_pos_y < boundary_top then
+            camera_pos_y = camera_pos_y - (boundary_top - player_pos_y) 
+        elseif player_pos_y + player_height > boundary_bottom then
+            camera_pos_y = camera_pos_y - (boundary_bottom - (player_pos_y + player_height))
         end
+
+        if player_pos_x < boundary_left then
+            camera_pos_x = camera_pos_x - (boundary_left - player_pos_x)
+        elseif player_pos_x + player_width > boundary_right then
+            camera_pos_x = camera_pos_x - (boundary_right - (player_pos_x + player_width))
+        end
+        ]]--
+
+        print(camera_pos_x, camera_pos_y)
+        -- Floor the values to avoid screen-tearing floats
+        Camera.set_position(
+            math.floor(camera_pos_x),
+            math.floor(camera_pos_y)
+        )
     end
 )
 

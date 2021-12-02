@@ -4,7 +4,8 @@ physics_objects = {}
 physics_objects.circle = {}
 physics_objects.circle.name = 'circle'
 physics_objects.circle.size = 25
-physics_objects.circle.body = love.physics.newBody(world, 100, 300, 'dynamic')
+physics_objects.circle.position = {x = 100, y = 300}
+physics_objects.circle.body = love.physics.newBody(world, 0, 0, 'dynamic')
 physics_objects.circle.shape = love.physics.newCircleShape(physics_objects.circle.size)
 physics_objects.circle.fixture = love.physics.newFixture(physics_objects.circle.body, physics_objects.circle.shape)
 physics_objects.circle.fixture:setUserData('CIRCLE')
@@ -31,7 +32,8 @@ end
 
 physics_objects.bullet = {}
 physics_objects.bullet.name = 'bullet'
-physics_objects.bullet.body = love.physics.newBody(world, 100, 200, 'dynamic')
+physics_objects.bullet.position = {x = 100, y = 200}
+physics_objects.bullet.body = love.physics.newBody(world, 0, 0, 'dynamic')
 physics_objects.bullet.shape = love.physics.newRectangleShape(40, 20)
 physics_objects.bullet.fixture = love.physics.newFixture(physics_objects.bullet.body, physics_objects.bullet.shape)
 physics_objects.bullet.update = function()

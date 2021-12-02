@@ -1,4 +1,4 @@
-system = require('lib/system')
+require('systems')
 
 keyboard = {}
 
@@ -8,6 +8,11 @@ keyboard.key_map = {
     end,
     b = function()
         debugOn = not debugOn
+    end,
+    o = function()
+        local player = systems.grab('player')
+        print(player.size)
+        player.size = player.size + 50
     end
 }
 
@@ -47,9 +52,9 @@ keyboard.move = function (body, time)
     -- so that it doesn't need to.
     if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
         if angVel < 0 then
-            body:applyAngularImpulse(10)
+            body:applyAngularImpulse(2)
         elseif angVel > 0 then
-            body:applyAngularImpulse(-10)
+            body:applyAngularImpulse(-2)
         end
     end
 

@@ -3,6 +3,7 @@ require('world')
 objects = require('objects')
 systems = require('systems')
 require('sounds')
+Camera = require('camera')
 
 love.load = function()
     seconds = 0
@@ -77,9 +78,13 @@ love.keypressed = function(pressed_key)
 end
 
 love.draw = function()
+    Camera.set()
+
     systems.call('DrawObjects')
     --
     if debugOn then debug() end
+
+    Camera.unset()
 end
 
 love.update = function(dt)
@@ -88,4 +93,6 @@ love.update = function(dt)
     systems.call('ControlPlayer')
 
     systems.call('UpdateObjects')
+
+    systems.call('UpdateCamera')
 end

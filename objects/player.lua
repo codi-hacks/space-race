@@ -15,7 +15,7 @@ player.fixture:setUserData('player')
 player.body:setMass(1)
 player.update = function()
     -- Copy from keepThingsOnScreen
-    if player.body:getX() < -25 then
+--[[    if player.body:getX() < -25 then
         player.body:setX(825)
     elseif player.body:getX() > 825 then
         player.body:setX(-25)
@@ -24,7 +24,7 @@ player.update = function()
         player.body:setY(625)
     elseif player.body:getY() > 626 then
         player.body:setY(-25)
-    end
+    end ]]--
 end
 player.draw = function()
     love.graphics.setColor({1, 0, 0, 1})
