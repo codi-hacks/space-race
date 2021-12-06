@@ -7,12 +7,20 @@ keyboard.key_map = {
         love.event.quit()
     end,
     b = function()
-        debugOn = not debugOn
+        state.debugOn = not state.debugOn
     end,
     o = function()
         local player = systems.grab('player')
-        print(player.size)
-        player.size = player.size + 50
+        player.body:setX(player.position.x)
+        player.body:setY(player.position.y)
+    end,
+    p = function()
+        state.paused = not state.paused
+        if state.paused == false then
+            love.audio.play(sounds.chirp_up)
+        elseif state.paused == true then
+            love.audio.play(sounds.chirp_down)
+        end
     end
 }
 
@@ -32,7 +40,7 @@ keyboard.move = function (body, time)
         body:applyForce(ratiox * movementForce, ratioy * movementForce)
     end
     if love.keyboard.isScancodeDown('s') then
-        body:applyForce(ratiox * movementForce * -0.25, ratioy * movementForce * -0.25)
+        body:applyForce(-ratiox * movementForce, -ratioy * movementForce)
     end
 
     -- Steer spaceship left and right
@@ -113,7 +121,7 @@ keyboard.move = function (body, time)
     end
 
     -- Induce crazy spin
-    if love.keyboard.isScancodeDown('p') then
+    if love.keyboard.isScancodeDown('l') then
         body:setAngularVelocity(20)
     end
 end

@@ -7,12 +7,13 @@ player.name = 'player'
 player.isControlled = true
 player.size = 25
 player.position = {x = 350, y = 350}
+player.mass = 1
 player.body = love.physics.newBody(world, 0, 0, 'dynamic')
 player.shape = love.physics.newRectangleShape(player.size * 2, player.size * 2)
 player.fixture = love.physics.newFixture(player.body, player.shape)
 player.fixture:setRestitution(0.5)
 player.fixture:setUserData('player')
-player.body:setMass(1)
+player.body:setMass(player.mass)
 player.update = function()
     -- Copy from keepThingsOnScreen
 --[[    if player.body:getX() < -25 then

@@ -4,10 +4,12 @@ objects = require('objects')
 systems = require('systems')
 require('sounds')
 Camera = require('camera')
+require('state')
 
 love.load = function()
     seconds = 0
-    debugOn = true
+    blinkTimer = 0
+    blink = true
     love.window.setMode(800, 600)
     sounds.loadSounds()
 
@@ -37,22 +39,21 @@ function debug()
     if entity.name == 'player' then
         love.graphics.setColor({1, 1, 1, 1})
         local clock_display = 'Time: ' .. roundOff(seconds)
-        love.graphics.print(clock_display, 0, 0, 0, 2, 2)
+        love.graphics.print(clock_display, pos_x, pos_y, 0, 2, 2)
         
+        pos_x = state.camera.pos_x
+        pos_y = state.camera.pos_y
         local xpos = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
-        love.graphics.print(xpos, 0, 25, 0, 2, 2)
+        love.graphics.print(xpos, pos_x, pos_y + 25, 0, 2, 2)
         local currentVelocity = {entity.body:getLinearVelocity()}
         local ypos = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
-        love.graphics.print(ypos, 0, 50, 0, 2, 2)
+        love.graphics.print(ypos, pos_x, pos_y + 50, 0, 2, 2)
 
-        topx, topy = entity.body:getWorldPoint(0, -25)
-        local ratiox = (topx - entity.body:getX()) * 0.04
-        local ratioy = (topy - entity.body:getY()) * 0.04
-        local ratios = 'Ratios: ' .. roundOff(ratiox) .. ':' .. roundOff(ratioy)
-        love.graphics.print(ratios, 0, 75, 0, 2, 2)
+        local ratios = 'Gravity: ' .. forcex .. ':' .. forcey
+        love.graphics.print(ratios, pos_x, pos_y + 75, 0, 2, 2)
 
-        angVel = player.body:getAngularVelocity()
-        love.graphics.print('Angular Velocity: ' .. roundOff(angVel), 0, 100, 0, 2, 2)
+        local campos = 'Camera: ' .. pos_x .. ':' .. pos_y
+        love.graphics.print(campos, pos_x, pos_y + 100, 0, 2, 2)
 
         -- Direction line
         local lastColor = {love.graphics.getColor()}
@@ -65,7 +66,7 @@ function debug()
         
         velocityArrow = {entity.body:getX() + currentVelocity[1], entity.body:getY() + currentVelocity[2]}
         love.graphics.setColor(lastColor)
-        love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), 0, 125, 0, 2, 2)
+        love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), pos_x, pos_y + 125, 0, 2, 2)
     end
 end
 
@@ -81,18 +82,40 @@ love.draw = function()
     Camera.set()
 
     systems.call('DrawObjects')
-    --
-    if debugOn then debug() end
+
+    if state.debugOn then debug() end
+
+    if state.paused == true then
+        blinkTimer = blinkTimer + love.timer.getDelta()
+        if blinkTimer > .25 then
+            blinkTimer = 0
+            blink = not blink
+        end
+        if blink == true then
+            love.graphics.setColor({1, 0, 0, 1})
+            love.graphics.rectangle('line', state.camera.pos_x, state.camera.pos_y,
+            state.camera.window_width, state.camera.window_height)
+        end
+    end
 
     Camera.unset()
 end
 
 love.update = function(dt)
-    world:update(dt)
-	seconds = seconds + dt
-    systems.call('ControlPlayer')
+    if state.paused == false then
+        world:update(dt)
+        seconds = seconds + dt
+        for _, entity in ipairs(objects) do
+            systems.ControlPlayer(entity)
+            systems.UpdateObjects(entity)
+            systems.Gravitate(entity, entity)
+            systems.UpdateCamera(entity)
+        end
 
-    systems.call('UpdateObjects')
-
-    systems.call('UpdateCamera')
+        if seconds <= 1 then
+            state.camera.scale_x = 1 / seconds
+        else
+            state.camera.scale_x = 1
+        end
+    end
 end
