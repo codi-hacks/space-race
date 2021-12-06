@@ -6,6 +6,8 @@ Use `a`/`d` to spin the ship left/right and `w`/`s` to boost forward/backward. T
 
 Press `b` for debug information.
 
+Press `p` to pause.
+
 ## Running
 
 Install [love2D](https://love2d.org/) and run `love .` in the main directory. That's it!
