@@ -55,6 +55,22 @@ keyboard.move = function (body, time)
         end
     end
 
+    -- Brake (applies force in opposite the current direction)
+    if love.keyboard.isScancodeDown('space') then
+        local brakeForce = {body:getLinearVelocity()}
+        for k,_ in ipairs(brakeForce) do
+            brakeForce[k] = brakeForce[k] * 2
+            if math.abs(brakeForce[k]) > movementForce then
+                brakeForce[k] = -movementForce * (brakeForce[k]>0 and 1 or brakeForce[k]<0 and -1 or 0)
+            else
+                brakeForce[k] = -brakeForce[k]
+            end
+        end
+
+        print(brakeForce[1], brakeForce[2])
+        body:applyForce(brakeForce[1], brakeForce[2])
+    end
+
     -- This slows player left/right spin to a halt once they are not holding the button
     -- Caution: This hardcodes the left/right buttons and should probably be reworked
     -- so that it doesn't need to.
@@ -67,13 +83,26 @@ keyboard.move = function (body, time)
     end
 
     -- Engine sound effect (also hardcodes movement keys)
-    if love.keyboard.isScancodeDown('w', 's') then
+    if love.keyboard.isScancodeDown('space') then
+        brakeForce = {body:getLinearVelocity()}
+        if (math.abs(brakeForce[1]) + math.abs(brakeForce[2])) > 0.5 then
+            love.audio.stop(sounds.engine)
+            if not sounds.braking:isPlaying() then
+                sounds.braking:setLooping(true)
+                love.audio.play(sounds.braking)
+            end
+        else
+            love.audio.stop(sounds.braking)
+        end
+    elseif love.keyboard.isScancodeDown('w', 's') then
+        love.audio.stop(sounds.braking)
         if not sounds.engine:isPlaying() then
             sounds.engine:setLooping(true)
             love.audio.play(sounds.engine)
         end
     else
         love.audio.stop(sounds.engine)
+        love.audio.stop(sounds.braking)
     end
 
 

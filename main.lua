@@ -43,11 +43,11 @@ function debug()
         
         pos_x = state.camera.pos_x
         pos_y = state.camera.pos_y
-        local xpos = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
-        love.graphics.print(xpos, pos_x, pos_y + 25, 0, 2, 2)
+        local playerPosition = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
+        love.graphics.print(playerPosition, pos_x, pos_y + 25, 0, 2, 2)
         local currentVelocity = {entity.body:getLinearVelocity()}
-        local ypos = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
-        love.graphics.print(ypos, pos_x, pos_y + 50, 0, 2, 2)
+        local playerVelocity = 'X/Y Vel: ' .. roundOff(currentVelocity[1]).. '/' .. roundOff(currentVelocity[2])
+        love.graphics.print(playerVelocity, pos_x, pos_y + 50, 0, 2, 2)
 
         local ratios = 'Gravity: ' .. forcex .. ':' .. forcey
         love.graphics.print(ratios, pos_x, pos_y + 75, 0, 2, 2)
@@ -112,8 +112,8 @@ love.update = function(dt)
             systems.UpdateCamera(entity)
         end
 
-        if seconds <= 1 then
-            state.camera.scale_x = 1 / seconds
+        if seconds <= 0.25 then
+            state.camera.scale_x = 1 / (seconds*4)
         else
             state.camera.scale_x = 1
         end
