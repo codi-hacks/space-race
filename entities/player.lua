@@ -1,5 +1,5 @@
 require('world')
-require('sounds')
+require('/services/sounds')
 
 -- .player dude
 player = {}
@@ -14,19 +14,7 @@ player.fixture = love.physics.newFixture(player.body, player.shape)
 player.fixture:setRestitution(0.5)
 player.fixture:setUserData('player')
 player.body:setMass(player.mass)
-player.update = function()
-    -- Copy from keepThingsOnScreen
---[[    if player.body:getX() < -25 then
-        player.body:setX(825)
-    elseif player.body:getX() > 825 then
-        player.body:setX(-25)
-    end
-    if player.body:getY() < -25 then
-        player.body:setY(625)
-    elseif player.body:getY() > 626 then
-        player.body:setY(-25)
-    end ]]--
-end
+player.update = nil
 player.draw = function()
     love.graphics.setColor({1, 0, 0, 1})
     local localX, localY = player.body:getWorldPoint(0, 25)

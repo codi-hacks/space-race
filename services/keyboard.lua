@@ -67,7 +67,6 @@ keyboard.move = function (body, time)
             end
         end
 
-        print(brakeForce[1], brakeForce[2])
         body:applyForce(brakeForce[1], brakeForce[2])
     end
 

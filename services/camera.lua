@@ -7,8 +7,8 @@
 
 require('state')
 state.camera.boundary_size = 0
-state.camera.pos_x = 0
-state.camera.pos_y = 0
+state.camera.pos_x = 0 * .5
+state.camera.pos_y = 0 * .5
 state.camera.rotation = 0
 state.camera.scale_x = 1
 state.camera.scale_y = 1
