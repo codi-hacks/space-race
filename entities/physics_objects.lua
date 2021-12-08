@@ -5,7 +5,7 @@ physics_objects.circle = {}
 physics_objects.circle.name = 'circle'
 physics_objects.circle.size = 25
 physics_objects.circle.position = {x = 500, y = 400}
-physics_objects.circle.mass = 50
+physics_objects.circle.mass = 75
 physics_objects.circle.body = love.physics.newBody(world, 0, 0, 'static')
 physics_objects.circle.shape = love.physics.newCircleShape(physics_objects.circle.size)
 physics_objects.circle.fixture = love.physics.newFixture(physics_objects.circle.body, physics_objects.circle.shape)
@@ -26,7 +26,7 @@ physics_objects.circle2 = {}
 physics_objects.circle2.name = 'circle2'
 physics_objects.circle2.size = 25
 physics_objects.circle2.position = {x = 200, y = 700}
-physics_objects.circle2.mass = 100
+physics_objects.circle2.mass = 25
 physics_objects.circle2.body = love.physics.newBody(world, 0, 0, 'static')
 physics_objects.circle2.shape = love.physics.newCircleShape(physics_objects.circle2.size)
 physics_objects.circle2.fixture = love.physics.newFixture(physics_objects.circle2.body, physics_objects.circle2.shape)

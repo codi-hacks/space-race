@@ -6,6 +6,7 @@ require('state')
 require('/services/debug')
 require('/services/sounds')
 require('/services/keyboard')
+require('/services/background')
 
 love.load = function()
     seconds = 0
@@ -13,6 +14,7 @@ love.load = function()
     blink = true
     love.window.setMode(800, 600)
     sounds.loadSounds()
+    starLocations = background.load()
 
     for _, entity in ipairs(entities) do
         systems.SpawnEntities(entity)
@@ -29,6 +31,8 @@ end
 
 love.draw = function()
     Camera.set()
+
+    background.draw(starLocations)
 
     for _, entity in ipairs(entities) do
         systems.DrawEntities(entity)
