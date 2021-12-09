@@ -1,3 +1,5 @@
+System = require('/lib/system')
+
 function debug()
     -- Displays certain values useful for debugging
     function roundOff(value) 
@@ -34,7 +36,7 @@ function debug()
         local campos = 'Camera: ' .. roundOff(pos_x) .. ':' .. roundOff(pos_y)
         love.graphics.print(campos, pos_x, pos_y + 100, 0, 2, 2)
 
-        -- Direction line
+        -- Direction line and hitbox
         local lastColor = {love.graphics.getColor()}
         love.graphics.setColor({1, 0, 0, 1})
         for _,value in pairs(entities) do

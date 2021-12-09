@@ -17,6 +17,8 @@ physics_objects.circle.end_contact = function(self)
     print('circle bonk')
 end
 physics_objects.circle.draw = function()
+    love.graphics.setColor({0, 0, 0, 1})
+    love.graphics.circle('fill', physics_objects.circle.body:getX(), physics_objects.circle.body:getY(), physics_objects.circle.size)
     love.graphics.setColor({0, 0, 1, 1})
     love.graphics.circle('line', physics_objects.circle.body:getX(), physics_objects.circle.body:getY(), physics_objects.circle.size)
 end
@@ -38,6 +40,8 @@ physics_objects.circle2.end_contact = function(self)
     print('circle2 bonk')
 end
 physics_objects.circle2.draw = function()
+    love.graphics.setColor({0, 0, 0, 1})
+    love.graphics.circle('fill', physics_objects.circle2.body:getX(), physics_objects.circle2.body:getY(), physics_objects.circle2.size)
     love.graphics.setColor({0.8, 0, 0.6, 1})
     love.graphics.circle('line', physics_objects.circle2.body:getX(), physics_objects.circle2.body:getY(), physics_objects.circle2.size)
 end

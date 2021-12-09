@@ -5,6 +5,7 @@ require('state')
 
 require('/services/debug')
 require('/services/sounds')
+require('/services/textures')
 require('/services/keyboard')
 require('/services/background')
 
@@ -13,7 +14,8 @@ love.load = function()
     blinkTimer = 0
     blink = true
     love.window.setMode(800, 600)
-    sounds.loadSounds()
+    sounds.load()
+    textures.load()
     starLocations = background.load()
 
     for _, entity in ipairs(entities) do
