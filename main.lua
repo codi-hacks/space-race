@@ -8,6 +8,7 @@ require('/services/sounds')
 require('/services/textures')
 require('/services/keyboard')
 require('/services/background')
+local map = require('/services/map')
 
 love.load = function()
     seconds = 0
@@ -17,6 +18,7 @@ love.load = function()
     sounds.load()
     textures.load()
     starLocations = background.load()
+    map.load('test.tmx')
 
     for _, entity in ipairs(entities) do
         systems.SpawnEntities(entity)
@@ -36,9 +38,13 @@ love.draw = function()
 
     background.draw(starLocations)
 
+    --[[
     for _, entity in ipairs(entities) do
         systems.DrawEntities(entity)
     end
+    ]]--
+
+    map.draw()
 
     if state.debugOn then debug() end
 

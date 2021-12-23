@@ -3,9 +3,11 @@
 System = require('/lib/system')
 
 DrawEntities = System(
-    {'draw'},
-    function(drawFunction)
-        drawFunction()
+    {'draw', 'layer'},
+    function(drawFunction, layer, currentLayer)
+        if layer == currentLayer then
+            drawFunction(layer)
+        end
     end
 )
 

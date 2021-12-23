@@ -2,12 +2,14 @@ require('world')
 require('/services/sounds')
 
 -- .player dude
-player = {}
+local player = {}
 player.name = 'player'
+player.type = 'entity'
 player.isControlled = true
 player.size = 25
 player.position = {x = 350, y = 350}
 player.mass = 1
+player.layer = 1
 player.body = love.physics.newBody(world, 0, 0, 'dynamic')
 --player.shape = love.physics.newRectangleShape(player.size * 2, player.size * 2)
 player.shape = love.physics.newPolygonShape(0,-25, -25,2, -25,25, 25,2, 25,25)
