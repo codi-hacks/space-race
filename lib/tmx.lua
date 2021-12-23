@@ -45,7 +45,6 @@ local Util = require('lib/util')
 --   }
 -- }
 
-
 local parse_layer_data_xml = function(tiles)
   local parsed_table = {}
   for i = 1, #tiles do
