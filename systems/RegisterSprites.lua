@@ -7,13 +7,13 @@ local Textures = require 'services/textures'
 
 local components = {
   '_entity',
-  'sprites'
+  'spritesheet'
 }
 
-local system = function(entity, sprites)
-  assert(Textures[sprites], 'Attempted to load undefined sprite: "' .. sprites .. '"')
+local system = function(entity, spritesheet)
+  assert(Textures[spritesheet.image], 'Attempted to load undefined sprite: "' .. spritesheet.image .. '"')
 
-  entity.sprite = Textures[sprites]
+  entity.sprite = Textures[spritesheet.image]
 end
 
 return System(components, system)

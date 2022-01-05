@@ -19,5 +19,9 @@ return {
         },
         type = 'polygon'
     },
-    sprites = 'spaceship'
+    spritesheet = {
+        image = 'spaceship',
+        offset_x = 12.5,
+        scale_x = 2
+    }
 }

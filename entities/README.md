@@ -36,6 +36,12 @@ The shape is attached to the fixture and determines the entity's hitbox.
   - `polygon` - Create a polygon based on defined `points` (as opposed to `radius` as with `circle` type shapes or `width` and `height` as with `rectangle` type shapes.)
   - `rectangle` - Instead of defining `points` or `radius` like you would with a polygon or circle, you would define the `height` and `width`. Box2D will create a shape with the resulting type of `polygon`, so this is just shorthand for not having to define 4 points everytime a rectangle is desired.
 
-### sprites (string)
+### spritesheet (table)
 
-Name of a sprite component. A `nil` value means no sprite will be registered.
+A `nil` value means no sprite will be registered.
+
+- image (string) The "texture" to use
+- offset_x (number = 0) The x-axis pixel offset of the sprite from the body. [[1](https://love2d.org/wiki/love.graphics.draw)]
+- offset_y (number = offset_x) The y-axis pixel offset. This will match the offset_x unless specified.
+- scale_x (number = 1) The x-axis scaling of the sprite.
+- scale_y (number = 1) The y-axis scaling of the sprite.
