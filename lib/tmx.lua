@@ -1,7 +1,6 @@
 --- Tmx service
 -- Parse and decode tmx files
 
-local Base64 = require('lib/base64')
 local Love = love
 local Xml = require('lib/xml')
 local Util = require('lib/util')
@@ -81,7 +80,7 @@ local parse_tile_layer = function(raw_layer_data, error_suffix)
     local tile_data_string = raw_layer_data[1][1]
     -- Strip newlines and whitespaces
     tile_data_string = tile_data_string:gsub('%s+', '')
-    tile_data_string = Base64.decode(tile_data_string)
+    tile_data_string = Love.data.decode('string', 'base64', tile_data_string)
 
     local compression = raw_layer_data[1].xarg.compression
     if not compression then
