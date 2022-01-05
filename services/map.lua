@@ -1,12 +1,12 @@
 --- Map service
 -- Store and decode maps as needed
 
-local Entity = entities
+local Entity = require('services/entity')
 local Love = love
 local Tmx = require('lib/tmx')
 local Util = require('lib/util')
-local World = world
-local systems = require('systems')
+local World = require('services/world')
+local DrawEntities = require('systems/DrawEntities')
 
 local active_map
 local map_directory = '/maps'
@@ -14,8 +14,8 @@ local maps = Tmx.get_map_tables(map_directory)
 
 local draw_objects = function(layer, layer_idx)
   -- Draw each entity that belongs to this layer
-  for _, entity in ipairs(entities) do
-    systems.DrawEntities(entity, layer_idx)
+  for _, entity in ipairs(Entity.list) do
+    DrawEntities(entity, layer_idx)
   end
   -- Draw collision fixture shape's edges in debug mode
 for _, fixture in ipairs(layer.objects) do

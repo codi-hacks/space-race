@@ -257,7 +257,7 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
       if tileset_tables[element.xarg.source] == nil then
         local raw_tileset_xml = Love.filesystem.read(map_directory .. '/' .. element.xarg.source)
         local parsed_tileset_xml = Xml.parse(raw_tileset_xml)[2]
-        table.insert(tileset_tables, parse_tileset(parsed_tileset_xml, error_suffix))
+        tileset_tables[element.xarg.source] = parse_tileset(parsed_tileset_xml, error_suffix)
       end
       table.insert(parsed_map.tilesets, tileset_tables[element.xarg.source])
     elseif element.label == 'tileset' then
@@ -280,6 +280,7 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
     parsed_map.tile_width ~= nil,
     'Unable to set map tile width' .. error_suffix
   )
+
   return parsed_map
 end
 
