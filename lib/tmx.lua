@@ -46,6 +46,7 @@ local Util = require('lib/util')
 --   }
 -- }
 
+
 local parse_layer_data_xml = function(tiles)
   local parsed_table = {}
   for i = 1, #tiles do
@@ -190,10 +191,6 @@ local parse_tileset = function(raw_tileset_data, error_suffix)
     'Expected a defined set of tileset columns. Got nil' .. error_suffix
   )
   assert(
-    raw_tileset_data.xarg.firstgid ~= nil,
-    'Expected tileset to define first gid. Got nil' .. error_suffix
-  )
-  assert(
     raw_tileset_data.xarg.tilecount ~= nil,
     'Expected a total tile count for the given tileset. Got nil' .. error_suffix
   )
@@ -202,7 +199,7 @@ local parse_tileset = function(raw_tileset_data, error_suffix)
   end
   formatted_tileset.source = raw_tileset_data[1].xarg.source:gsub('%.%./', '')
   formatted_tileset.columns = tonumber(raw_tileset_data.xarg.columns)
-  formatted_tileset.first_gid = tonumber(raw_tileset_data.xarg.firstgid)
+  formatted_tileset.first_gid = tonumber(raw_tileset_data.xarg.firstgid) or 1
   formatted_tileset.image_height = tonumber(raw_tileset_data[1].xarg.height)
   formatted_tileset.image_width = tonumber(raw_tileset_data[1].xarg.width)
   formatted_tileset.tile_count = tonumber(raw_tileset_data.xarg.tilecount)
@@ -213,7 +210,9 @@ end
 
 -- file_name (string) for error messages only
 -- raw_file_content (string) the tmx file as a single string
-local parse = function(file_name, raw_file_content)
+-- map_directory (string) path to find maps, example: '/maps'
+-- tileset_tables (table) index of tilesets loaded from .tsx files
+local parse = function(file_name, raw_file_content, map_directory, tileset_tables)
   -- This will be our map's final table:
   local parsed_map = {
     layers = {},
@@ -248,12 +247,19 @@ local parse = function(file_name, raw_file_content)
   for _, element in ipairs(parsed_xml) do
     if element.label == 'layer' then
       table.insert(parsed_map.layers, parse_tile_layer(element, error_suffix))
-      --local parsed_layer = parse_tile_layer(element, error_suffix)
-      --Util.push(parsed_map.layers, parsed_layer)
     elseif element.label == 'objectgroup' then
       table.insert(parsed_map.layers, parse_object_layer(element))
-      --local parsed_object_group = parse_object_layer(element)
-      --Util.push(parsed_map.layers, parsed_object_group)
+    -- Tileset is sourced from a .tsx file, check
+    -- to see if we indexed this tileset already
+    elseif element.label == 'tileset' and element.xarg.source then
+      -- Check to see if we indexed this tileset already and add
+      -- the tileset to the tileset_tables index if we haven't
+      if tileset_tables[element.xarg.source] == nil then
+        local raw_tileset_xml = Love.filesystem.read(map_directory .. '/' .. element.xarg.source)
+        local parsed_tileset_xml = Xml.parse(raw_tileset_xml)[2]
+        table.insert(tileset_tables, parse_tileset(parsed_tileset_xml, error_suffix))
+      end
+      table.insert(parsed_map.tilesets, tileset_tables[element.xarg.source])
     elseif element.label == 'tileset' then
       table.insert(parsed_map.tilesets, parse_tileset(element, error_suffix))
     end
@@ -277,6 +283,131 @@ local parse = function(file_name, raw_file_content)
   return parsed_map
 end
 
+-- Creates table of map filenames as keys
+-- and their contents as parsed tables:
+local get_map_tables = function(map_directory, map_file_ext)
+  if map_file_ext == nil then
+    map_file_ext = '.tmx'
+  end
+  local map_tables = {}
+  local tileset_tables = {}
+  local file_list = Love.filesystem.getDirectoryItems(map_directory)
+  for _, file_name in ipairs(file_list) do
+    local file_ext = string.sub(file_name, -string.len(map_file_ext))
+    -- Only keep files matching the tiled file extension
+    if file_ext == map_file_ext then
+      -- ie., "src/maps/general.tmx"
+      local file_path = map_directory .. '/' .. file_name
+      -- ie., "general" for "general.tmx"
+      local file_name_without_ext = file_name:match('(.+)%..+')
+      local file_content = Love.filesystem.read(file_path)
+      local parsed_content = parse(file_name, file_content, map_directory, tileset_tables)
+      map_tables[file_name_without_ext] = parsed_content
+    end
+  end
+
+  return map_tables
+end
+
+local draw_tiles = function(layer, map)
+  for i, tile in ipairs(layer.data) do
+    -- Skip unset tiles
+    if tile ~= 0 then
+        local tile_pos_x = map.tile_width * ((i - 1) % map.columns)
+        local tile_pos_y = map.tile_height * math.floor((i - 1) / map.columns)
+        local _, _, _, texture_height = map.quads[tile].quad:getViewport()
+        Love.graphics.draw(
+            map.quads[tile].image,
+            map.quads[tile].quad,
+            tile_pos_x,
+            -- Tiled counts image y position from bottom to top
+            tile_pos_y - texture_height + map.tile_height
+        )
+        --Love.graphics.draw(textures.star, tile_pos_x, tile_pos_y - texture_height + map.tile_height)
+    end
+  end
+end
+
+local load_quads = function(map)
+  local quads = {}
+
+  for _, tileset in ipairs(map.tilesets) do
+    local image = Love.graphics.newImage(tileset.source)
+    local quad_idx = tileset.first_gid
+    local row_count = tileset.tile_count / tileset.columns
+    for row = 1, row_count do
+      for column = 1, tileset.columns do
+        local tile_x = map.tile_width * (column - 1)
+        local tile_y = map.tile_height * (row - 1)
+        local quad = Love.graphics.newQuad(
+          tile_x,
+          tile_y,
+          tileset.tile_width,
+          tileset.tile_height,
+          tileset.image_width,
+          tileset.image_height
+        )
+        quads[quad_idx] = {
+          image = image,
+          quad = quad
+        }
+        quad_idx = quad_idx + 1
+      end
+    end
+  end
+
+  return quads
+end
+
+local spawn_fixture = function(world, object, layer_index)
+  local body = Love.physics.newBody(
+    world,
+    object.pos_x,
+    object.pos_y,
+    'static'
+  )
+  if object.rotation then
+    body:setAngle(object.rotation)
+  end
+  local shape
+  if object.points then
+    shape = Love.physics.newPolygonShape(object.points)
+  elseif object.width then
+    shape = Love.physics.newRectangleShape(
+      object.width / 2,
+      object.height / 2,
+      object.width,
+      object.height
+    )
+  end
+
+  if shape then
+    local fixture = Love.physics.newFixture(body, shape)
+    fixture:setGroupIndex(layer_index)
+    return fixture
+  end
+  return nil
+end
+
+local load_fixtures = function(world, layer, layer_idx, entity_spawn_callback)
+  local fixtures = {}
+  for _, object in ipairs(layer.objects) do
+    if object.name and object.type == 'entity' then
+      entity_spawn_callback(object, layer_idx)
+    else
+      local collision_fixture = spawn_fixture(world, object, layer_idx)
+      if collision_fixture then
+        table.insert(fixtures, collision_fixture)
+      end
+    end
+  end
+  return fixtures
+end
+
+
 return {
-  parse = parse
+  draw_tiles = draw_tiles,
+  get_map_tables = get_map_tables,
+  load_fixtures = load_fixtures,
+  load_quads = load_quads
 }

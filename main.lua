@@ -18,7 +18,7 @@ love.load = function()
     sounds.load()
     textures.load()
     starLocations = background.load()
-    map.load('test.tmx')
+    ---map.load('test')
 
     for _, entity in ipairs(entities) do
         systems.SpawnEntities(entity)
@@ -44,7 +44,7 @@ love.draw = function()
     end
     ]]--
 
-    map.draw()
+    --map.draw()
 
     if state.debugOn then debug() end
 
