@@ -41,7 +41,6 @@ love.draw = function()
     map.draw()
 
 
-
     if state.paused == true then
         blinkTimer = blinkTimer + love.timer.getDelta()
         if blinkTimer > .25 then
