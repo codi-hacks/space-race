@@ -8,8 +8,8 @@ local components = {
   'body',
   'draw_layer',
   '?shape',
-  'sprite',
-  'spritesheet'
+  '?sprite',
+  '?spritesheet'
 }
 
 local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
@@ -19,24 +19,35 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
     return
   end
 
-  Love.graphics.draw(
-    sprite,
-    body:getX(),
-    body:getY(),
-    body:getAngle(),
-    spritesheet.scale_x or 1,
-    spritesheet.scale_y or spritesheet.scale_x or 1,
-    spritesheet.offset_x or 0,
-    spritesheet.offset_y or spritesheet.offset_x or 0
-  )
+  if spritesheet then
+    Love.graphics.draw(
+        sprite,
+        body:getX(),
+        body:getY(),
+        body:getAngle(),
+        spritesheet.scale_x or 1,
+        spritesheet.scale_y or spritesheet.scale_x or 1,
+        spritesheet.offset_x or 0,
+        spritesheet.offset_y or spritesheet.offset_x or 0
+    )
+  end
 
   -- Draw fixture shape edges in debug mode
   if shape then
     Love.graphics.setColor(160, 72, 14, 255)
-    Love.graphics.polygon(
+    if shape:getType() == 'polygon' then
+      Love.graphics.polygon(
       'line',
       body:getWorldPoints(shape:getPoints())
-    )
+      )
+    else
+        Love.graphics.circle(
+            'fill',
+            body:getX(),
+            body:getY(),
+            shape:getRadius()
+        )
+    end
     Love.graphics.setColor(255, 255, 255, 255)
   end
 end

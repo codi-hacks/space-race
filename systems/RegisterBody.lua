@@ -18,12 +18,19 @@ local system = function(body, pos_x, pos_y)
     pos_y + (body.offset_y or 0),
     body.type or 'dynamic'
   )
+
+  -- Set the body's mass
+  if mass then
+    new_body:setMass(body.mass)
+  else
+    new_body:setMass(1)
+  end
   -- Give it a fixed rotation unless
   -- explicitly set to false.
-  if body.fixed_rotation == false then
-    new_body:setFixedRotation(false)
-  else
+  if body.fixed_rotation == true then
     new_body:setFixedRotation(true)
+  else
+    new_body:setFixedRotation(false)
   end
   return new_body
 end
