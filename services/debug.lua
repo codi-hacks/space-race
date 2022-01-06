@@ -19,8 +19,8 @@ function debug(entity)
         print('=================================')
     end
     if state.debugOn then
-        pos_x = entity.body:getX()
-        pos_y = entity.body:getY()
+        pos_x = state.camera.pos_x;
+        pos_y = state.camera.pos_y;
         love.graphics.setColor({ 1, 1, 1, 1 })
 
 
