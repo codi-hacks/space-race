@@ -64,7 +64,6 @@ love.update = function(dt)
         seconds = seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
-            DebugPlayer(entity)
             --Gravitate(entity, entity)
             UpdateCamera(entity)
         end

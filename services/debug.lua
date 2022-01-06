@@ -21,10 +21,8 @@ function debug(entity)
     if state.debugOn then
         pos_x = entity.body:getX()
         pos_y = entity.body:getY()
-        print("PosX: " .. pos_x .. " Pos Y " .. pos_y)
         love.graphics.setColor({ 1, 1, 1, 1 })
 
-        love.graphics.print("HEY",  0, 0, 0, 2, 2);
 
         local clock_display = 'Time: ' .. roundOff(seconds)
         love.graphics.print(clock_display, pos_x, pos_y, 0, 2, 2)
