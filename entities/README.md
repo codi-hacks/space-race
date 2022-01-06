@@ -13,6 +13,7 @@ Given a `nil` value instead of a table, the entity won't be given a body.
 - `fixed_rotation` (boolean = true) Whether or not an entity should have rotation movement [[1](https://love2d.org/wiki/Body:setFixedRotation)].
 - `offset_x` (number = 0) Add a positive/negative horizontal pixel offset from all of the entity's designated spawn points.
 - `offset_y` (number = 0) Add a positive/negative vertical pixel offset from all of the entity's designated spawn points.
+- `mass` (number = 1) Set the entity's mass.
 - `type` (string = 'dynamic') Set the Box2D body type. [[1](https://github.com/GuidebeeGameEngine/Box2D/wiki/Body-Types)]
   - `dynamic` - Body has a given mass and interactions with other bodies.
   - `kinematic` - Body interacts with dynamic bodies but cannot be moved by them.
