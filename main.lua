@@ -4,7 +4,6 @@ local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
 
-require('services/debug')
 require('services/sounds')
 require('services/textures')
 require('services/keyboard')
@@ -12,6 +11,7 @@ require('services/background')
 local map = require('services/map')
 
 local ControlPlayer = require('systems/ControlPlayer')
+local DebugPlayer = require('systems/DebugPlayer')
 local UpdateCamera = require('systems/UpdateCamera')
 
 love.load = function()
@@ -40,7 +40,7 @@ love.draw = function()
 
     map.draw()
 
-    if state.debugOn then debug() end
+
 
     if state.paused == true then
         blinkTimer = blinkTimer + love.timer.getDelta()
