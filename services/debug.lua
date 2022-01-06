@@ -1,14 +1,13 @@
-System = require('/lib/system')
+local Entity = require('services/entity')
 
-function debug()
+function debug(entity)
+
     -- Displays certain values useful for debugging
-    function roundOff(value) 
+    function roundOff(value)
         return math.floor(value * 100) / 100
     end
-
-    -- View all objects currently in the entity component system
     if love.keyboard.isScancodeDown('n') then
-        for index, data in ipairs(objects) do
+        for index, data in ipairs(Entity.list) do
             print(index)
 
             for key, value in pairs(data) do
@@ -18,13 +17,11 @@ function debug()
     elseif love.keyboard.isScancodeDown('m') then
         print('=================================')
     end
-
-    entity = systems.grab('player')
-    if entity.name == 'player' then
+    if love.keyboard.isScancodeDown("b")then
         love.graphics.setColor({1, 1, 1, 1})
         local clock_display = 'Time: ' .. roundOff(seconds)
         love.graphics.print(clock_display, pos_x, pos_y, 0, 2, 2)
-        
+
         pos_x = state.camera.pos_x
         pos_y = state.camera.pos_y
         local playerPosition = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
@@ -39,12 +36,12 @@ function debug()
         -- Direction line and hitbox
         local lastColor = {love.graphics.getColor()}
         love.graphics.setColor({1, 0, 0, 1})
-        for _,value in pairs(entities) do
+        for _,value in pairs(Entity.list) do
             local currentVelocity = {value.body:getLinearVelocity()}
             local velocityArrow = {value.body:getX() + currentVelocity[1], value.body:getY() + currentVelocity[2]}
             love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
         end
-        
+
         velocityArrow = {entity.body:getX() + currentVelocity[1], entity.body:getY() + currentVelocity[2]}
         love.graphics.setColor(lastColor)
         love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), pos_x, pos_y + 125, 0, 2, 2)
