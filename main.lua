@@ -13,6 +13,7 @@ local map = require('services/map')
 
 local ControlPlayer = require('systems/ControlPlayer')
 local UpdateCamera = require('systems/UpdateCamera')
+local Gravitate = require('systems/Gravitate')
 
 love.load = function()
     seconds = 0
@@ -64,7 +65,7 @@ love.update = function(dt)
         seconds = seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
-            --Gravitate(entity, entity)
+            Gravitate(entity)
             UpdateCamera(entity)
         end
 
