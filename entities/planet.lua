@@ -10,8 +10,9 @@ return {
         mask = 65535
     },
     shape = {
-        radius = 50,
+        radius = 100,
         type = 'circle',
         visible = true
-    }
+    },
+    gravitational_mass = 5
 }

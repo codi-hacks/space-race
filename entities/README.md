@@ -46,3 +46,9 @@ A `nil` value means no sprite will be registered.
 - offset_y (number = offset_x) The y-axis pixel offset. This will match the offset_x unless specified.
 - scale_x (number = 1) The x-axis scaling of the sprite.
 - scale_y (number = 1) The y-axis scaling of the sprite.
+
+### Optional Values
+
+Other traits assignable to entities that are optional
+
+- gravitational_mass (number) What mass to use when calculating gravity between two entities
