@@ -22,7 +22,7 @@ love.load = function()
     sounds.load()
     textures.load()
     starLocations = background.load()
-    map.load('test')
+    map.load('test2')
 end
 
 
