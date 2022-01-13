@@ -3,21 +3,23 @@
 
 local Love = love
 local System = require 'lib/system'
+local state = require 'state'
 
 local components = {
   'body',
   'draw_layer',
   '?shape',
   '?sprite',
-  '?spritesheet'
+  '?spritesheet',
+  '?gravitational_mass'
 }
 
-local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
-    -- Don't draw the entity unless it belongs to the
-    -- layer from which this system was invoked.
-    if draw_layer ~= layer_idx then
-        return
-    end
+local system = function(body, draw_layer, shape, sprite, spritesheet, gravitational_mass, layer_idx)
+  -- Don't draw the entity unless it belongs to the
+  -- layer from which this system was invoked.
+  if draw_layer ~= layer_idx then
+    return
+  end
 
   if spritesheet then
     Love.graphics.draw(
@@ -33,7 +35,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
   end
 
   -- Draw fixture shape edges in debug mode
-  if shape then
+  if shape and state.debugOn then
     Love.graphics.setColor(160, 72, 14, 255)
     if shape:getType() == 'polygon' then
       Love.graphics.polygon(
@@ -41,6 +43,9 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
       body:getWorldPoints(shape:getPoints())
       )
     else
+        if gravitational_mass then
+            Love.graphics.setColor(gravitational_mass / 10, 0.1, 0.1, 1)
+        end
         Love.graphics.circle(
             'fill',
             body:getX(),

@@ -20,7 +20,7 @@ love.load = function()
     blinkTimer = 0
     blink = true
     love.window.setMode(800, 600)
-    sounds.load()
+    --sounds.load()
     textures.load()
     starLocations = background.load()
     map.load('test')
