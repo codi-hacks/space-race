@@ -1,10 +1,10 @@
 -- Update and control the camera.
 -- Uses Camera.lua for all of the actual camera functions.
 
-System = require('/lib/system')
-Camera = require('/services/camera')
+local System = require('/lib/system')
+local Camera = require('/services/camera')
 
-UpdateCamera = System(
+return System(
     {'-isControlled', 'body'},
     function(body)
         local player_pos_x, player_pos_y = body:getPosition()
@@ -37,11 +37,9 @@ UpdateCamera = System(
         elseif player_pos_x + player_width > boundary_right then
             camera_pos_x = camera_pos_x - (boundary_right - (player_pos_x + player_width))
         end
-        
+
         ]]--
 
         Camera.set_position(camera_pos_x, camera_pos_y)
     end
 )
-
-return UpdateCamera

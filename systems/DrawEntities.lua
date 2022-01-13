@@ -1,12 +1,56 @@
--- Call any draw functions that need to be drawn
+--- DrawEntity
+-- Draw currently-visible entities on screen.
 
-System = require('/lib/system')
+local Love = love
+local System = require 'lib/system'
 
-DrawEntities = System(
-    {'draw'},
-    function(drawFunction)
-        drawFunction()
+local components = {
+    'body',
+    'draw_layer',
+    '?shape',
+    'sprite',
+    'spritesheet'
+}
+
+local system = function(body, draw_layer, shape, sprite, spritesheet, layer_idx)
+    -- Don't draw the entity unless it belongs to the
+    -- layer from which this system was invoked.
+    if draw_layer ~= layer_idx then
+        return
     end
-)
 
-return DrawEntities
+    Love.graphics.draw(
+        sprite,
+        body:getX(),
+        body:getY(),
+        body:getAngle(),
+        spritesheet.scale_x or 1,
+        spritesheet.scale_y or spritesheet.scale_x or 1,
+        spritesheet.offset_x or 0,
+        spritesheet.offset_y or spritesheet.offset_x or 0
+    )
+
+  -- Draw fixture shape edges in debug mode
+    if shape then
+        Love.graphics.setColor(160, 72, 14, 255)
+
+        if shape:getType() == 'circle' then
+            local x, y = body:getWorldPoint(shape:getPoint())
+            Love.graphics.circle(
+                'line',
+                x,
+                y,
+                shape:getRadius()
+            )
+        else
+            Love.graphics.polygon(
+                'line',
+                body:getWorldPoints(shape:getPoints())
+            )
+        end
+
+        Love.graphics.setColor(255, 255, 255, 255)
+    end
+end
+
+return System(components, system)

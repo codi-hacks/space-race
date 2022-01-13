@@ -1,6 +1,7 @@
-require('systems')
+local Entity = require('services/entity')
+local state = require('state')
 
-keyboard = {}
+local keyboard = {}
 
 keyboard.key_map = {
     escape = function()
@@ -10,7 +11,7 @@ keyboard.key_map = {
         state.debugOn = not state.debugOn
     end,
     o = function()
-        local player = systems.grab('player')
+        local player = Entity.grab('player')
         player.body:setX(player.position.x)
         player.body:setY(player.position.y)
     end,

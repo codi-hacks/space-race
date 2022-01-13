@@ -1,11 +1,13 @@
-physics_objects = {}
+local physics_objects = {}
 
 --physics_objects.circle dude
 physics_objects.circle = {}
 physics_objects.circle.name = 'circle'
+physics_objects.circle.type = 'entity'
 physics_objects.circle.size = 25
 physics_objects.circle.position = {x = 500, y = 400}
 physics_objects.circle.mass = 75
+physics_objects.circle.layer = 2
 physics_objects.circle.body = love.physics.newBody(world, 0, 0, 'static')
 physics_objects.circle.shape = love.physics.newCircleShape(physics_objects.circle.size)
 physics_objects.circle.fixture = love.physics.newFixture(physics_objects.circle.body, physics_objects.circle.shape)
@@ -26,9 +28,11 @@ end
 --physics_objects.circle dude
 physics_objects.circle2 = {}
 physics_objects.circle2.name = 'circle2'
+physics_objects.circle2.type = 'entity'
 physics_objects.circle2.size = 25
 physics_objects.circle2.position = {x = 200, y = 700}
 physics_objects.circle2.mass = 25
+physics_objects.circle2.layer = 2
 physics_objects.circle2.body = love.physics.newBody(world, 0, 0, 'static')
 physics_objects.circle2.shape = love.physics.newCircleShape(physics_objects.circle2.size)
 physics_objects.circle2.fixture = love.physics.newFixture(physics_objects.circle2.body, physics_objects.circle2.shape)
@@ -48,8 +52,10 @@ end
 
 physics_objects.bullet = {}
 physics_objects.bullet.name = 'bullet'
+physics_objects.bullet.type = 'entity'
 physics_objects.bullet.position = {x = 100, y = 200}
 physics_objects.bullet.mass = 0.01
+physics_objects.bullet.layer = 2
 physics_objects.bullet.body = love.physics.newBody(world, 0, 0, 'dynamic')
 physics_objects.bullet.shape = love.physics.newRectangleShape(40, 20)
 physics_objects.bullet.fixture = love.physics.newFixture(physics_objects.bullet.body, physics_objects.bullet.shape)
