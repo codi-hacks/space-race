@@ -1,13 +1,13 @@
 local world = require('services/world')
-require('state')
+local state = require('state')
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
 
-require('services/sounds')
-require('services/textures')
-require('services/keyboard')
-require('services/background')
+local sounds = require('services/sounds')
+local textures = require('services/textures')
+local keyboard = require('services/keyboard')
+local background = require('services/background')
 local map = require('services/map')
 
 local ControlPlayer = require('systems/ControlPlayer')
