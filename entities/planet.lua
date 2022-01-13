@@ -1,6 +1,7 @@
 return {
     body = {
-        mass = 75
+        mass = 75,
+        type = 'static'
     },
     fixture = {
         category = 1,
