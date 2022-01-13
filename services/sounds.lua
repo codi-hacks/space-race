@@ -1,4 +1,4 @@
-sounds = {}
+local sounds = {}
 
 sounds.load = function()
     sounds.bonk = love.audio.newSource('/assets/sounds/bonk.mp3', 'stream')

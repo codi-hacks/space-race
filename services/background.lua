@@ -1,6 +1,6 @@
 -- Load random spots for stars to be drawn then draw them.
 
-background = {}
+local background = {}
 
 function background.load()
     -- Load returns a table full of values for star locations
