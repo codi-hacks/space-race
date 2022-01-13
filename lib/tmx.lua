@@ -323,7 +323,6 @@ local draw_tiles = function(layer, map)
             -- Tiled counts image y position from bottom to top
             tile_pos_y - texture_height + map.tile_height
         )
-        --Love.graphics.draw(textures.star, tile_pos_x, tile_pos_y - texture_height + map.tile_height)
     end
   end
 end
@@ -333,7 +332,7 @@ local load_quads = function(map)
 
   for _, tileset in ipairs(map.tilesets) do
     local image = Love.graphics.newImage(tileset.source)
-    local quad_idx = tileset.first_gid
+    local quad_idx = #quads + 1
     local row_count = tileset.tile_count / tileset.columns
     for row = 1, row_count do
       for column = 1, tileset.columns do
