@@ -30,7 +30,7 @@ The shape is attached to the fixture and determines the entity's hitbox.
 
 - points (table) an array of number x and y coordinates indicating all the corners of the polygon. This is only used when the shape `type` is `polygon` (see below).
 - type (string) Set the shape type. This will determine what other parameters are required to define the shape. [[1](https://love2d.org/wiki/ShapeType)].
-  - `chain` - Similar to an `edge`, except that loops back to the first point.
+  - `chain` - Similar to an `edge`, except that it loops back to the first point.
   - `circle` - This will create a circular shape. Instead of defining a `points` table as you would with a `polygon` type shape, a `radius` is specified instead.
   - `edge` - A 2D shape defined by `points`. It does not have volume and can only collide with `circle` and `polygon` type shapes [[1](https://love2d.org/wiki/EdgeShape)].
   - `polygon` - Create a polygon based on defined `points` (as opposed to `radius` as with `circle` type shapes or `width` and `height` as with `rectangle` type shapes.)

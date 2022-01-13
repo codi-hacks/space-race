@@ -23,6 +23,12 @@ local system = function(shape)
       shape.width,
       shape.height
     )
+  elseif shape.type == 'circle' then
+      new_shape = Love.physics.newCircleShape(
+        shape.offset_x or 0,
+        shape.offset_y or 0,
+        shape.radius
+      )
   else
     new_shape = Love.physics.newPolygonShape(shape.points)
   end
