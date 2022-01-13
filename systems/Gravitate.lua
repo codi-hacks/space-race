@@ -12,7 +12,7 @@ local gravityMaker = System(
             local forcex = x2 - x1
             local forcey = y2 - y1
             local force = (gravitationalConstant * mass2 * mass1) / ((math.abs(x2 - x1))^2 + (math.abs(y2 - y1))^2)
-            
+
             forcex = force * (x2 - x1)
             forcey = force * (y2 - y1)
             body1:applyForce((forcex), (forcey))
