@@ -10,7 +10,7 @@ return {
         mask = 65535
     },
     shape = {
-        radius = 25,
+        radius = 50,
         type = 'circle',
         visible = true
     }

@@ -8,7 +8,6 @@ local function debug(entity)
     local function roundOff(value)
         return math.floor(value * 100) / 100
     end
-
     if love.keyboard.isScancodeDown('n') then
         for index, data in ipairs(Entity.list) do
             print(index)

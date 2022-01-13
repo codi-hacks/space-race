@@ -10,6 +10,7 @@ local gravityMaker = System(
     function(body2, mass1, body1, x1, y1)
         local mass2 = body2:getMass()
         if body1 ~= body2 then
+            print(mass1, mass2)
             local x2, y2 = body2:getPosition()
             local forcex = x2 - x1
             local forcey = y2 - y1
