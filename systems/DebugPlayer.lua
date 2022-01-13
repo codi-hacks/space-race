@@ -2,10 +2,10 @@ local System = require('lib/system')
 local Entity = require('services/entity')
 local state = require('state')
 
-local function debug(entity)
+function debug(entity)
 
     -- Displays certain values useful for debugging
-    local function roundOff(value)
+    function roundOff(value)
         return math.floor(value * 100) / 100
     end
     if love.keyboard.isScancodeDown('n') then
