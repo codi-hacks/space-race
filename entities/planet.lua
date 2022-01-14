@@ -10,9 +10,14 @@ return {
         mask = 65535
     },
     shape = {
-        radius = 100,
+        radius = 64,
         type = 'circle',
         visible = true
     },
-    gravitational_mass = 5
+    spritesheet = {
+        image = 'planet',
+        offset_x = 16,
+        scale_x = 4
+    },
+    gravitational_mass = 500
 }
