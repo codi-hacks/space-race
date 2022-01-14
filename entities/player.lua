@@ -23,5 +23,6 @@ return {
         image = 'spaceship',
         offset_x = 12.5,
         scale_x = 2
-    }
+    },
+    gravitational_mass = 1
 }

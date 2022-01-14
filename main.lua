@@ -1,25 +1,26 @@
 local world = require('services/world')
-require('state')
+local state = require('state')
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
 
-require('services/sounds')
-require('services/textures')
-require('services/keyboard')
-require('services/background')
+local sounds = require('services/sounds')
+local textures = require('services/textures')
+local keyboard = require('services/keyboard')
+local background = require('services/background')
 local map = require('services/map')
 
 local ControlPlayer = require('systems/ControlPlayer')
 local DebugPlayer = require('systems/DebugPlayer')
 local UpdateCamera = require('systems/UpdateCamera')
+local Gravitate = require('systems/Gravitate')
 
 love.load = function()
     seconds = 0
     blinkTimer = 0
     blink = true
     love.window.setMode(800, 600)
-    sounds.load()
+    --sounds.load()
     textures.load()
     starLocations = background.load()
     map.load('test')
@@ -39,7 +40,6 @@ love.draw = function()
     background.draw(starLocations)
 
     map.draw()
-
 
 
     if state.paused == true then
@@ -64,7 +64,7 @@ love.update = function(dt)
         seconds = seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
-            --Gravitate(entity, entity)
+            Gravitate(entity)
             UpdateCamera(entity)
         end
 

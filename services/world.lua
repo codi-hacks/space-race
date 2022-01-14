@@ -1,3 +1,5 @@
+local sounds = require('services/sounds')
+
 love.physics.setMeter(64)
 
 --[[local end_contact_callback = function(fixture_a, fixture_b, contact)
