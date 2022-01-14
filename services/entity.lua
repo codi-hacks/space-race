@@ -41,32 +41,32 @@ end
 -- }
 -- layer_index (number) what map layer to draw this in
 local spawn = function(object, layer_index)
-  local entity_config = entity_configs[object.name]
-  assert(
-    entity_config ~= nil,
-    'Map entity reference "' .. object.name .. '" not found.'
-  )
+    local entity_config = entity_configs[object.name]
+    assert(
+        entity_config ~= nil,
+        'Map entity reference "' .. object.name .. '" not found.'
+    )
 
-  -- Don't mutate the source config
-  local entity = Util.copy(entity_config)
-  -- Plovisionary table to write and track active inputs
-  entity.input = {}
-  -- Layer to draw player in. We could just get
-  -- that information from the fixture collision
-  -- group that was set but that collision group
-  -- could change in special cases or on death.
-  entity.draw_layer = layer_index
+    -- Don't mutate the source config
+    local entity = Util.copy(entity_config)
+    -- Plovisionary table to write and track active inputs
+    entity.input = {}
+    -- Layer to draw player in. We could just get
+    -- that information from the fixture collision
+    -- group that was set but that collision group
+    -- could change in special cases or on death.
+    entity.draw_layer = layer_index
 
-  RegisterBody(entity, object.pos_x, object.pos_y)
-  RegisterShape(entity)
-  RegisterFixture(entity, layer_index)
-  RegisterSprites(entity)
+    RegisterBody(entity, object.pos_x, object.pos_y)
+    RegisterShape(entity)
+    RegisterFixture(entity, layer_index)
+    RegisterSprites(entity)
 
-  table.insert(entities, entity)
+    table.insert(entities, entity)
 end
 
 return {
-  grab = grab,
-  list = entities,
-  spawn = spawn
+    grab = grab,
+    list = entities,
+    spawn = spawn
 }
