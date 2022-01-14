@@ -35,9 +35,9 @@ local grab = function(selectedName)
 end
 
 -- object (table) a map entity object {
---   name (string) entity config file
---   pos_x (number) spawn x coordinate
---   pos_y (number) spawn y coordinate
+--     name (string) entity config file
+--     pos_x (number) spawn x coordinate
+--     pos_y (number) spawn y coordinate
 -- }
 -- layer_index (number) what map layer to draw this in
 local spawn = function(object, layer_index)
