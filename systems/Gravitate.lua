@@ -4,7 +4,7 @@ local System = require('/lib/system')
 local Entity = require('services/entity')
 
 -- This is an arbitrary value used to give strength to gravity
-local gravitationalConstant = 10000
+local gravitationalConstant = 100
 
 local gravityMaker = System(
     {'body', 'gravitational_mass'},
