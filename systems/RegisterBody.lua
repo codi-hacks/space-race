@@ -11,7 +11,6 @@ local components = {
 }
 
 local system = function(body, pos_x, pos_y)
-
   local new_body = Love.physics.newBody(
     World,
     pos_x + (body.offset_x or 0),
@@ -19,12 +18,6 @@ local system = function(body, pos_x, pos_y)
     body.type or 'dynamic'
   )
 
-  -- Set the body's mass
-  if mass then
-    new_body:setMass(body.mass)
-  else
-    new_body:setMass(1)
-  end
   -- Give it a fixed rotation unless
   -- explicitly set to false.
   if body.fixed_rotation == true then
