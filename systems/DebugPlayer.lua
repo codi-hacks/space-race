@@ -2,12 +2,13 @@ local System = require('lib/system')
 local Entity = require('services/entity')
 local state = require('state')
 
-function debug(entity)
+local function debug(entity)
 
     -- Displays certain values useful for debugging
-    function roundOff(value)
+    local function roundOff(value)
         return math.floor(value * 100) / 100
     end
+
     if love.keyboard.isScancodeDown('n') then
         for index, data in ipairs(Entity.list) do
             print(index)
