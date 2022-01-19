@@ -20,12 +20,11 @@ local system = function(body, pos_x, pos_y)
 
     -- Give it a fixed rotation unless
     -- explicitly set to false.
-    if body.fixed_rotation == false then
-        new_body:setFixedRotation(false)
-    else
+    if body.fixed_rotation == true then
         new_body:setFixedRotation(true)
+    else
+        new_body:setFixedRotation(false)
     end
-
     return new_body
 end
 

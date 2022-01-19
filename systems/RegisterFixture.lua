@@ -6,15 +6,14 @@ local System = require 'lib/system'
 local Love = love
 
 local components = {
-  '_entity',
-  'body',
-  '=fixture',
-  'shape'
+    '_entity',
+    'body',
+    '=fixture',
+    'shape'
 }
 
 local system = function(entity, body, fixture, shape)
     local loaded_fixture = Love.physics.newFixture(body, shape)
-
     if fixture.density then
         loaded_fixture:setDensity(fixture.density)
     end
@@ -22,7 +21,7 @@ local system = function(entity, body, fixture, shape)
         loaded_fixture:setFriction(fixture.friction)
     end
     if fixture.restitution then
-      loaded_fixture:setRestitution(fixture.restitution)
+        loaded_fixture:setRestitution(fixture.restitution)
     end
 
     loaded_fixture:setFilterData(
