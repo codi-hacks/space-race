@@ -19,5 +19,5 @@ return {
         offset_x = 16,
         scale_x = 4
     },
-    gravitational_mass = 500
+    gravitational_mass = 200
 }
