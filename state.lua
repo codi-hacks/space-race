@@ -4,6 +4,7 @@ state = {}
 
 state.paused = false
 state.debugOn = false
+state.activeMap = {filename = 'happy'}
 
 state.camera = {} -- Initialized in /camera.lua
 

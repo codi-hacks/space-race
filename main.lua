@@ -3,6 +3,7 @@ local state = require('state')
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
+local menu = require('menu')
 
 local sounds = require('services/sounds')
 local textures = require('services/textures')
@@ -20,39 +21,34 @@ love.load = function()
     blinkTimer = 0
     blink = true
     love.window.setMode(800, 600)
-    --sounds.load()
     textures.load()
     starLocations = background.load()
-    map.load('test')
+    map.load(state.activeMap.filename)
 end
 
 
 -- Game time
 love.keypressed = function(pressed_key)
-    if keyboard.key_map[pressed_key] then
-        keyboard.key_map[pressed_key]()
+    if state.paused then
+        if menu.key_map[pressed_key] then
+            menu.key_map[pressed_key]()
+        end
+    else
+        if keyboard.key_map[pressed_key] then
+            keyboard.key_map[pressed_key]()
+        end
     end
 end
 
 love.draw = function()
-    Camera.set()
+        Camera.set()
 
-    background.draw(starLocations)
+        background.draw(starLocations)
 
-    map.draw()
-
+        map.draw()
 
     if state.paused == true then
-        blinkTimer = blinkTimer + love.timer.getDelta()
-        if blinkTimer > .25 then
-            blinkTimer = 0
-            blink = not blink
-        end
-        if blink == true then
-            love.graphics.setColor({1, 0, 0, 1})
-            love.graphics.rectangle('line', state.camera.pos_x, state.camera.pos_y,
-            state.camera.window_width, state.camera.window_height)
-        end
+        menu.draw()
     end
 
     Camera.unset()
@@ -73,5 +69,7 @@ love.update = function(dt)
         else
             state.camera.scale_x = 1
         end
+    else
+        menu.update(dt)
     end
 end
