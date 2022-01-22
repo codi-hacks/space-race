@@ -1,7 +1,7 @@
 local Entity = require('services/entity')
 local state = require('state')
 local sounds = require('services/sounds')
-local menu = require('menu')
+local menu = require('menu/menu')
 
 local keyboard = {}
 

@@ -3,7 +3,9 @@ local state = require('state')
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
-local menu = require('menu')
+
+local menu = require('menu/menu')
+local loadMap = require('menu/loadMap')
 
 local sounds = require('services/sounds')
 local textures = require('services/textures')
@@ -18,12 +20,11 @@ local Gravitate = require('systems/Gravitate')
 
 love.load = function()
     seconds = 0
-    blinkTimer = 0
-    blink = true
     love.window.setMode(800, 600)
     textures.load()
     starLocations = background.load()
-    map.load(state.activeMap.filename)
+    loadMap(state.activeMap)
+    menu.load()
 end
 
 
