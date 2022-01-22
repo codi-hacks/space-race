@@ -25,6 +25,10 @@ Given a `nil` value instead of a table, the entity won't be given a body.
 - friction (number) Set the contact sliding friction. [[1](https://love2d.org/wiki/Fixture:setFriction)]
 - mask (number = 0) Set which fixture categories are filtered from collision. Add the categories together you want the fixture to ignore colliding with and subtract that number from `65535`. For instance, a player doesn't collide with players or player bullets so the formula for that would be `65535 - 1 - 2`.
 
+### gravitational_mass (number = 0)
+
+Mass for calculating gravity between two entities
+
 ### shape (table)
 
 The shape is attached to the fixture and determines the entity's hitbox.
@@ -46,9 +50,3 @@ A `nil` value means no sprite will be registered.
 - offset_y (number = offset_x) The y-axis pixel offset. This will match the offset_x unless specified.
 - scale_x (number = 1) The x-axis scaling of the sprite.
 - scale_y (number = 1) The y-axis scaling of the sprite.
-
-### Optional Values
-
-Other traits assignable to entities that are optional
-
-- gravitational_mass (number) What mass to use when calculating gravity between two entities
