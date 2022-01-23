@@ -27,17 +27,17 @@ local function debug(entity)
 
 
         local clock_display = 'Time: ' .. roundOff(seconds)
-        love.graphics.print(clock_display, pos_x, pos_y, 0, 2, 2)
+        love.graphics.print(clock_display, pos_x, pos_y, 0, 0.9, 0.9)
 
 
         local playerPosition = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
-        love.graphics.print(playerPosition, pos_x, pos_y + 25, 0, 2, 2)
+        love.graphics.print(playerPosition, pos_x, pos_y + 25, 0, 0.9, 0.9)
         local currentVelocity = { entity.body:getLinearVelocity() }
         local playerVelocity = 'X/Y Vel: ' .. roundOff(currentVelocity[1]) .. '/' .. roundOff(currentVelocity[2])
-        love.graphics.print(playerVelocity, pos_x, pos_y + 50, 0, 2, 2)
+        love.graphics.print(playerVelocity, pos_x, pos_y + 50, 0, 0.9, 0.9)
 
         local campos = 'Camera: ' .. roundOff(pos_x) .. ':' .. roundOff(pos_y)
-        love.graphics.print(campos, pos_x, pos_y + 100, 0, 2, 2)
+        love.graphics.print(campos, pos_x, pos_y + 100, 0, 0.9, 0.9)
 
         -- Direction line and hitbox
         local lastColor = { love.graphics.getColor() }
@@ -50,7 +50,7 @@ local function debug(entity)
 
         velocityArrow = { entity.body:getX() + currentVelocity[1], entity.body:getY() + currentVelocity[2] }
         love.graphics.setColor(lastColor)
-        love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), pos_x, pos_y + 125, 0, 2, 2)
+        love.graphics.print('VelocityArrow: ' .. roundOff(velocityArrow[1]) .. '/' .. roundOff(velocityArrow[2]), pos_x, pos_y + 125, 0, 0.9, 0.9)
     end
 end
 
