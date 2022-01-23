@@ -87,6 +87,8 @@ menu.draw = function()
     if blink then
         love.graphics.print(mapList[mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 4, 4)
     end
+    love.graphics.print('Current Map:\n' .. mapList[state.activeMap].displayName, corner[1] + 460, corner[2] + 450, 0, 4, 4)
+    love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 4, 4)
 
     --[[if blink == true then
         love.graphics.setColor({1, 0, 0, 1})
