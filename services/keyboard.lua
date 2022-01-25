@@ -1,6 +1,7 @@
 local Entity = require('services/entity')
 local state = require('state')
 local sounds = require('services/sounds')
+local menu = require('menu/menu')
 
 local keyboard = {}
 
@@ -18,11 +19,8 @@ keyboard.key_map = {
     end,
     p = function()
         state.paused = not state.paused
-        if state.paused == false then
-            love.audio.play(sounds.chirp_up)
-        elseif state.paused == true then
-            love.audio.play(sounds.chirp_down)
-        end
+        menu.load()
+        love.audio.play(sounds.chirp_up)
     end
 }
 

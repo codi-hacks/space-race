@@ -2,8 +2,9 @@
 
 state = {}
 
-state.paused = false
+state.paused = true
 state.debugOn = false
+state.activeMap = 1
 
 state.camera = {} -- Initialized in /camera.lua
 

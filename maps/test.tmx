@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="4">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="5">
  <tileset firstgid="1" source="star_map.tsx"/>
  <layer id="1" name="Background" width="20" height="20">
   <data encoding="base64">
@@ -8,9 +8,20 @@
  </layer>
  <objectgroup id="2" name="Objects">
   <object id="1" name="planet" type="entity" x="504.667" y="78.333">
+   <properties>
+    <property name="gravitational_mass" type="int" value="1"/>
+    <property name="radius" type="int" value="50"/>
+   </properties>
    <point/>
   </object>
   <object id="3" name="player" type="entity" x="174.667" y="156.333">
+   <point/>
+  </object>
+  <object id="4" name="planet" type="entity" x="216" y="387">
+   <properties>
+    <property name="gravitational_mass" type="int" value="1"/>
+    <property name="radius" type="int" value="90"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
