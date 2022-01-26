@@ -24,5 +24,8 @@
    </properties>
    <point/>
   </object>
+  <object id="5" name="speedboost" type="entity" x="397.955" y="351.662">
+   <point/>
+  </object>
  </objectgroup>
 </map>
