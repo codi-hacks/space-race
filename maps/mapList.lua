@@ -16,5 +16,10 @@ return {
         displayName = 'Happy',
         filename = 'happy',
         thumbnail = nil
+    },
+    {
+        displayName = 'No Planets',
+        filename = 'noPlanet',
+        thumbnail = nil
     }
 }
