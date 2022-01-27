@@ -47,7 +47,7 @@ menu.key_map = {
     down = function()
         cycleMaps.down()
     end,
-    enter = function()
+    ['return'] = function()
         menu.load_map()
 
     end,

@@ -36,11 +36,6 @@ love.keypressed = function(pressed_key)
         if menu.key_map[pressed_key] then
             menu.key_map[pressed_key]()
         end
-        if pressed_key == "return" then
-            -- Special Override for return because enter is registered as return inside Love2d
-            -- However, return is a keyword inside lua.
-            menu.key_map["enter"]()
-        end
     else
         if keyboard.key_map[pressed_key] then
             keyboard.key_map[pressed_key]()
