@@ -3,8 +3,7 @@ return function()
         body = {
             mass = 0
         },
-        speedBoost = true,
-        customCollision = true,
+        onCollision = 'speedboost',
         shape = {
             type = 'rectangle',
             width =32,

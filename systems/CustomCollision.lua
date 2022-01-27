@@ -18,7 +18,7 @@ local function customCollision(entity)
         -- data is the player
         if data.isControlled then
             if CheckCollision(entity.body:getX(), entity.body:getY(), 32, 32, data.body:getX(), data.body:getY(), 32, 32) then
-                if entity.speedBoost then
+                if entity.onCollision == "speedboost" then
                     speedBoost.boost(data, entity);
                 end
             end
@@ -26,7 +26,7 @@ local function customCollision(entity)
     end
 end
 return System(
-    { '_entity', '-customCollision' },
+    { '_entity', 'onCollision' },
     function(entity)
         customCollision(entity)
     end
