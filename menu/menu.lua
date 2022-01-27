@@ -38,9 +38,7 @@ menu.key_map = {
         state.debugOn = not state.debugOn
     end,
     p = function()
-        state.paused = not state.paused
-        menu.unload()
-        love.audio.play(sounds.chirp_down)
+        menu.load_map()
     end,
     up = function()
         cycleMaps.up()
@@ -48,27 +46,30 @@ menu.key_map = {
     down = function()
         cycleMaps.down()
     end,
-    backspace = function()
-        -- If selected map is the same, just unpause...
-        if state.activeMap == mapSelect then
-            state.paused = not state.paused
-            menu.unload()
-            love.audio.play(sounds.chirp_down)
-        -- ...or else load a new map
-        else
-            --Entity.list = {}
-            loadMap(mapSelect)
-
-            state.paused = not state.paused
-            menu.unload()
-            love.audio.play(sounds.chirp_down)
-        end
-    end
+    ['return'] = function()
+        menu.load_map()
+    end,
 }
+menu.load_map = function()
+    -- If selected map is the same, just unpause...
+    if state.activeMap == mapSelect then
+        state.paused = not state.paused
+        menu.unload()
+        love.audio.play(sounds.chirp_down)
+        -- ...or else load a new map
+    else
+        --Entity.list = {}
+        loadMap(mapSelect)
+
+        state.paused = not state.paused
+        menu.unload()
+        love.audio.play(sounds.chirp_down)
+    end
+end
 
 menu.draw = function()
     -- Alias the true corner coordinates for convienience
-    local corner = {state.camera.pos_x, state.camera.pos_y}
+    local corner = { state.camera.pos_x, state.camera.pos_y }
 
     -- Transparent red background
     love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
@@ -76,7 +77,7 @@ menu.draw = function()
         0 + corner[1], 0 + corner[2],
         0 + corner[1], 600 + corner[2],
         800 + corner[1], 600 + corner[2],
-        800 + corner[1], 0 + corner[2]}
+        800 + corner[1], 0 + corner[2] }
     love.graphics.polygon('fill', verticies)
 
     -- Draw menu image background
