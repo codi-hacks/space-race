@@ -16,6 +16,7 @@ local map = require('services/map')
 local ControlPlayer = require('systems/ControlPlayer')
 local DebugPlayer = require('systems/DebugPlayer')
 local UpdateCamera = require('systems/UpdateCamera')
+local CustomCollision = require('systems/CustomCollision')
 local Gravitate = require('systems/Gravitate')
 
 love.load = function()
@@ -65,6 +66,7 @@ love.update = function(dt)
             ControlPlayer(entity)
             Gravitate(entity)
             UpdateCamera(entity)
+            CustomCollision(entity)
         end
 
         if seconds <= 0.25 then

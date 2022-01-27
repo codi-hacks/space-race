@@ -23,12 +23,11 @@ keyboard.key_map = {
         love.audio.play(sounds.chirp_up)
     end
 }
+keyboard.boost = 0;
 
-
-keyboard.move = function (body, time)
+keyboard.move = function(body, time)
     -- Standard amount of force to base movement off of
-    local movementForce = 100
-
+    local movementForce = 100 + keyboard.boost
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
     local topx, topy = body:getWorldPoint(0, -25)
@@ -57,11 +56,11 @@ keyboard.move = function (body, time)
 
     -- Brake (applies force in opposite the current direction)
     if love.keyboard.isScancodeDown('space') then
-        local brakeForce = {body:getLinearVelocity()}
-        for k,_ in ipairs(brakeForce) do
+        local brakeForce = { body:getLinearVelocity() }
+        for k, _ in ipairs(brakeForce) do
             brakeForce[k] = brakeForce[k] * 2
             if math.abs(brakeForce[k]) > movementForce then
-                brakeForce[k] = -movementForce * (brakeForce[k]>0 and 1 or brakeForce[k]<0 and -1 or 0)
+                brakeForce[k] = -movementForce * (brakeForce[k] > 0 and 1 or brakeForce[k] < 0 and -1 or 0)
             else
                 brakeForce[k] = -brakeForce[k]
             end
@@ -83,7 +82,7 @@ keyboard.move = function (body, time)
 
     -- Engine sound effect (also hardcodes movement keys)
     if love.keyboard.isScancodeDown('space') then
-        brakeForce = {body:getLinearVelocity()}
+        brakeForce = { body:getLinearVelocity() }
         if (math.abs(brakeForce[1]) + math.abs(brakeForce[2])) > 0.5 then
             love.audio.stop(sounds.engine)
             if not sounds.braking:isPlaying() then
@@ -152,6 +151,7 @@ keyboard.move = function (body, time)
     if love.keyboard.isScancodeDown('l') then
         body:setAngularVelocity(20)
     end
+    keyboard.boost = 0;
 end
 
 return keyboard

@@ -3,11 +3,12 @@ return function()
         body = {
             mass = 0
         },
-        speed_boost = 1,
+        speedBoost = true,
+        customCollision = true,
         shape = {
             type = 'rectangle',
-            width =64,
-            height=64
+            width =32,
+            height=32
         },
         spritesheet = {
             image = 'speedboost',
