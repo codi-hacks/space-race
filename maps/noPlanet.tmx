@@ -11,5 +11,8 @@
   <object id="1" name="player" type="entity" x="174.667" y="156.333">
    <point/>
   </object>
+    <object id="5" name="speedboost" type="entity" x="397.955" y="351.662">
+     <point/>
+    </object>
  </objectgroup>
 </map>
