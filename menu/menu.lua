@@ -39,7 +39,6 @@ menu.key_map = {
     end,
     p = function()
         menu.load_map()
-
     end,
     up = function()
         cycleMaps.up()
@@ -49,11 +48,7 @@ menu.key_map = {
     end,
     ['return'] = function()
         menu.load_map()
-
     end,
-    backspace = function()
-        menu.load_map()
-    end
 }
 menu.load_map = function()
     -- If selected map is the same, just unpause...
