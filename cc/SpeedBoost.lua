@@ -3,8 +3,7 @@ local keyboard = require('services/keyboard')
 local speedBoost = {}
 
 function speedBoost.boost(player, speedBoost)
-    print("Speed Boost");
-    keyboard.boost= 100
+    player.powerUps.speedBoost = { value = 100, time = 1 };
 end
 
 return speedBoost

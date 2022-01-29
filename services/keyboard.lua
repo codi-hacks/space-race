@@ -23,11 +23,16 @@ keyboard.key_map = {
         love.audio.play(sounds.chirp_up)
     end
 }
-keyboard.boost = 0;
 
-keyboard.move = function(body, time)
+keyboard.move = function(entity, time)
+    local body = entity.body;
     -- Standard amount of force to base movement off of
-    local movementForce = 100 + keyboard.boost
+    local movementForce = 100
+    if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
+        movementForce = movementForce + entity.powerUps.speedBoost.value
+    end
+    print("Movement Speed ".. movementForce)
+
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
     local topx, topy = body:getWorldPoint(0, -25)
@@ -151,7 +156,14 @@ keyboard.move = function(body, time)
     if love.keyboard.isScancodeDown('l') then
         body:setAngularVelocity(20)
     end
-    keyboard.boost = 0;
-end
+    -- Power Up cleanup
+    for _, data in pairs(entity.powerUps) do
+        if data.time > 0 then
+            data.time = data.time - 1
+            print("Updating " .. data.value .. " Time " .. data.time)
+        end
+    end
 
+
+end
 return keyboard

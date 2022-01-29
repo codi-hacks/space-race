@@ -9,6 +9,9 @@ return function()
             friction = 0,
             mask = 65535
         },
+        powerUps={
+
+        },
         gravitational_mass = 1,
         isControlled = true,
         shape = {
