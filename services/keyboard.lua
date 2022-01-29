@@ -31,7 +31,6 @@ keyboard.move = function(entity, time)
     if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
         movementForce = movementForce + entity.powerUps.speedBoost.value
     end
-    print("Movement Speed ".. movementForce)
 
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
