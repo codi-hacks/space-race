@@ -1,9 +1,13 @@
+
+function boost(player, speedBoost)
+    player.powerUps.speedBoost = { value = 100, time = 1 };
+end
 return function()
     return {
         body = {
             mass = 0
         },
-        onCollision = 'speedboost',
+        onCollision = boost,
         shape = {
             type = 'rectangle',
             width =32,
@@ -13,7 +17,6 @@ return function()
         },
         spritesheet = {
             image = 'speedboost',
-
         }
     }
 end

@@ -159,7 +159,6 @@ keyboard.move = function(entity, time)
     for _, data in pairs(entity.powerUps) do
         if data.time > 0 then
             data.time = data.time - 1
-            print("Updating " .. data.value .. " Time " .. data.time)
         end
     end
 

@@ -1,7 +1,6 @@
 -- Controls all objects with self.isControlled = true (typically just the player)
 
 local System = require('lib/system')
-local speedBoost = require('cc/SpeedBoost')
 local state = require('state')
 local Entity = require('services/entity')
 -- Stolen from here https://love2d.org/wiki/BoundingBox.lua
@@ -18,9 +17,7 @@ local function customCollision(entity)
         -- data is the player
         if data.isControlled then
             if CheckCollision(entity.body:getX(), entity.body:getY(), 32, 32, data.body:getX(), data.body:getY(), 32, 32) then
-                if entity.onCollision == "speedboost" then
-                    speedBoost.boost(data, entity);
-                end
+                entity.onCollision(data, entity)
             end
         end
     end
