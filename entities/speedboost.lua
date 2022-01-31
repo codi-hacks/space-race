@@ -1,6 +1,6 @@
 
-function boost(player, speedBoost)
-    player.powerUps.speedBoost = { value = 100, time = 1 };
+local boost = function(player)
+    player.powerUps.speedBoost = { value = 100, time = 100 };
 end
 return function()
     return {

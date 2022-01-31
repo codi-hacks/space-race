@@ -132,6 +132,9 @@ keyboard.move = function(entity, time)
         body:setLinearVelocity(0, 0)
         body:setAngularVelocity(0)
         local movespeed = 200
+        if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
+            movespeed = movespeed + entity.powerUps.speedBoost.value
+        end
         local xpos = body:getX()
         local ypos = body:getY()
         if love.keyboard.isScancodeDown('up') then
