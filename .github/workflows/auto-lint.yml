@@ -1,0 +1,12 @@
+name: Auto-lint
+on: [push, pull_request]
+
+jobs:
+  luacheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run luacheck
+      uses: judaew/luacheck-action@v0.2.1
+      with:
+        targets: "."
