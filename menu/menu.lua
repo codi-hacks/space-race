@@ -2,7 +2,7 @@
 local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
 local loadMap = require('menu/loadMap')
-
+local state = require 'state'
 
 --[[
     TODO:
@@ -37,7 +37,7 @@ menu.load = function()
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
-    menu.mapSelect = love.state.activeMap
+    menu.mapSelect = state.activeMap
 end
 
 menu.unload = function()
@@ -52,7 +52,7 @@ menu.key_map = {
         love.event.quit()
     end,
     b = function()
-        love.state.debugOn = not love.state.debugOn
+        state.debugOn = not state.debugOn
     end,
     p = function()
         menu.load_map()
@@ -69,8 +69,8 @@ menu.key_map = {
 }
 menu.load_map = function()
     -- If selected map is the same, just unpause...
-    if love.state.activeMap == menu.mapSelect then
-        love.state.paused = not love.state.paused
+    if state.activeMap == menu.mapSelect then
+        state.paused = not state.paused
         menu.unload()
         love.audio.play(sounds.chirp_down)
         -- ...or else load a new map
@@ -78,7 +78,7 @@ menu.load_map = function()
         --Entity.list = {}
         loadMap(menu.mapSelect)
 
-        love.state.paused = not love.state.paused
+        state.paused = not state.paused
         menu.unload()
         love.audio.play(sounds.chirp_down)
     end
@@ -86,7 +86,7 @@ end
 
 menu.draw = function()
     -- Alias the true corner coordinates for convienience
-    local corner = { love.state.camera.pos_x, love.state.camera.pos_y }
+    local corner = { state.camera.pos_x, state.camera.pos_y }
 
     -- Transparent red background
     love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
@@ -105,14 +105,14 @@ menu.draw = function()
     if menu.blink then
         love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
     end
-    love.graphics.print('Current Map:\n' .. mapList[love.state.activeMap].displayName,
+    love.graphics.print('Current Map:\n' .. mapList[state.activeMap].displayName,
         corner[1] + 400, corner[2] + 450, 0, 2, 2)
     love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
 
     --[[if menu.blink == true then
         love.graphics.setColor({1, 0, 0, 1})
         love.graphics.rectangle('line', corner[1], corner[2],
-        love.state.camera.window_width, love.state.camera.window_height)
+        state.camera.window_width, state.camera.window_height)
     end]]--
 end
 

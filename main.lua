@@ -1,11 +1,3 @@
-love.state = {}
-love.state.paused = true
-love.state.debugOn = false
-love.state.activeMap = 1
-love.state.camera = {
-} -- Initialized in /camera.lua
-love.state.camera.pos_x =0
-love.state.camera.pos_y =0
 local world = require('services/world')
 
 local Entity = require('services/entity')
@@ -23,7 +15,7 @@ local ControlPlayer = require('systems/ControlPlayer')
 local UpdateCamera = require('systems/UpdateCamera')
 local CustomCollision = require('systems/CustomCollision')
 local Gravitate = require('systems/Gravitate')
-
+local state = require 'state'
 
 
 
@@ -34,14 +26,14 @@ love.load = function()
     textures.load()
     love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
     love.starLocations = background.load()
-    loadMap(love.state.activeMap)
+    loadMap(state.activeMap)
     menu.load()
 end
 
 
 -- Game time
 love.keypressed = function(pressed_key)
-    if love.state.paused then
+    if state.paused then
         if menu.key_map[pressed_key] then
             menu.key_map[pressed_key]()
         end
@@ -59,7 +51,7 @@ love.draw = function()
 
         map.draw()
 
-    if love.state.paused == true then
+    if state.paused == true then
         menu.draw()
     end
 
@@ -67,7 +59,7 @@ love.draw = function()
 end
 
 love.update = function(dt)
-    if love.state.paused == false then
+    if state.paused == false then
         world:update(dt)
         love.seconds = love.seconds + dt
         for _, entity in ipairs(Entity.list) do
@@ -78,9 +70,9 @@ love.update = function(dt)
         end
 
         if love.seconds <= 0.25 then
-            love.state.camera.scale_x = 1 / (love.seconds*4)
+            state.camera.scale_x = 1 / (love.seconds*4)
         else
-            love.state.camera.scale_x = 1
+            state.camera.scale_x = 1
         end
     else
         menu.update(dt)
