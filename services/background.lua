@@ -5,12 +5,12 @@ local background = {}
 function background.load()
     -- Load returns a table full of values for star locations
     local randomsTable = {}
-    local window_x = math.floor(state.camera.window_width / 10)
-    local window_y = math.floor(state.camera.window_height / 10)
+    local window_x = math.floor(love.state.camera.window_width / 10)
+    local window_y = math.floor(love.state.camera.window_height / 10)
     for i=10, window_x, 10 do
         for j=10, window_y, 10 do
-            random_x = (i - love.math.random(0, 9)) * 10
-            random_y = (j - love.math.random(0, 9)) * 10
+            local random_x = (i - love.math.random(0, 9)) * 10
+            local random_y = (j - love.math.random(0, 9)) * 10
             table.insert(randomsTable, {random_x, random_y})
         end
     end
@@ -22,8 +22,8 @@ function background.draw(randoms)
     -- Renders generated star pattern over many window areas (as decided by `repeats`).
     -- Probably should create a system where it only renders when visible,
     -- but it seems fine for now.
-    local window_x = state.camera.window_width
-    local window_y = state.camera.window_height
+    local window_x = love.state.camera.window_width
+    local window_y = love.state.camera.window_height
     local repeats = 10
     for _,coords in ipairs(randoms) do
         love.graphics.setColor({1, 1, 1, 1})

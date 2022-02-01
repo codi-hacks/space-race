@@ -9,7 +9,8 @@ exclude_files = { 'lib/*.*' }
 -- Ignore global variables in these files
 files['**/*.lua'] = {
   globals = {
-    'love'
+    'love',
+    'state'
   }
 }
 -- Ignore busted spec file globals

@@ -12,7 +12,7 @@ return function()
         powerUps={
 
         },
-        gravitational_mass = 1,
+        gravitationalMass = 1,
         isControlled = true,
         shape = {
             points = {

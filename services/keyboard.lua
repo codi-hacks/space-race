@@ -1,5 +1,5 @@
 local Entity = require('services/entity')
-local state = require('state')
+
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
 
@@ -10,7 +10,7 @@ keyboard.key_map = {
         love.event.quit()
     end,
     b = function()
-        state.debugOn = not state.debugOn
+        love.state.debugOn = not love.state.debugOn
     end,
     o = function()
         local player = Entity.grab('player')
@@ -18,7 +18,7 @@ keyboard.key_map = {
         player.body:setY(player.position.y)
     end,
     p = function()
-        state.paused = not state.paused
+        love.state.paused = not love.state.paused
         menu.load()
         love.audio.play(sounds.chirp_up)
     end
@@ -86,7 +86,7 @@ keyboard.move = function(entity, time)
 
     -- Engine sound effect (also hardcodes movement keys)
     if love.keyboard.isScancodeDown('space') then
-        brakeForce = { body:getLinearVelocity() }
+        local brakeForce = { body:getLinearVelocity() }
         if (math.abs(brakeForce[1]) + math.abs(brakeForce[2])) > 0.5 then
             love.audio.stop(sounds.engine)
             if not sounds.braking:isPlaying() then
