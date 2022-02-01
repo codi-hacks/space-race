@@ -10,7 +10,6 @@ exclude_files = { 'lib/*.*' }
 files['**/*.lua'] = {
   globals = {
     'love',
-    'state'
   }
 }
 -- Ignore busted spec file globals
