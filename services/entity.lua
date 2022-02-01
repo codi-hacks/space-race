@@ -19,7 +19,7 @@ end
 -- "Caveman way" of setting the player ship attributes from map - J.R.C 2/1/22
 local function check_ship_type(object, entity)
     -- Gross code to Check the ship_type of each applicable entity and set the player attributes accordingly - J.R.C 2/1/22
-    if object.ship_type ~= nil then
+    if object.ship_type then
         local ship_num = tonumber(object.ship_type)
         entity.ship_index = ship_num
         local ship = get_ship(ship_num)

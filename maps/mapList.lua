@@ -48,11 +48,6 @@ return {
         thumbnail = nil
     },
     {
-        displayName = 'ship_stolen',
-        filename = 'ship_not_stolen',
-        thumbnail = nil
-    },
-    {
         displayName = 'BIG MAP',
         filename = 'mp_big',
         thumbnail = nil

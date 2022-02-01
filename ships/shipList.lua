@@ -15,7 +15,7 @@
 ]]
 
 return {
-    { 
+    [1] = { 
         displayName = 'Trevor\'s OG Ship', -- Index 1
         filename = 'ship',
         shape = {
@@ -34,7 +34,7 @@ return {
             scale_x = 2
         }
     },
-    {
+    [2] = {
         displayName = 'Ship Two', -- Index 2
         filename = 'ship_spaceship_2',
         shape = {
@@ -53,7 +53,7 @@ return {
             scale_x = 2
         }
     },
-    {
+    [3] = {
         displayName = 'UFO', -- Index 3
         filename = 'ship_ufo',
         shape = {
@@ -72,7 +72,7 @@ return {
             scale_x = 2
         }
     },
-    {
+    [4] = {
         displayName = 'Shuttle Rocket', -- Index 4
         filename = 'ship_shuttle',
         shape = {
@@ -91,7 +91,7 @@ return {
             scale_x = 2
         }
     },
-    {
+    [5] = {
         displayName = 'Shuttle', -- Index 5
         filename = 'ship_shuttle_no_boosters',
         shape = {
@@ -110,31 +110,11 @@ return {
             scale_x = 2
         }
     },
-    {
-        displayName = 'Stolen', -- Index 6
-        filename = 'not_stolen',
-        shape = {
-            points = {
-                -50, -80,
-                50, -80,
-                -75, 0,
-                -75, 40,
-                75, 0,
-                75, 40
-            },
-            type = 'polygon'
-        },
-        spritesheet = {
-            image = 'not_stolen',
-            offset_x = 75,
-            scale_x = 1
-        }
-    },
-    {
-        displayName = 'Purple', -- Index 7
+   [6] = {
+        displayName = 'Purple', -- Index 6
         filename = 'ship_purple',
         shape = {
-           points = {
+            points = {
                 0, -26,
                 -15, 15,
                 -15, 16,

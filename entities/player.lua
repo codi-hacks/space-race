@@ -7,7 +7,7 @@ local function get_ship(index)
 end
 
 return function()
-    ship_index = 7
+    ship_index = 6
     local ship = get_ship(ship_index)
     
     return {
