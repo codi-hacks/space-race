@@ -111,7 +111,7 @@ return {
         }
     },
     {
-        displayName = 'Stolen', -- Index 5
+        displayName = 'Stolen', -- Index 6
         filename = 'not_stolen',
         shape = {
             points = {
@@ -131,7 +131,7 @@ return {
         }
     },
     {
-        displayName = 'Purple', -- Index 5
+        displayName = 'Purple', -- Index 7
         filename = 'ship_purple',
         shape = {
             points = {
