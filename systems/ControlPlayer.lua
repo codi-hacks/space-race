@@ -5,8 +5,8 @@ local keyboard = require('services/keyboard')
 local state = require('state')
 
 return System(
-    {'-isControlled', 'body'},
-    function(body)
-        keyboard.move(body, love.timer.getDelta())
+    {'_entity','-isControlled'},
+    function(entity)
+        keyboard.move(entity, love.timer.getDelta())
     end
 )

@@ -24,10 +24,13 @@ keyboard.key_map = {
     end
 }
 
-
-keyboard.move = function (body, time)
+keyboard.move = function(entity, time)
+    local body = entity.body;
     -- Standard amount of force to base movement off of
     local movementForce = 100
+    if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
+        movementForce = movementForce + entity.powerUps.speedBoost.value
+    end
 
     -- Variables that allows the function to know which way the spaceship
     -- is pointing and to move it in that direction.
@@ -57,11 +60,11 @@ keyboard.move = function (body, time)
 
     -- Brake (applies force in opposite the current direction)
     if love.keyboard.isScancodeDown('space') then
-        local brakeForce = {body:getLinearVelocity()}
-        for k,_ in ipairs(brakeForce) do
+        local brakeForce = { body:getLinearVelocity() }
+        for k, _ in ipairs(brakeForce) do
             brakeForce[k] = brakeForce[k] * 2
             if math.abs(brakeForce[k]) > movementForce then
-                brakeForce[k] = -movementForce * (brakeForce[k]>0 and 1 or brakeForce[k]<0 and -1 or 0)
+                brakeForce[k] = -movementForce * (brakeForce[k] > 0 and 1 or brakeForce[k] < 0 and -1 or 0)
             else
                 brakeForce[k] = -brakeForce[k]
             end
@@ -83,7 +86,7 @@ keyboard.move = function (body, time)
 
     -- Engine sound effect (also hardcodes movement keys)
     if love.keyboard.isScancodeDown('space') then
-        brakeForce = {body:getLinearVelocity()}
+        brakeForce = { body:getLinearVelocity() }
         if (math.abs(brakeForce[1]) + math.abs(brakeForce[2])) > 0.5 then
             love.audio.stop(sounds.engine)
             if not sounds.braking:isPlaying() then
@@ -129,6 +132,9 @@ keyboard.move = function (body, time)
         body:setLinearVelocity(0, 0)
         body:setAngularVelocity(0)
         local movespeed = 200
+        if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
+            movespeed = movespeed + entity.powerUps.speedBoost.value
+        end
         local xpos = body:getX()
         local ypos = body:getY()
         if love.keyboard.isScancodeDown('up') then
@@ -152,6 +158,13 @@ keyboard.move = function (body, time)
     if love.keyboard.isScancodeDown('l') then
         body:setAngularVelocity(20)
     end
-end
+    -- Power Up cleanup
+    for _, data in pairs(entity.powerUps) do
+        if data.time > 0 then
+            data.time = data.time - 1
+        end
+    end
 
+
+end
 return keyboard
