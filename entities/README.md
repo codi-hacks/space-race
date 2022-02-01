@@ -50,3 +50,10 @@ A `nil` value means no sprite will be registered.
 - offset_y (number = offset_x) The y-axis pixel offset. This will match the offset_x unless specified.
 - scale_x (number = 1) The x-axis scaling of the sprite.
 - scale_y (number = 1) The y-axis scaling of the sprite.
+### onCollision (function)
+    The Custom OnCollision function.
+- Passes the player. into the function
+### powerUps (table)
+- Powerups active
+- Properties currently implemented time and value
+- Currently implemented powerUps speedboost
