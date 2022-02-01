@@ -13,7 +13,7 @@ return function()
     return {
         
         body = {
-            mass = 0.0001
+            mass = 1
         },
         fixture = {
             category = 1,
