@@ -117,7 +117,7 @@ menu.draw = function()
 end
 
 menu.update = function(dt)
-    -- menu.blink timer for visual effect
+    -- Blink timer for visual effect
     menu.blinkTimer = menu.blinkTimer + dt
     if menu.blinkTimer > 0.80 and menu.blink == true then
         menu.blinkTimer = 0
