@@ -1,7 +1,19 @@
+
+local shipList = require('ships/shipList')
+
+local function get_ship(index)
+    print("player.lua ship_index: " .. index)
+    return shipList[index]
+end
+
 return function()
+    ship_index = 7
+    local ship = get_ship(ship_index)
+    
     return {
+        
         body = {
-            mass = 1
+            mass = 0.0001
         },
         fixture = {
             category = 1,
@@ -14,20 +26,8 @@ return function()
         },
         gravitational_mass = 1,
         isControlled = true,
-        shape = {
-            points = {
-                0, -25,
-                -25, 2,
-                -25, 25,
-                25, 2,
-                25, 25
-            },
-            type = 'polygon'
-        },
-        spritesheet = {
-            image = 'spaceship',
-            offset_x = 12.5,
-            scale_x = 2
-        }
+        shape = ship.shape,
+        spritesheet = ship.spritesheet 
+        
     }
 end
