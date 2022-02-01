@@ -134,12 +134,12 @@ return {
         displayName = 'Purple', -- Index 7
         filename = 'ship_purple',
         shape = {
-            points = {
-                0, -32,
+           points = {
+                0, -26,
                 -15, 15,
-                -15, 32,
+                -15, 16,
                 15, 15,
-                15, 32
+                15, 16
             },
             type = 'polygon'
         },
