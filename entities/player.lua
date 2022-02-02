@@ -1,3 +1,4 @@
+--local sounds = require 'services/sounds'
 local shipList = require('ships/shipList')
 
 -- Returns the ship's attribute table based on index (shipList.lua) - J.R.C 2/2/22
@@ -8,21 +9,27 @@ local function get_ship(index)
     return shipList[index]
 end
 
-return function(object)
-    local ship_index = tonumber(object.ship_type)
+return function(props)
+    local ship_index = tonumber(props.ship_type)
     local ship = get_ship(ship_index)
-
     return {
         body = {
             mass = 1
         },
+        checkpoints = tonumber(props.checkpoints),
         fixture = {
             category = 1,
             density = 10,
             friction = 0,
             mask = 65535
         },
+        on_end_contact = function()
+            -- Extremely useful and essential sound effect
+            -- TODO: fix this so it only bonks when we expect it to
+            --love.audio.play(sounds.bonk)
+        end,
         powerUps={
+
         },
         gravitational_mass = 1,
         isControlled = true,

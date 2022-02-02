@@ -1,27 +1,26 @@
 local textures = {}
 
 textures.load = function()
-    textures.spaceship = love.graphics.newImage("/assets/sprites/ship.png") -- Ship Index 1 J.R.C 2/1/22
-    textures.star = love.graphics.newImage("/assets/sprites/star.png")
-    textures.planet = love.graphics.newImage('assets/sprites/planet.png')
-    -- Wyatt's Beautiful spedboost
-    textures.speedboost = love.graphics.newImage('assets/sprites/speedboost.png')
-     -- Assorted spaceships by Jon
-    -- Ship Index 2 J.R.C 2/1/22
-     textures.ship_spaceship_2 = love.graphics.newImage('/assets/sprites/ship_ship_2.png')
-    -- Ship Index 3 J.R.C 2/1/22
-     textures.ship_ufo = love.graphics.newImage('/assets/sprites/ship_ufo.png')
-    -- Ship Index 4 J.R.C 2/1/22
-     textures.ship_shuttle = love.graphics.newImage('/assets/sprites/ship_shuttle.png')
-    -- Ship Index 5 J.R.C 2/1/22
-     textures.ship_shuttle_no_boosters = love.graphics.newImage('/assets/sprites/ship_shuttle_no_boosters.png')
-    -- Ship Index 6 J.R.C 2/1/22
-    textures.ship_purple = love.graphics.newImage('/assets/sprites/ship_purple.png')
-    -- Ship Index 7 J.R.C 2/1/22
-    textures.ship_green = love.graphics.newImage('/assets/sprites/ship_green.png')
-    -- Ship Index 8 J.R.C 2/1/22
-    textures.ship_big = love.graphics.newImage('/assets/sprites/ship_big.png')
+    local i = function(filename)
+        return love.graphics.newImage('assets/sprites/' .. filename)
+    end
+    textures.block1             = i 'block1.png'
+    textures.checkpoint         = i 'checkpoint.png'
+    textures['checkpoint-ball'] = i 'checkpoint-ball.png'
+    textures['checkpoint-gate'] = i 'checkpoint-gate.png'
+    textures.spaceship          = i 'ship.png'
+    textures.star               = i 'star.png'
+    textures.planet             = i 'planet.png'
+    textures.speedboost         = i 'speedboost.png'
 
+    -- Assorted spaceships by Jon
+    textures.ship_2             = i 'ship_2.png'          -- Ship Index 2
+    textures.ship_ufo           = i 'ship_ufo.png'        -- Ship Index 3
+    textures.ship_shuttle       = i 'ship_shuttle.png'    -- Ship Index 4
+    textures.ship_shuttle_2     = i 'ship_shuttle_2.png'  -- Ship Index 5
+    textures.ship_purple        = i 'ship_purple.png'     -- Ship Index 6
+    textures.ship_green         = i 'ship_green.png'      -- Ship Index 7
+    textures.ship_big           = i 'ship_big.png'        -- Ship Index 8
 end
 
 return textures
