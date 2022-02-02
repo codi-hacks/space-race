@@ -43,8 +43,10 @@ local function debug(entity)
         local lastColor = { love.graphics.getColor() }
         love.graphics.setColor({ 1, 0, 0, 1 })
         for _, value in pairs(Entity.list) do
-            local velocityArrow = { value.body:getX() + currentVelocityX, value.body:getY() + currentVelocityY }
-            love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
+            if value.isControlled then
+                local velocityArrow = { value.body:getX() + currentVelocityX, value.body:getY() + currentVelocityY }
+                love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
+            end
         end
 
         local velocityArrowX =  entity.body:getX() + currentVelocityX
