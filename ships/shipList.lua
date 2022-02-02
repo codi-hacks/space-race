@@ -35,7 +35,7 @@ return {
     },
     [2] = {
         displayName = 'Ship Two', -- Index 2
-        filename = 'ship_spaceship_2',
+        filename = 'ship_2',
         shape = {
             points = {
                 0, -25,
@@ -47,7 +47,7 @@ return {
             type = 'polygon'
         },
         spritesheet = {
-            image = 'ship_spaceship_2',
+            image = 'ship_2',
             offset_x = 12.5,
             scale_x = 2
         }
@@ -92,7 +92,7 @@ return {
     },
     [5] = {
         displayName = 'Shuttle', -- Index 5
-        filename = 'ship_shuttle_no_boosters',
+        filename = 'ship_shuttle_2',
         shape = {
             points = {
                 0, -32,
@@ -104,7 +104,7 @@ return {
             type = 'polygon'
         },
         spritesheet = {
-            image = 'ship_shuttle_no_boosters',
+            image = 'ship_shuttle_2',
             offset_x = 16,
             scale_x = 2
         }
