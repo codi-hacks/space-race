@@ -29,6 +29,9 @@
  </objectgroup>
  <objectgroup id="2" name="Player and Walls">
   <object id="1" name="player" x="174.667" y="156.333">
+   <properties>
+    <property name="checkpoints" type="int" value="9"/>
+   </properties>
    <point/>
   </object>
   <object id="11" x="964" y="2.66667" width="122.667" height="122.667"/>

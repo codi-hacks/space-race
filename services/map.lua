@@ -2,7 +2,6 @@
 -- Store and decode maps as needed
 
 local Entity = require('services/entity')
-local Love = love
 local Tmx = require('lib/tmx')
 local Util = require('lib/util')
 local World = require('services/world')
@@ -13,20 +12,11 @@ local active_map
 local map_directory = '/maps'
 local maps = Tmx.get_map_tables(map_directory)
 
-local draw_objects = function(layer, layer_idx)
+local draw_objects = function(layer_idx)
     -- Draw each entity that belongs to this layer
     for _, entity in ipairs(Entity.list) do
         DrawEntities(entity, layer_idx)
         DebugPlayer(entity)
-    end
-
-    -- Draw collision fixture shape's edges in debug mode
-    for _, fixture in ipairs(layer.objects) do
-        local body = fixture:getBody()
-        local shape = fixture:getShape()
-        Love.graphics.setColor(255, 0, 0, 255)
-        Love.graphics.polygon('line', body:getWorldPoints(shape:getPoints()))
-        Love.graphics.setColor(255, 255, 255, 255)
     end
 end
 
@@ -40,7 +30,7 @@ local draw = function()
         if layer.type == 'tiles' then
             Tmx.draw_tiles(layer, active_map)
         else
-            draw_objects(layer, idx)
+            draw_objects(idx)
         end
     end
 end

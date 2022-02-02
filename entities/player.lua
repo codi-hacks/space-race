@@ -1,10 +1,11 @@
 --local sounds = require 'services/sounds'
 
-return function()
+return function(props)
     return {
         body = {
             mass = 1
         },
+        checkpoints = tonumber(props.checkpoints),
         fixture = {
             category = 1,
             density = 10,

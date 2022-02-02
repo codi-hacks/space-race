@@ -1,4 +1,6 @@
 return function()
+    local CompleteLevel = require 'systems/CompleteLevel'
+
     return {
         body = {
             type = 'static'
@@ -7,9 +9,13 @@ return function()
             category = 1,
             mask = 65535
         },
+        on_begin_contact = function(_, entity_b)
+            CompleteLevel(entity_b)
+        end,
         on_end_contact = function(self, entity_b)
             if entity_b.isControlled and self.sprite.name ~= 'close' then
                 self.sprite = self.spritesheet.actions.close:clone()
+                entity_b.checkpoints = entity_b.checkpoints - 1
             end
         end,
         on_pre_solve = function(self, entity_b, contact)
