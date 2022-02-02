@@ -7,7 +7,7 @@ local RegisterSprites = require 'systems/RegisterSprites'
 
 local entity_directory = 'entities'
 
---------Jon's shiplist stuff--------------- 
+--------Jon's shiplist stuff---------------
 local shipList = require('ships/shipList') -- List of ships and attributes J.R.C 2/1/22
 
 local function get_ship(index)
@@ -23,10 +23,10 @@ local function check_ship_type(object, entity)
         entity.ship_index = ship_num
         local ship = get_ship(ship_num)
         entity.shape = ship.shape
-        entity.spritesheet = ship.spritesheet   
-        
+        entity.spritesheet = ship.spritesheet
+
         -- Potentially set other ship attributes here (Force Modifiers, etc...)
-        
+
     end
 end
 -------------------------------------------
