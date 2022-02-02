@@ -1,11 +1,19 @@
 local shipList = require('ships/shipList')
+
+-- Returns the ship's attribute table based on index (shipList.lua) - J.R.C 2/2/22
 local function get_ship(index)
-    print("player.lua ship_index: " .. index)
+    if index then
+        print("player.lua ship_index: " .. index)
+    else
+        index = 1 -- Defaults to Trevor's OG ship if none is found in the map props.
+    end
     return shipList[index]
 end
-return function()
-    local ship_index = 6
+
+return function(object)
+    local ship_index = tonumber(object.ship_type)
     local ship = get_ship(ship_index)
+
     return {
         body = {
             mass = 1
