@@ -1,17 +1,12 @@
-
 local shipList = require('ships/shipList')
-
 local function get_ship(index)
     print("player.lua ship_index: " .. index)
     return shipList[index]
 end
-
 return function()
-    ship_index = 6
+    local ship_index = 6
     local ship = get_ship(ship_index)
-    
     return {
-        
         body = {
             mass = 1
         },
@@ -22,12 +17,10 @@ return function()
             mask = 65535
         },
         powerUps={
-
         },
         gravitational_mass = 1,
         isControlled = true,
         shape = ship.shape,
-        spritesheet = ship.spritesheet 
-        
+        spritesheet = ship.spritesheet
     }
 end

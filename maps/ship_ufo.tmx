@@ -9,7 +9,7 @@
  <objectgroup id="2" name="Objects">
   <object id="1" name="player" type="entity" x="174.667" y="156.333">
    <properties>
-    <property name="ship_type" type="int" value="3"/>
+    <property name="ship_type" type="int" value="8"/>
    </properties>
    <point/>
   </object>

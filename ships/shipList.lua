@@ -3,19 +3,18 @@
     All ships have a:
     displayName - The display name of the ship.
     filename - The filename of the ship sprite
-    shape with: 
+    shape with:
         points
         type
     spritesheet with:
         image
         offset_x
         scale_x
-    
-        - J.R.C 2/1/22 
-]]
 
+        - J.R.C 2/1/22
+]]
 return {
-    [1] = { 
+    [1] = {
         displayName = 'Trevor\'s OG Ship', -- Index 1
         filename = 'ship',
         shape = {
@@ -110,7 +109,7 @@ return {
             scale_x = 2
         }
     },
-   [6] = {
+    [6] = {
         displayName = 'Purple', -- Index 6
         filename = 'ship_purple',
         shape = {
@@ -126,6 +125,44 @@ return {
         spritesheet = {
             image = 'ship_purple',
             offset_x = 16,
+            scale_x = 1
+        }
+    },
+    [7] = {
+        displayName = 'Green', -- Index 7
+        filename = 'ship_green',
+        shape = {
+            points = {
+                0, -26,
+                -15, 15,
+                -15, 16,
+                15, 15,
+                15, 16
+            },
+            type = 'polygon'
+        },
+        spritesheet = {
+            image = 'ship_green',
+            offset_x = 16,
+            scale_x = 1
+        }
+    },
+    [8] = {
+        displayName = 'Big One', -- Index 8
+        filename = 'ship_big',
+        shape = {
+            points = {
+                0, -45,
+                -32, 32,
+                -32, 32,
+                32, 32,
+                32, 32
+            },
+            type = 'polygon'
+        },
+        spritesheet = {
+            image = 'ship_big',
+            offset_x = 32,
             scale_x = 1
         }
     }
