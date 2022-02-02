@@ -25,14 +25,12 @@ local function debug(entity)
         local pos_y = state.camera.pos_y
         love.graphics.setColor({ 1, 1, 1, 1 })
 
-
         local clock_display = 'Time: ' .. roundOff(love.seconds)
         love.graphics.print(clock_display, pos_x, pos_y, 0, 0.9, 0.9)
 
-
         local playerPosition = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
         love.graphics.print(playerPosition, pos_x, pos_y + 25, 0, 0.9, 0.9)
-        local currentVelocityX,currentVelocityY =  entity.body:getLinearVelocity()
+        local currentVelocityX, currentVelocityY = entity.body:getLinearVelocity()
         local playerVelocity = 'X/Y Vel: ' .. roundOff(currentVelocityX) .. '/' .. roundOff(currentVelocityY)
         love.graphics.print(playerVelocity, pos_x, pos_y + 50, 0, 0.9, 0.9)
 
@@ -42,14 +40,11 @@ local function debug(entity)
         -- Direction line and hitbox
         local lastColor = { love.graphics.getColor() }
         love.graphics.setColor({ 1, 0, 0, 1 })
-        for _, value in pairs(Entity.list) do
-            if value.isControlled then
-                local velocityArrow = { value.body:getX() + currentVelocityX, value.body:getY() + currentVelocityY }
-                love.graphics.line(value.body:getX(), value.body:getY(), velocityArrow[1], velocityArrow[2])
-            end
-        end
+        -- VelocityArrow Line For the Player
+        local velocityArrow = { entity.body:getX() + currentVelocityX, entity.body:getY() + currentVelocityY }
+        love.graphics.line(entity.body:getX(), entity.body:getY(), velocityArrow[1], velocityArrow[2])
 
-        local velocityArrowX =  entity.body:getX() + currentVelocityX
+        local velocityArrowX = entity.body:getX() + currentVelocityX
         local velocityArrowY = entity.body:getY() + currentVelocityY
 
         love.graphics.setColor(lastColor)
@@ -59,7 +54,7 @@ local function debug(entity)
 end
 
 return System(
-    { '_entity','-isControlled' },
+    { '_entity', '-isControlled' },
     function(entity)
         debug(entity)
     end
