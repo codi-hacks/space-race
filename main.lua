@@ -14,10 +14,10 @@ local background = require('services/background')
 local map = require('services/map')
 
 local ControlPlayer = require('systems/ControlPlayer')
-local DebugPlayer = require('systems/DebugPlayer')
-local UpdateCamera = require('systems/UpdateCamera')
 local CustomCollision = require('systems/CustomCollision')
 local Gravitate = require('systems/Gravitate')
+local UpdateCamera = require('systems/UpdateCamera')
+local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 
 love.load = function()
     seconds = 0
@@ -64,9 +64,10 @@ love.update = function(dt)
         seconds = seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
+            CustomCollision(entity)
             Gravitate(entity)
             UpdateCamera(entity)
-            CustomCollision(entity)
+            UpdateEntityAnimation(entity, dt)
         end
 
         if seconds <= 0.25 then

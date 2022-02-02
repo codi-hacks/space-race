@@ -29,6 +29,27 @@ Given a `nil` value instead of a table, the entity won't be given a body.
 
 Mass for calculating gravity between two entities
 
+### powerUps (table)
+
+- Powerups active on the player.
+
+- time (number) - Seconds the powerup has left until it is no longer active
+- value (number) - Custom value to set the intensity of the powerup
+
+```lua
+powerUps = { time = 100, value = 100 }
+```
+
+### onCollision (function)
+
+Register custom functionality to happen when contact with the player is made.
+
+```lua
+onCollision = function(self, player)
+  print(player.body:getLinearVelocity())
+end
+```
+
 ### shape (table)
 
 The shape is attached to the fixture and determines the entity's hitbox.
@@ -45,15 +66,4 @@ The shape is attached to the fixture and determines the entity's hitbox.
 
 A `nil` value means no sprite will be registered.
 
-- image (string) The "texture" to use
-- offset_x (number = 0) The x-axis pixel offset of the sprite from the body. [[1](https://love2d.org/wiki/love.graphics.draw)]
-- offset_y (number = offset_x) The y-axis pixel offset. This will match the offset_x unless specified.
-- scale_x (number = 1) The x-axis scaling of the sprite.
-- scale_y (number = 1) The y-axis scaling of the sprite.
-### onCollision (function)
-    The Custom OnCollision function.
-- Passes the player. into the function
-### powerUps (table)
-- Powerups active
-- Properties currently implemented time and value
-- Currently implemented powerUps speedboost
+See [spritesheed.md](./spritesheet.md) for more information.

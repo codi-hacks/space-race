@@ -1,3 +1,5 @@
+--local sounds = require 'services/sounds'
+
 return function()
     return {
         body = {
@@ -9,6 +11,11 @@ return function()
             friction = 0,
             mask = 65535
         },
+        on_end_contact = function()
+            -- Extremely useful and essential sound effect
+            -- TODO: fix this so it only bonks when we expect it to
+            --love.audio.play(sounds.bonk)
+        end,
         powerUps={
 
         },
