@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="109">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="110">
  <tileset firstgid="1" source="star_map.tsx"/>
  <tileset firstgid="2" source="block1.tsx"/>
  <layer id="1" name="Background" width="128" height="128">
@@ -112,5 +112,8 @@
   <object id="89" x="2239" y="2082" width="34" height="93"/>
   <object id="90" x="2275" y="2084" width="29" height="125"/>
   <object id="108" x="1984" y="2497" width="64" height="95.5"/>
+  <object id="109" name="checkpoint-ball" x="2162" y="2380">
+   <point/>
+  </object>
  </objectgroup>
 </map>

@@ -6,6 +6,7 @@ textures.load = function()
     end
     textures.block1             = i 'block1.png'
     textures.checkpoint         = i 'checkpoint.png'
+    textures['checkpoint-ball'] = i 'checkpoint-ball.png'
     textures['checkpoint-gate'] = i 'checkpoint-gate.png'
     textures.spaceship          = i 'ship.png'
     textures.star               = i 'star.png'
