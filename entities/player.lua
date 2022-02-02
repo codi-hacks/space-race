@@ -7,11 +7,9 @@ local function get_ship(index)
 end
 
 return function()
-    ship_index = 6
+    local ship_index = 6
     local ship = get_ship(ship_index)
-    
     return {
-        
         body = {
             mass = 1
         },
@@ -27,7 +25,7 @@ return function()
         gravitational_mass = 1,
         isControlled = true,
         shape = ship.shape,
-        spritesheet = ship.spritesheet 
-        
+        spritesheet = ship.spritesheet
+
     }
 end
