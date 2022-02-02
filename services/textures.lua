@@ -1,10 +1,17 @@
 local textures = {}
 
 textures.load = function()
-    textures.spaceship = love.graphics.newImage("/assets/sprites/ship.png")
-    textures.star = love.graphics.newImage("/assets/sprites/star.png")
-    textures.planet = love.graphics.newImage('assets/sprites/planet.png')
-    textures.speedboost = love.graphics.newImage('assets/sprites/speedboost.png')
+    local i = function(filename)
+        return love.graphics.newImage('assets/sprites/' .. filename)
+    end
+    textures.block1             = i 'block1.png'
+    textures.checkpoint         = i 'checkpoint.png'
+    textures['checkpoint-ball'] = i 'checkpoint-ball.png'
+    textures['checkpoint-gate'] = i 'checkpoint-gate.png'
+    textures.spaceship          = i 'ship.png'
+    textures.star               = i 'star.png'
+    textures.planet             = i 'planet.png'
+    textures.speedboost         = i 'speedboost.png'
 end
 
 return textures

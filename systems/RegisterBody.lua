@@ -10,7 +10,7 @@ local components = {
     '=body'
 }
 
-local system = function(body, pos_x, pos_y)
+local system = function(body, pos_x, pos_y, rotation)
     local new_body = Love.physics.newBody(
         World,
         pos_x + (body.offset_x or 0),
@@ -18,13 +18,15 @@ local system = function(body, pos_x, pos_y)
         body.type or 'dynamic'
     )
 
-    -- Give it a fixed rotation unless
-    -- explicitly set to false.
+    new_body:setAngle(rotation or 0)
+
+    -- By default, don't allow entities to rotate
     if body.fixed_rotation == true then
         new_body:setFixedRotation(true)
     else
         new_body:setFixedRotation(false)
     end
+
     return new_body
 end
 

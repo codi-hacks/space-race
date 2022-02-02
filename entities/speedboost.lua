@@ -1,13 +1,20 @@
-
-local boost = function(_, player)
-    player.powerUps.speedBoost = { value = 100, time = 100 };
-end
 return function()
     return {
         body = {
-            mass = 0
+            type = 'static'
         },
-        onCollision = boost,
+        fixture = {
+            category = 1,
+            mask = 65535
+        },
+        on_begin_contact = function(_, entity_b)
+            if entity_b.isControlled then
+                entity_b.powerUps.speedBoost = { value = 100, time = 100 };
+            end
+        end,
+        on_pre_solve = function(_, _, contact)
+            contact:setEnabled(false)
+        end,
         shape = {
             type = 'rectangle',
             width =32,

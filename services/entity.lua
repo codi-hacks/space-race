@@ -3,7 +3,7 @@ local Love = love
 local RegisterBody = require 'systems/RegisterBody'
 local RegisterFixture = require 'systems/RegisterFixture'
 local RegisterShape = require 'systems/RegisterShape'
-local RegisterSprites = require 'systems/RegisterSprites'
+local RegisterSpritesheet = require 'systems/RegisterSpritesheet'
 
 local entity_directory = 'entities'
 
@@ -57,10 +57,10 @@ local spawn = function(object, layer_index)
     -- could change in special cases or on death.
     entity.draw_layer = layer_index
 
-    RegisterBody(entity, object.pos_x, object.pos_y)
+    RegisterBody(entity, object.pos_x, object.pos_y, object.rotation)
     RegisterShape(entity)
     RegisterFixture(entity, layer_index)
-    RegisterSprites(entity)
+    RegisterSpritesheet(entity)
 
     table.insert(entities, entity)
 end
