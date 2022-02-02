@@ -1,7 +1,7 @@
 local map = require('services/map')
 local mapList = require('maps/mapList')
 local Entity = require('services/entity')
-local state = require('state')
+local state = require 'state'
 local background = require('services/background')
 
 -- Load a map
@@ -24,7 +24,7 @@ return function(mapNumber)
 
     -- Remove old entities from map
     for k1,v1 in ipairs(Entity.list) do
-        for k2,v2 in ipairs(oldEntities) do
+        for _,v2 in ipairs(oldEntities) do
             if v1 == v2 then
                 v2.body:destroy()
                 v2.shape:release()
@@ -33,10 +33,10 @@ return function(mapNumber)
         end
     end
     table.sort(destroyList, function(a,b) return a > b end)
-    for k,v in ipairs(destroyList) do
+    for _,v in ipairs(destroyList) do
         table.remove(Entity.list, v)
     end
 
     -- Generate some new stars, because why not?
-    starLocations = background.load()
+    love.starLocations = background.load()
 end
