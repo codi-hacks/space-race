@@ -1,5 +1,4 @@
 local Love = love
-local Util = require 'lib/util'
 
 local RegisterBody = require 'systems/RegisterBody'
 local RegisterFixture = require 'systems/RegisterFixture'

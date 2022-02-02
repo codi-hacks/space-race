@@ -10,7 +10,7 @@ love.physics.setMeter(64)
 end
 ]]--
 
-local end_contact_callback = function(fixture_a, fixture_b, contact)
+local end_contact_callback = function(_, _, _)
   -- Extremely useful and essential sound effect
     love.audio.play(sounds.bonk)
 end
