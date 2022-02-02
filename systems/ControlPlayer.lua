@@ -2,7 +2,6 @@
 
 local System = require('lib/system')
 local keyboard = require('services/keyboard')
-local state = require('state')
 
 return System(
     {'_entity','-isControlled'},
