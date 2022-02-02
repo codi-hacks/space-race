@@ -22,15 +22,17 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
     end
 
     if spritesheet then
-        Love.graphics.draw(
-            sprite,
+        local offset_x = sprite.offset_x or spritesheet.offset_x or 0
+        local offset_y = sprite.offset_y or spritesheet.offset_y or offset_x
+        sprite:draw(
+            spritesheet.image,
             body:getX(),
             body:getY(),
             body:getAngle(),
             spritesheet.scale_x or 1,
             spritesheet.scale_y or spritesheet.scale_x or 1,
-            spritesheet.offset_x or 0,
-            spritesheet.offset_y or spritesheet.offset_x or 0
+            offset_x,
+            offset_y
         )
     end
 

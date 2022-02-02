@@ -10,14 +10,12 @@ local loadMap = require('menu/loadMap')
 local textures = require('services/textures')
 local background = require('services/background')
 local map = require('services/map')
-
-local ControlPlayer = require('systems/ControlPlayer')
-local UpdateCamera = require('systems/UpdateCamera')
-local CustomCollision = require('systems/CustomCollision')
-local Gravitate = require('systems/Gravitate')
 local state = require 'state'
 
-
+local ControlPlayer = require('systems/ControlPlayer')
+local Gravitate = require('systems/Gravitate')
+local UpdateCamera = require('systems/UpdateCamera')
+local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 
 love.load = function()
     love.seconds =0
@@ -66,7 +64,7 @@ love.update = function(dt)
             ControlPlayer(entity)
             Gravitate(entity)
             UpdateCamera(entity)
-            CustomCollision(entity)
+            UpdateEntityAnimation(entity, dt)
         end
 
         if love.seconds <= 0.25 then
