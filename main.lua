@@ -13,7 +13,6 @@ local map = require('services/map')
 local state = require 'state'
 
 local ControlPlayer = require('systems/ControlPlayer')
-local CustomCollision = require('systems/CustomCollision')
 local Gravitate = require('systems/Gravitate')
 local UpdateCamera = require('systems/UpdateCamera')
 local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
@@ -63,7 +62,6 @@ love.update = function(dt)
         love.seconds = love.seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
-            CustomCollision(entity)
             Gravitate(entity)
             UpdateCamera(entity)
             UpdateEntityAnimation(entity, dt)
