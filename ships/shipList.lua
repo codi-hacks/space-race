@@ -3,18 +3,19 @@
     All ships have a:
     displayName - The display name of the ship.
     filename - The filename of the ship sprite
-    shape with:
+    shape with: 
         points
         type
     spritesheet with:
         image
         offset_x
         scale_x
-
-        - J.R.C 2/1/22
+    
+        - J.R.C 2/1/22 
 ]]
+
 return {
-    [1] = {
+    [1] = { 
         displayName = 'Trevor\'s OG Ship', -- Index 1
         filename = 'ship',
         shape = {

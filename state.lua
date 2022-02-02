@@ -1,6 +1,6 @@
 -- Initialize table to keep track of game state
 
-local state = {}
+state = {}
 
 state.paused = true
 state.debugOn = false

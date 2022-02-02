@@ -1,4 +1,5 @@
 local Love = love
+local Util = require 'lib/util'
 
 local RegisterBody = require 'systems/RegisterBody'
 local RegisterFixture = require 'systems/RegisterFixture'
@@ -7,9 +8,8 @@ local RegisterSprites = require 'systems/RegisterSprites'
 
 local entity_directory = 'entities'
 
---------Jon's shiplist stuff---------------
--- List of ships and attributes J.R.C 2/1/22
-local shipList = require('ships/shipList')
+--------Jon's shiplist stuff--------------- 
+local shipList = require('ships/shipList') -- List of ships and attributes J.R.C 2/1/22
 
 local function get_ship(index)
     print("player.lua ship_index: " .. index)
@@ -18,17 +18,16 @@ end
 
 -- "Caveman way" of setting the player ship attributes from map - J.R.C 2/1/22
 local function check_ship_type(object, entity)
-    -- Gross code to Check the ship_type of each applicable entity and
-    -- set the player attributes accordingly - J.R.C 2/1/22
+    -- Gross code to Check the ship_type of each applicable entity and set the player attributes accordingly - J.R.C 2/1/22
     if object.ship_type then
         local ship_num = tonumber(object.ship_type)
         entity.ship_index = ship_num
         local ship = get_ship(ship_num)
         entity.shape = ship.shape
-        entity.spritesheet = ship.spritesheet
-
+        entity.spritesheet = ship.spritesheet   
+        
         -- Potentially set other ship attributes here (Force Modifiers, etc...)
-
+        
     end
 end
 -------------------------------------------

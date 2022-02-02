@@ -1,5 +1,5 @@
 -- Load random spots for stars to be drawn then draw them.
-local state = require 'state'
+
 local background = {}
 
 function background.load()
@@ -9,8 +9,8 @@ function background.load()
     local window_y = math.floor(state.camera.window_height / 10)
     for i=10, window_x, 10 do
         for j=10, window_y, 10 do
-            local random_x = (i - love.math.random(0, 9)) * 10
-            local random_y = (j - love.math.random(0, 9)) * 10
+            random_x = (i - love.math.random(0, 9)) * 10
+            random_y = (j - love.math.random(0, 9)) * 10
             table.insert(randomsTable, {random_x, random_y})
         end
     end

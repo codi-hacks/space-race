@@ -4,8 +4,8 @@
 -- Distance between player and screen edge before the
 -- player is considered to be in the bounary in which
 -- the camera needs to be moved.
-local state = require 'state'
 
+local state = require('state')
 state.camera.boundary_size = 0
 state.camera.pos_x = 0 * .5
 state.camera.pos_y = 0 * .5
