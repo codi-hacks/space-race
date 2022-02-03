@@ -10,7 +10,7 @@ local loadMap = require('menu/loadMap')
 local textures = require('services/textures')
 local background = require('services/background')
 local map = require('services/map')
-local state = require 'state'
+local State = require 'services/state'
 
 local ControlPlayer = require('systems/ControlPlayer')
 local Gravitate = require('systems/Gravitate')
@@ -24,14 +24,14 @@ love.load = function()
     textures.load()
     love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
     love.starLocations = background.load()
-    loadMap(state.activeMap)
+    loadMap(State.activeMap)
     menu.load()
 end
 
 
 -- Game time
 love.keypressed = function(pressed_key)
-    if state.paused then
+    if State.paused then
         if menu.key_map[pressed_key] then
             menu.key_map[pressed_key]()
         end
@@ -49,7 +49,7 @@ love.draw = function()
 
         map.draw()
 
-    if state.paused == true then
+    if State.paused == true then
         menu.draw()
     end
 
@@ -57,7 +57,7 @@ love.draw = function()
 end
 
 love.update = function(dt)
-    if state.paused == false then
+    if State.paused == false then
         world:update(dt)
         love.seconds = love.seconds + dt
         for _, entity in ipairs(Entity.list) do
@@ -68,9 +68,9 @@ love.update = function(dt)
         end
 
         if love.seconds <= 0.25 then
-            state.camera.scale_x = 1 / (love.seconds*4)
+            State.camera.scale_x = 1 / (love.seconds*4)
         else
-            state.camera.scale_x = 1
+            State.camera.scale_x = 1
         end
     else
         menu.update(dt)

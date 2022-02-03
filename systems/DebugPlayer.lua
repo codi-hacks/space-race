@@ -1,6 +1,6 @@
 local System = require('lib/system')
 local Entity = require('services/entity')
-local state = require 'state'
+local State = require 'services/state'
 
 local function debug(entity)
 
@@ -20,9 +20,9 @@ local function debug(entity)
     elseif love.keyboard.isScancodeDown('m') then
         print('=================================')
     end
-    if state.debugOn then
-        local pos_x = state.camera.pos_x
-        local pos_y = state.camera.pos_y
+    if State.debugOn then
+        local pos_x = State.camera.pos_x
+        local pos_y = State.camera.pos_y
         love.graphics.setColor({ 1, 1, 1, 1 })
         -- Time
         local clock_display = 'Time: ' .. roundOff(love.seconds)

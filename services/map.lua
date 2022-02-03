@@ -5,7 +5,7 @@ local Entity = require('services/entity')
 local Tmx = require('lib/tmx')
 local Util = require('lib/util')
 local World = require('services/world')
-local DrawEntities = require('systems/DrawEntities')
+local DrawEntity = require('systems/DrawEntity')
 local DebugPlayer = require('systems/DebugPlayer')
 
 local active_map
@@ -15,7 +15,7 @@ local maps = Tmx.get_map_tables(map_directory)
 local draw_objects = function(layer_idx)
     -- Draw each entity that belongs to this layer
     for _, entity in ipairs(Entity.list) do
-        DrawEntities(entity, layer_idx)
+        DrawEntity(entity, layer_idx)
         DebugPlayer(entity)
     end
 end
