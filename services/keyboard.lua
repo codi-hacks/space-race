@@ -1,5 +1,5 @@
 local Entity = require('services/entity')
-local state = require('state')
+local State = require('services/state')
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
 
@@ -10,7 +10,7 @@ keyboard.key_map = {
         love.event.quit()
     end,
     b = function()
-        state.debugOn = not state.debugOn
+        State.debugOn = not State.debugOn
     end,
     o = function()
         local player = Entity.grab('player')
@@ -18,7 +18,7 @@ keyboard.key_map = {
         player.body:setY(player.position.y)
     end,
     p = function()
-        state.paused = not state.paused
+        State.paused = not State.paused
         menu.load()
         love.audio.play(sounds.chirp_up)
     end

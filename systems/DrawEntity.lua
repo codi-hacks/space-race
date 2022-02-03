@@ -3,7 +3,7 @@
 
 local Love = love
 local System = require 'lib/system'
-local state = require 'state'
+local State = require 'services/state'
 
 local components = {
     'body',
@@ -37,7 +37,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
     end
 
     -- Draw fixture shape edges in debug mode
-    if shape and state.debugOn then
+    if shape and State.debugOn then
         Love.graphics.setColor(160, 72, 14, 255)
 
         if shape:getType() == 'polygon' then
