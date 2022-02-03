@@ -6,7 +6,7 @@ local Entity = require 'services/entity'
 --local Map = require 'services/map'
 local Menu = require 'menu/menu'
 local Sounds = require 'services/sounds'
-local State = require 'state'
+local State = require 'services/state'
 
 return System(
     {'checkpoints'},
