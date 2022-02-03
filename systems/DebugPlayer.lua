@@ -46,7 +46,7 @@ local function debug(entity)
         -- Actually Draw the Line
         love.graphics.setColor({ 1, 0, 0, 1 })
         love.graphics.line(entity.body:getX(), entity.body:getY(), velocityArrowX,velocityArrowY)
-
+        love.graphics.setColor({ 1, 1, 1, 1 }) -- Added this line to fix sprite drawing as red - J.R.C 2/2/22
     end
 end
 
