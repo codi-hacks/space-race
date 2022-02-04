@@ -12,4 +12,6 @@ State.activeShip = 1
 
 State.camera = {} -- Initialized in /camera.lua
 
+State.credits = -1 -- True value loaded in services/save.lua
+
 return State

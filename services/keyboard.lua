@@ -2,20 +2,22 @@ local Entity = require('services/entity')
 local State = require('services/state')
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
+local save = require('services/save')
 
 local keyboard = {}
 
 keyboard.key_map = {
     escape = function()
+        save.write()
         love.event.quit()
     end,
     b = function()
         State.debugOn = not State.debugOn
     end,
     o = function()
-        local player = Entity.grab('player')
-        player.body:setX(player.position.x)
-        player.body:setY(player.position.y)
+        -- Become Mr. Krabs and get all the money
+        love.audio.play(sounds.chirp_up)
+        State.credits = State.credits + 1
     end,
     p = function()
         State.paused = not State.paused
