@@ -18,7 +18,7 @@ local ship_menu = {}
 --Function returns the ship table of the ship to the left
 local function get_left()
     local left_index = ship_menu.shipSelect
-    if ship_menu.shipSelect <= 1 then
+    if left_index <= 1 then
         left_index = #shipList
     else
         left_index = ship_menu.shipSelect - 1
@@ -29,7 +29,7 @@ end
 --Function returns the ship table of the ship to the right
 local function get_right()
     local right_index = ship_menu.shipSelect
-    if ship_menu.shipSelect >= #shipList then
+    if right_index >= #shipList then
         right_index = 1
     else
         right_index = ship_menu.shipSelect + 1
@@ -166,13 +166,24 @@ ship_menu.draw = function()
         shift_y = left_image:getPixelHeight() % 64
 
         -- Draw a preview of the left option
-        love.graphics.draw(left_image, corner[1] + 250 - shift_x, corner[2] + 240 + shift_y, 0, left_ship.spritesheet.scale_x + 0.5)
+        love.graphics.draw(
+            left_image, corner[1] + 250 - shift_x,
+            corner[2] + 240 + shift_y,
+            0,
+            left_ship.spritesheet.scale_x + 0.5
+        )
 
         shift_x = right_image:getPixelWidth() * (right_ship.spritesheet.scale_x + 0.5) / 2 - right_image:getPixelWidth()
         shift_y = right_image:getPixelHeight() % 64
 
         -- Draw a preview of the right option
-        love.graphics.draw(right_image, corner[1] + 550 + shift_x, corner[2] + 240 + shift_y, 0, right_ship.spritesheet.scale_x + 0.5)
+        love.graphics.draw(
+            right_image,
+            corner[1] + 550 + shift_x,
+            corner[2] + 240 + shift_y,
+            0,
+            right_ship.spritesheet.scale_x + 0.5
+        )
     end
 
 

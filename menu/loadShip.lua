@@ -1,6 +1,4 @@
 local shipList = require('ships/shipList')
-local Entity = require('services/entity')
-local State = require 'services/state'
 
 -- Returns the ship's attribute table based on index (shipList.lua) - J.R.C 2/2/22
 local function get_ship(index)
@@ -34,5 +32,7 @@ return function(shipNumber)
     RespawnPlayer(player)
     --Spawn a new player
     ]]
+
+    get_ship(shipNumber)
 
 end
