@@ -76,9 +76,12 @@ menu.load_map = function()
         -- ...or else load a new map
     else
         --Entity.list = {}
+
         loadMap(menu.mapSelect)
 
+
         State.paused = not State.paused
+        State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
         menu.unload()
         love.audio.play(sounds.chirp_down)
     end

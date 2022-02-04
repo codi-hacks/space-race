@@ -31,7 +31,7 @@
   <object id="1" name="player" x="174.667" y="156.333">
    <properties>
     <property name="checkpoints" type="int" value="9"/>
-    <property name="ship_type" type="int" value="8"/>
+    <property name="ship_type" type="int" value="3"/>
    </properties>
    <point/>
   </object>

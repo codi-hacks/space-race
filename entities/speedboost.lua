@@ -1,5 +1,6 @@
 return function()
     return {
+        name = 'player',
         body = {
             type = 'static'
         },

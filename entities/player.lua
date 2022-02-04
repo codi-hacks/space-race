@@ -9,9 +9,17 @@ local function get_ship(index)
     return shipList[index]
 end
 
+local function set_Ship(_, index)
+    ship_index = index
+    ship = get_ship(ship_index)
+    shape = ship.shape
+    spritesheet = ship.spritesheet
+end
+
 return function(props)
     local ship_index = tonumber(props.ship_type)
     local ship = get_ship(ship_index)
+
     return {
         body = {
             mass = 1
@@ -34,6 +42,8 @@ return function(props)
         gravitational_mass = 1,
         isControlled = true,
         shape = ship.shape,
-        spritesheet = ship.spritesheet
+        spritesheet = ship.spritesheet,
+
+        set_ship = set_Ship
     }
 end
