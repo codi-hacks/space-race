@@ -1,8 +1,9 @@
 # action.yml
 name: 'Unit Tests'
 on:
+  pull_request:
   push:
-    branches: [ test ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
