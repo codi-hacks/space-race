@@ -17,6 +17,7 @@ return function(props)
 
 
     return {
+        name = 'player',
         body = {
             mass = 1
         },

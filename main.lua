@@ -7,8 +7,6 @@ local Camera = require('services/camera')
 local menu = require('menu/menu')
 local loadMap = require('menu/loadMap')
 
-local shipMenu = require('menu/shipMenu')
-
 local textures = require('services/textures')
 local background = require('services/background')
 local map = require('services/map')
@@ -28,7 +26,6 @@ love.load = function()
     love.starLocations = background.load()
     loadMap(State.activeMap)
     menu.load()
-    shipMenu.load() -- Load ship menu - J.R.C 2/2/22
 end
 
 
@@ -37,10 +34,6 @@ love.keypressed = function(pressed_key)
     if State.paused then
         if menu.key_map[pressed_key] then
             menu.key_map[pressed_key]()
-        end
-    elseif State.shipMenu then  -- Update ship menu keymap - J.R.C 2/2/22
-        if shipMenu.key_map[pressed_key] then
-            shipMenu.key_map[pressed_key]()
         end
     else
         if keyboard.key_map[pressed_key] then
@@ -55,9 +48,7 @@ love.draw = function()
         background.draw( love.starLocations)
 
         map.draw()
-        if State.shipMenu then -- Draw ship menu  - J.R.C 2/2/22
-            shipMenu.draw()
-        elseif State.paused == true then
+        if State.paused == true then
             menu.draw()
         end
 
@@ -65,9 +56,7 @@ love.draw = function()
 end
 
 love.update = function(dt)
-    if State.shipMenu then -- Update ship menu - J.R.C 2/2/22
-        shipMenu.update(dt)
-    elseif State.paused == false then
+    if State.paused == false then
         world:update(dt)
         love.seconds = love.seconds + dt
         for _, entity in ipairs(Entity.list) do
