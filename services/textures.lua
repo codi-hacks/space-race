@@ -1,8 +1,10 @@
+local Love = require 'services/love'
+
 local textures = {}
 
 textures.load = function()
     local i = function(filename)
-        return love.graphics.newImage('assets/sprites/' .. filename)
+        return Love.graphics.newImage('assets/sprites/' .. filename)
     end
     textures.block1             = i 'block1.png'
     textures.checkpoint         = i 'checkpoint.png'

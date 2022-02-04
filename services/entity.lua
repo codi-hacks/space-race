@@ -1,4 +1,4 @@
-local Love = love
+local Love = require 'services/love'
 
 local RegisterBody = require 'systems/RegisterBody'
 local RegisterFixture = require 'systems/RegisterFixture'

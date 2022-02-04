@@ -1,4 +1,4 @@
-
+local Love = require 'services/love'
 local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
 local loadMap = require('menu/loadMap')
@@ -34,7 +34,7 @@ end
 
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
-    menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
+    menu.titleImage = Love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
     menu.mapSelect = State.activeMap
@@ -49,7 +49,7 @@ end
 
 menu.key_map = {
     escape = function()
-        love.event.quit()
+        Love.event.quit()
     end,
     b = function()
         State.debugOn = not State.debugOn
@@ -72,7 +72,7 @@ menu.load_map = function()
     if State.activeMap == menu.mapSelect then
         State.paused = not State.paused
         menu.unload()
-        love.audio.play(sounds.chirp_down)
+        Love.audio.play(sounds.chirp_down)
         -- ...or else load a new map
     else
         --Entity.list = {}
@@ -80,7 +80,7 @@ menu.load_map = function()
 
         State.paused = not State.paused
         menu.unload()
-        love.audio.play(sounds.chirp_down)
+        Love.audio.play(sounds.chirp_down)
     end
 end
 
@@ -89,29 +89,29 @@ menu.draw = function()
     local corner = { State.camera.pos_x, State.camera.pos_y }
 
     -- Transparent red background
-    love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
+    Love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
     local verticies = {
         0 + corner[1], 0 + corner[2],
         0 + corner[1], 600 + corner[2],
         800 + corner[1], 600 + corner[2],
         800 + corner[1], 0 + corner[2] }
-    love.graphics.polygon('fill', verticies)
+    Love.graphics.polygon('fill', verticies)
 
     -- Draw menu image background
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(menu.titleImage, verticies[1], verticies[2])
+    Love.graphics.setColor(1, 1, 1, 1)
+    Love.graphics.draw(menu.titleImage, verticies[1], verticies[2])
 
     -- Draw text
     if menu.blink then
-        love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+        Love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
     end
-    love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
+    Love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
         corner[1] + 400, corner[2] + 450, 0, 2, 2)
-    love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
+    Love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
 
     --[[if menu.blink == true then
-        love.graphics.setColor({1, 0, 0, 1})
-        love.graphics.rectangle('line', corner[1], corner[2],
+        Love.graphics.setColor({1, 0, 0, 1})
+        Love.graphics.rectangle('line', corner[1], corner[2],
         State.camera.window_width, State.camera.window_height)
     end]]--
 end

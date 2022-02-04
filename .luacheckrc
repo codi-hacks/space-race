@@ -6,8 +6,8 @@ std = 'luajit'
 -- Ignore libs as we aren't accountable for those
 exclude_files = { 'lib/*.*' }
 
--- Ignore global variables in these files
-files['**/*.lua'] = {
+-- Ignore lua love global just right here
+files['services/love.lua'] = {
   globals = {
     'love'
   }

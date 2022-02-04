@@ -3,6 +3,7 @@ local world = require('services/world')
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
+local Love = require 'services/love'
 
 local menu = require('menu/menu')
 local loadMap = require('menu/loadMap')
@@ -17,20 +18,20 @@ local Gravitate = require('systems/Gravitate')
 local UpdateCamera = require('systems/UpdateCamera')
 local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 
-love.load = function()
-    love.seconds =0
-    love.window.setMode(800, 600)
-    love.graphics.setDefaultFilter('nearest', 'nearest')
+Love.load = function()
+    Love.seconds =0
+    Love.window.setMode(800, 600)
+    Love.graphics.setDefaultFilter('nearest', 'nearest')
     textures.load()
-    love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
-    love.starLocations = background.load()
+    Love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
+    Love.starLocations = background.load()
     loadMap(State.activeMap)
     menu.load()
 end
 
 
 -- Game time
-love.keypressed = function(pressed_key)
+Love.keypressed = function(pressed_key)
     if State.paused then
         if menu.key_map[pressed_key] then
             menu.key_map[pressed_key]()
@@ -42,10 +43,10 @@ love.keypressed = function(pressed_key)
     end
 end
 
-love.draw = function()
+Love.draw = function()
         Camera.set()
 
-        background.draw( love.starLocations)
+        background.draw( Love.starLocations)
 
         map.draw()
 
@@ -56,10 +57,10 @@ love.draw = function()
     Camera.unset()
 end
 
-love.update = function(dt)
+Love.update = function(dt)
     if State.paused == false then
         world:update(dt)
-        love.seconds = love.seconds + dt
+        Love.seconds = Love.seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
             Gravitate(entity)
@@ -67,8 +68,8 @@ love.update = function(dt)
             UpdateEntityAnimation(entity, dt)
         end
 
-        if love.seconds <= 0.25 then
-            State.camera.scale_x = 1 / (love.seconds*4)
+        if Love.seconds <= 0.25 then
+            State.camera.scale_x = 1 / (Love.seconds*4)
         else
             State.camera.scale_x = 1
         end

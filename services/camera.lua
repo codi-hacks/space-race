@@ -5,6 +5,7 @@
 -- player is considered to be in the bounary in which
 -- the camera needs to be moved.
 local State = require 'services/state'
+local Love = require 'services/love'
 
 State.camera.boundary_size = 0
 State.camera.pos_x = 0 * .5
@@ -12,12 +13,12 @@ State.camera.pos_y = 0 * .5
 State.camera.rotation = 0
 State.camera.scale_x = 1
 State.camera.scale_y = 1
-State.camera.window_width, State.camera.window_height = love.graphics:getDimensions()
+State.camera.window_width, State.camera.window_height = Love.graphics:getDimensions()
 
 local window_width = State.camera.window_width / State.camera.scale_x
 local window_height = State.camera.window_height / State.camera.scale_y
 -- https://love2d.org/wiki/FilterMode
-love.graphics.setDefaultFilter('nearest', 'nearest')
+Love.graphics.setDefaultFilter('nearest', 'nearest')
 
 local get_boundary_bottom = function()
     return State.camera.pos_y + window_height - State.camera.boundary_size
@@ -49,10 +50,10 @@ local rotate = function(dr)
 end
 
 local set = function()
-    love.graphics.push()
-    love.graphics.rotate(-State.camera.rotation)
-    love.graphics.scale(State.camera.scale_x, State.camera.scale_y)
-    love.graphics.translate(-State.camera.pos_x, -State.camera.pos_y)
+    Love.graphics.push()
+    Love.graphics.rotate(-State.camera.rotation)
+    Love.graphics.scale(State.camera.scale_x, State.camera.scale_y)
+    Love.graphics.translate(-State.camera.pos_x, -State.camera.pos_y)
 end
 
 local set_position = function(x, y)
@@ -66,7 +67,7 @@ local set_scale = function(sx, sy)
 end
 
 local unset = function()
-    love.graphics.pop()
+    Love.graphics.pop()
 end
 
 return {

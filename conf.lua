@@ -1,4 +1,6 @@
-function love.conf(t)
+local Love = require 'services/love'
+
+function Love.conf(t)
     t.identity = nil
     t.appendidentity = false
     t.version = "11.3"

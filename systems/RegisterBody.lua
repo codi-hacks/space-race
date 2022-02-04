@@ -3,7 +3,7 @@
 
 local System = require 'lib/system'
 
-local Love = love
+local Love = require 'services/love'
 local World = require 'services/world'
 
 local components = {

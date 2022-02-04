@@ -1,7 +1,7 @@
 --- DrawEntity
 -- Draw currently-visible entities on screen.
 
-local Love = love
+local Love = require 'services/love'
 local System = require 'lib/system'
 local State = require 'services/state'
 
