@@ -11,6 +11,7 @@ local textures = require('services/textures')
 local background = require('services/background')
 local map = require('services/map')
 local State = require 'services/state'
+local save = require('services/save')
 
 local ControlPlayer = require('systems/ControlPlayer')
 local Gravitate = require('systems/Gravitate')
@@ -24,6 +25,7 @@ love.load = function()
     textures.load()
     love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
     love.starLocations = background.load()
+    save.read()
     loadMap(State.activeMap)
     menu.load()
 end

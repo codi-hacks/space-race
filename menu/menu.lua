@@ -3,18 +3,9 @@ local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
 local loadMap = require('menu/loadMap')
 local State = require 'services/state'
-
---[[
-    TODO:
-        Fix entities not being cleared upon loading a new map.
-        Add text to title saying SPAAACE RAAAAACE
-]]
-
-
+local save = require('services/save')
 
 local menu = {}
-
-
 
 menu.up = function()
     menu.mapSelect = menu.mapSelect + 1
@@ -30,14 +21,15 @@ menu.down = function()
     end
 end
 
-
-
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
     menu.mapSelect = State.activeMap
+
+    -- Save data when opening menu since this is likely right before a player will quit.
+    save.write()
 end
 
 menu.unload = function()
@@ -49,6 +41,7 @@ end
 
 menu.key_map = {
     escape = function()
+        save.write()
         love.event.quit()
     end,
     b = function()
@@ -104,16 +97,12 @@ menu.draw = function()
     -- Draw text
     if menu.blink then
         love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+        love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
     end
     love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
         corner[1] + 400, corner[2] + 450, 0, 2, 2)
     love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
-
-    --[[if menu.blink == true then
-        love.graphics.setColor({1, 0, 0, 1})
-        love.graphics.rectangle('line', corner[1], corner[2],
-        State.camera.window_width, State.camera.window_height)
-    end]]--
+    love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
 end
 
 menu.update = function(dt)
