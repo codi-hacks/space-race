@@ -104,6 +104,7 @@ love.filesystem.read = function(file_path)
 end
 
 love.graphics = {}
+love.graphics.circle = function() end
 love.graphics.draw = function() end
 love.graphics.getDimensions = function()
     return 512, 512
@@ -131,6 +132,8 @@ end
 love.graphics.polygon = function()
     return true
 end
+love.graphics.pop = function() end
+love.graphics.print = function() end
 love.graphics.push = function() end
 love.graphics.rotate = function() end
 love.graphics.scale = function() end
@@ -140,6 +143,17 @@ end
 love.graphics.setDefaultFilter = function() end
 love.graphics.setNewFont = function() end
 love.graphics.translate = function() end
+
+love.keyboard = {}
+love.keyboard.hasKeyRepeat = function()
+    return false
+end
+love.keyboard.isDown = function()
+    return false
+end
+love.keyboard.isScancodeDown = function()
+    return false
+end
 
 love.math = {}
 -- TODO, implement real decompression
@@ -154,7 +168,27 @@ end
 love.physics = {}
 love.physics.newBody = function()
     return {
-        setAngle = function() end,
+        __angle = 0,
+        __x = 0,
+        __y = 0,
+        getAngle = function(self)
+            return self.__angle
+        end,
+        getX = function(self)
+            return self.__x
+        end,
+        getY = function(self)
+            return self.__y
+        end,
+        setAngle = function(self, value)
+            self.__angle = value
+        end,
+        setX = function(self, value)
+            self.__x = value
+        end,
+        setY = function(self, value)
+            self.__y = value
+        end,
         setFixedRotation = function() end
     }
 end

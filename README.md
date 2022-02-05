@@ -20,11 +20,11 @@ Of course, this game is still in development, so please expect bugs.
 
 ### Linting
 
-You can check your changes against the linter in realtime by install the luacheck plugin for your editor or running `luacheck .` command (assuming you have luacheck installed).
+You can check your changes against [the linter](https://github.com/mpeterv/luacheck#readme) in realtime by installing a [luacheck plugin](https://github.com/mpeterv/luacheck#editor-support) for your editor or running `luacheck .` command (assuming you have luacheck installed).
 
 ### Docker
 
-Alternatively, you can run the linter as well as the unit tests (via buster) if you have Docker installed.
+Alternatively, you can run the linter as well as the ([busted](https://olivinelabs.com/busted)) unit tests if you have Docker installed.
 Once docker is installed and running, simply invoke one of the `make` commands:
 
 ```sh

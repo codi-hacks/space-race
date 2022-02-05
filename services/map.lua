@@ -11,8 +11,6 @@ local DebugPlayer = require('systems/DebugPlayer')
 local active_map
 local map_directory = '/maps'
 local maps = Tmx.get_map_tables(map_directory)
---local inspect = require('lib/inspect')
---print(inspect(maps))
 
 local draw_objects = function(layer_idx)
     -- Draw each entity that belongs to this layer
