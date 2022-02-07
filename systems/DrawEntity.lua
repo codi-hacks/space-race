@@ -1,7 +1,6 @@
 --- DrawEntity
 -- Draw currently-visible entities on screen.
 
-local Love = require 'services/love'
 local System = require 'lib/system'
 local State = require 'services/state'
 
@@ -38,18 +37,18 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
 
     -- Draw fixture shape edges in debug mode
     if shape and State.debugOn then
-        Love.graphics.setColor(160, 72, 14, 255)
+        love.graphics.setColor(160, 72, 14, 255)
 
         if shape:getType() == 'polygon' then
-            Love.graphics.polygon(
+            love.graphics.polygon(
                 'line',
                 body:getWorldPoints(shape:getPoints())
             )
         else
             if gravitational_mass then
-                Love.graphics.setColor(gravitational_mass / 10, 0.1, 0.1, 1)
+                love.graphics.setColor(gravitational_mass / 10, 0.1, 0.1, 1)
             end
-            Love.graphics.circle(
+            love.graphics.circle(
                 'fill',
                 body:getX(),
                 body:getY(),
@@ -57,7 +56,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
             )
         end
 
-        Love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.setColor(255, 255, 255, 255)
     end
 end
 

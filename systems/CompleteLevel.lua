@@ -3,7 +3,6 @@
 local System = require('lib/system')
 
 local Entity = require 'services/entity'
-local Love = require 'services/love'
 --local Map = require 'services/map'
 local Menu = require 'menu/menu'
 local Sounds = require 'services/sounds'
@@ -15,7 +14,7 @@ return System(
         if checkpoints < 1 then
             State.paused = true
             Menu.load()
-            Love.audio.play(Sounds.chirp_up)
+            love.audio.play(Sounds.chirp_up)
             --map.unload(2)
             Entity.list = {}
         end

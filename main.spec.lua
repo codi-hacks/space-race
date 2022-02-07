@@ -1,22 +1,22 @@
-local Love = require 'services/love'
+_G.love = require 'lib/love'
 require 'main'
 
 describe('Main Program', function()
     it('should expose lifecycle hooks', function()
-        assert.equal('function', type(Love.draw))
-        assert.equal('function', type(Love.load))
-        assert.equal('function', type(Love.update))
+        assert.equal('function', type(love.draw))
+        assert.equal('function', type(love.load))
+        assert.equal('function', type(love.update))
     end)
 
     it('should load', function()
-        Love.load({})
+        love.load({})
     end)
 
     it('should update', function()
-        Love.update(0.00025)
+        love.update(0.00025)
     end)
 
     it('should draw', function()
-        Love.draw()
+        love.draw()
     end)
 end)

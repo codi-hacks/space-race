@@ -1,11 +1,5 @@
---- A wrapper for the love global so that we can mock it in specs
-
-if love then
-    return love
-end
-
 -- luacheck: allow defined
-love = {}
+local love = {}
 
 assert(jit ~= nil, '"jit" global not found. Is this LuaJIT?')
 local is_windows = jit.os == 'Windows'

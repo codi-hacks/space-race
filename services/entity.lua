@@ -1,5 +1,3 @@
-local Love = require 'services/love'
-
 local RegisterBody = require 'systems/RegisterBody'
 local RegisterFixture = require 'systems/RegisterFixture'
 local RegisterShape = require 'systems/RegisterShape'
@@ -9,7 +7,7 @@ local entity_directory = 'entities'
 
 local get_entity_factories = function(directory)
     local entities = {}
-    local file_list = Love.filesystem.getDirectoryItems(directory)
+    local file_list = love.filesystem.getDirectoryItems(directory)
     for _, file_name in ipairs(file_list) do
         -- Ignore non-lua files
         if file_name:match('[^.]+$') == 'lua' then

@@ -1,3 +1,4 @@
+_G.love = require 'lib/love'
 local Map = require 'services/map'
 local Textures = require 'services/textures'
 

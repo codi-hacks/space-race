@@ -1,6 +1,5 @@
 local map = require('services/map')
 local mapList = require('maps/mapList')
-local Love = require 'services/love'
 local Entity = require('services/entity')
 local State = require 'services/state'
 local background = require('services/background')
@@ -39,5 +38,5 @@ return function(mapNumber)
     end
 
     -- Generate some new stars, because why not?
-    Love.starLocations = background.load()
+    love.starLocations = background.load()
 end

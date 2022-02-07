@@ -1,5 +1,4 @@
 -- Load random spots for stars to be drawn then draw them.
-local Love = require 'services/love'
 local State = require 'services/state'
 local background = {}
 
@@ -10,8 +9,8 @@ function background.load()
     local window_y = math.floor(State.camera.window_height / 10)
     for i=10, window_x, 10 do
         for j=10, window_y, 10 do
-            local random_x = (i - Love.math.random(0, 9)) * 10
-            local random_y = (j - Love.math.random(0, 9)) * 10
+            local random_x = (i - love.math.random(0, 9)) * 10
+            local random_y = (j - love.math.random(0, 9)) * 10
             table.insert(randomsTable, {random_x, random_y})
         end
     end
@@ -27,10 +26,10 @@ function background.draw(randoms)
     local window_y = State.camera.window_height
     local repeats = 10
     for _,coords in ipairs(randoms) do
-        Love.graphics.setColor({1, 1, 1, 1})
+        love.graphics.setColor({1, 1, 1, 1})
         for i = window_x * -repeats, window_x * repeats, window_x do
             for j = window_y * -repeats, window_y * repeats, window_y do
-                Love.graphics.circle('fill', coords[1] + i, coords[2] + j, 1)
+                love.graphics.circle('fill', coords[1] + i, coords[2] + j, 1)
             end
         end
     end
