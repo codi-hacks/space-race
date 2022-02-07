@@ -18,7 +18,7 @@ RUN python3 get-pip.py
 RUN python3 -m pip install cpp-coveralls
 
 ## Luarocks
-RUN luarocks install busted 2.0.rc13-0
+RUN luarocks install busted 2.0.0-1
 RUN luarocks install luacheck
 RUN luarocks install luacov
 RUN luarocks install luacov-coveralls
