@@ -218,7 +218,11 @@ ship_menu.draw = function()
             300, "left", 0, 1, 1
         )
         love.graphics.printf("\t Notes: ", corner[1] + 25, corner[2] + 540,  600, "left", 0, 1, 1)
-        love.graphics.printf(shipList[ship_menu.shipSelect].description, corner[1] + 90, corner[2] + 540,  650, "left", 0, 1, 1)
+        love.graphics.printf(
+            shipList[ship_menu.shipSelect].description,
+            corner[1] + 90, corner[2] + 540,
+            650, "left", 0, 1, 1
+        )
 
 
     end
