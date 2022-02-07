@@ -158,15 +158,20 @@ ship_menu.draw = function()
 
 
         -- Draw a preview of the currently selected ship at 128x128
-        love.graphics.draw(image, corner[1] + 400 - shift_x, corner[2] + 200 + shift_y, 0, center_scale_x, center_scale_y)
+        love.graphics.draw(
+            image,
+            corner[1] + 400 - shift_x, corner[2] + 200 + shift_y,
+            0,
+            center_scale_x,
+            center_scale_y
+        )
 
         shift_x = left_image:getPixelWidth() * (left_scale_x) / 2
         shift_y = left_image:getPixelHeight() * (left_scale_y) / 2
 
         -- Draw a preview of the left option at 64x64
         love.graphics.draw(
-            left_image, corner[1] + 220 - shift_x,
-            corner[2] + 240 + shift_y,
+            left_image, corner[1] + 220 - shift_x, corner[2] + 240 + shift_y,
             0,
             left_scale_x,
             left_scale_y
@@ -178,8 +183,7 @@ ship_menu.draw = function()
         -- Draw a preview of the right option at 64x64
         love.graphics.draw(
             right_image,
-            corner[1] + 580 + shift_x,
-            corner[2] + 240 + shift_y,
+            corner[1] + 580 + shift_x, corner[2] + 240 + shift_y,
             0,
             right_scale_x,
             right_scale_y
@@ -197,9 +201,22 @@ ship_menu.draw = function()
 
         love.graphics.printf("Description: ", corner[1] + 25, corner[2] + 450,  300, "left", 0, 1, 1)
         love.graphics.setFont(ship_menu.description_font)
-        love.graphics.printf("\t Size: " .. sizeT, corner[1] + 25, corner[2] + 480,  300, "left", 0, 1, 1)
-        love.graphics.printf("\t Speed: " .. shipList[ship_menu.shipSelect].speed, corner[1] + 25, corner[2] + 500,  300, "left", 0, 1, 1)
-        love.graphics.printf("\t Handling: " .. shipList[ship_menu.shipSelect].handling, corner[1] + 25, corner[2] + 520,  300, "left", 0, 1, 1)
+        love.graphics.printf(
+            "\t Size: " .. sizeT,
+            corner[1] + 25, corner[2] + 480,
+            300,
+            "left", 0, 1, 1
+        )
+        love.graphics.printf(
+            "\t Speed: " .. shipList[ship_menu.shipSelect].speed,
+            corner[1] + 25, corner[2] + 500,
+            300, "left", 0, 1, 1
+        )
+        love.graphics.printf(
+            "\t Handling: " .. shipList[ship_menu.shipSelect].handling,
+            corner[1] + 25, corner[2] + 520,
+            300, "left", 0, 1, 1
+        )
         love.graphics.printf("\t Notes: ", corner[1] + 25, corner[2] + 540,  600, "left", 0, 1, 1)
         love.graphics.printf(shipList[ship_menu.shipSelect].description, corner[1] + 90, corner[2] + 540,  650, "left", 0, 1, 1)
 
