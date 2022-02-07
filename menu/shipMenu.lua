@@ -227,7 +227,11 @@ ship_menu.draw = function()
 
         -- Draw description text
         love.graphics.setFont(ship_menu.font)
-        local size = image:getPixelWidth() / 32
+        -- Size takes into account actual pixel display size
+        local size = (
+            image:getPixelWidth() *
+            shipList[ship_menu.shipSelect].spritesheet.scale_x / 32
+        )
         local sizeT = "Small"
         if size >= 2 then
             sizeT = "Large"
