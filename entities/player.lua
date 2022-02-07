@@ -35,7 +35,6 @@ return function(props)
         gravitational_mass = 1,
         isControlled = true,
         shape = ship.shape,
-        spritesheet = ship.spritesheet,
-        setShip = set_ship
+        spritesheet = ship.spritesheet
     }
 end

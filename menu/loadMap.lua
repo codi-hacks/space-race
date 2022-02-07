@@ -4,9 +4,6 @@ local Entity = require('services/entity')
 local State = require 'services/state'
 local background = require('services/background')
 
-local player = require('entities/player')
-local shipList = require('ships/shipList')
-
 -- Load a map
 
 return function(mapNumber)
