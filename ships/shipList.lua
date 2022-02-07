@@ -10,6 +10,9 @@
         image
         offset_x
         scale_x
+    description - A string that describes anyhing interesting about the ship
+    speed - Force modifier value for acceleration
+    handling - Force modifer value for turning, braking, etc...
 
         - J.R.C 2/1/22
 ]]
@@ -55,7 +58,7 @@ return {
             scale_x = 2
         },
         description =   "This small ship boasts three thrusters and leather seats! " ..
-                        " Beat your best time in luxurious style",
+                        "Beat your best time in luxurious style",
         speed = 2,
         handling = 1
     },
@@ -99,7 +102,7 @@ return {
             offset_x = 16,
             scale_x = 2
         },
-        description =   "The space shuttle has boosters engaged for insane speed." ..
+        description =   "The space shuttle has boosters engaged for insane speed. " ..
                         "Blaassssttt off! ",
         speed = 4,
         handling = 1
@@ -123,7 +126,7 @@ return {
             scale_x = 2
         },
         description =   "The boosters have disengaged from the space shuttle. " ..
-                        " Speed has been sacrificed for a major improvement to the handling stats.",
+                        "Speed has been sacrificed for a major improvement to the handling stats.",
         speed = 1,
         handling = 3
     },
@@ -189,7 +192,7 @@ return {
             offset_x = 32,
             scale_x = 1
         },
-        description =   "The biggest ship in the fleet!" ..
+        description =   "The biggest ship in the fleet! " ..
                         "It takes a master vessel commander to handle one THIS big!",
         speed = 0.5,
         handling = 4
