@@ -70,7 +70,6 @@ end
             menu.state.ship_select = true
         elseif menu.state.ship_select then
             menu.load_map()
-            print("Loading map")
         end
     end,
     up = function()
@@ -99,7 +98,6 @@ end
             menu.state.ship_select = true
         elseif menu.state.ship_select then
             menu.load_map()
-            print("Loading map")
         end
     end,
 }
@@ -117,7 +115,6 @@ menu.load_map = function()
 
         loadMap(menu.mapSelect)
 
-
         State.paused = not State.paused
         State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
         menu.unload()
@@ -127,6 +124,7 @@ end
 
 menu.draw = function()
 
+    -- Draw map select (normal menu)
     if menu.state.map_select then
         -- Alias the true corner coordinates for convienience
         local corner = { State.camera.pos_x, State.camera.pos_y }
@@ -157,6 +155,8 @@ menu.draw = function()
             love.graphics.rectangle('line', corner[1], corner[2],
             State.camera.window_width, State.camera.window_height)
         end]]--
+
+    -- Draw ship select Menu
     elseif menu.state.ship_select then
         shipMenu.draw()
     end
