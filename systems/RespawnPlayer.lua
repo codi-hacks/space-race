@@ -1,6 +1,5 @@
 local System = require('lib/system')
 local Entity = require('services/entity')
-local player = require('entities/player')
 
 return System(
     {'_entity','-isControlled'},
