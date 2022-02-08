@@ -4,9 +4,6 @@ local loadShip = require('menu/loadShip')
 local state = require('services/state')
 local Textures = require('services/textures')
 
-
-
-
 --[[
    Menu template code by Trevor. Thanks!
 
@@ -80,20 +77,11 @@ ship_menu.unload = function()
 end
 
 ship_menu.load_ship = function()
-    -- If selected ship is the same, just unpause...
-    if state.activeShip == ship_menu.shipSelect then
-        state.shipMenu = not state.shipMenu
-        ship_menu.unload()
-        love.audio.play(sounds.chirp_down)
-        -- ...or else load a new ship
-    else
-        --Entity.list = {}
         loadShip(ship_menu.shipSelect)
 
         state.shipMenu = not state.shipMenu
         --ship_menu.unload()
         love.audio.play(sounds.chirp_down)
-    end
 end
 
 ship_menu.draw = function()

@@ -13,7 +13,6 @@ return function(props)
     local ship = get_ship(tonumber(props.ship_type))
 
     return {
-
         body = {
             mass = 1
         },

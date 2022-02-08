@@ -48,6 +48,7 @@ menu.load = function()
     -- Set the current menu state to map select
     menu.state.map_select = true
     menu.state.ship_select = false
+    menu.font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
 end
 
 menu.unload = function()
@@ -64,13 +65,11 @@ end
     b = function()
         State.debugOn = not State.debugOn
     end,
+    -- P now just pauses and unpauses
+    -- use ENTER to select a map and ship - J.R.C 2/7/22
     p = function()
-        if menu.state.map_select then
-            menu.state.map_select = false
-            menu.state.ship_select = true
-        elseif menu.state.ship_select then
-            menu.load_map()
-        end
+        menu.state.map_select = not menu.state.map_select
+        State.paused = not State.paused
     end,
     up = function()
         if menu.state.map_select then
@@ -98,6 +97,7 @@ end
             menu.state.ship_select = true
         elseif menu.state.ship_select then
             menu.load_map()
+            shipMenu.load_ship()
         end
     end,
 }
@@ -105,27 +105,35 @@ end
 
 menu.load_map = function()
     -- If selected map is the same, just unpause...
-    if State.activeMap == menu.mapSelect then
-        State.paused = not State.paused
-        menu.unload()
-        love.audio.play(sounds.chirp_down)
-        -- ...or else load a new map
-    else
+    --[[
+
+            Removed unpause, map is reloaded every time you select now
+            - J.R.C 2/7/22
+
+            if State.activeMap == menu.mapSelect then
+                State.paused = not State.paused
+                menu.unload()
+                love.audio.play(sounds.chirp_down)
+             -- ...or else load a new map
+            else
+
+    ]]
         --Entity.list = {}
 
-        loadMap(menu.mapSelect)
+    loadMap(menu.mapSelect)
 
-        State.paused = not State.paused
-        State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
-        menu.unload()
-        love.audio.play(sounds.chirp_down)
-    end
+    State.paused = not State.paused
+    State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
+    menu.unload()
+    love.audio.play(sounds.chirp_down)
 end
 
 menu.draw = function()
 
     -- Draw map select (normal menu)
     if menu.state.map_select then
+        -- Added this because shipMenu changed the font - J.R.C
+        love.graphics.setFont(menu.font)
         -- Alias the true corner coordinates for convienience
         local corner = { State.camera.pos_x, State.camera.pos_y }
 
