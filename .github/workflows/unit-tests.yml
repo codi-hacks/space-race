@@ -1,0 +1,21 @@
+# action.yml
+name: 'Unit Tests'
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build container
+        run: |
+          docker build -t space-race .
+      - name: Run unit tests & upload coverage report
+        env:
+          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        run: |
+          docker run -e COVERALLS_TOKEN space-race

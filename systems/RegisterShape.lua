@@ -3,8 +3,6 @@
 
 local System = require 'lib/system'
 
-local Love = love
-
 local components = {
     '=shape'
 }
@@ -17,16 +15,16 @@ local system = function(shape)
 
     local new_shape
     if shape.type == 'rectangle' then
-        new_shape = Love.physics.newRectangleShape(
+        new_shape = love.physics.newRectangleShape(
             shape.offset_x or 0,
             shape.offset_y or 0,
             shape.width,
             shape.height
         )
     elseif shape.type == 'circle' then
-        new_shape = Love.physics.newCircleShape(shape.radius)
+        new_shape = love.physics.newCircleShape(shape.radius)
     else
-        new_shape = Love.physics.newPolygonShape(shape.points)
+        new_shape = love.physics.newPolygonShape(shape.points)
     end
 
     return new_shape

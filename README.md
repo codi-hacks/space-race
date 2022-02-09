@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/codi-hacks/space-race/badge.svg?branch=)](https://coveralls.io/github/codi-hacks/space-race?branch=)
+
 # Spaceship Game!
 
 Use w/a/s/d to move laterally via velocity. Press shift and arrow keys to "teleport" laterally.
@@ -13,3 +15,20 @@ Press `p` to pause.
 Install [love2D](https://love2d.org/) and run `love .` in the main directory. That's it!
 
 Of course, this game is still in development, so please expect bugs.
+
+## Development
+
+### Linting
+
+You can check your changes against [the linter](https://github.com/mpeterv/luacheck#readme) in realtime by installing a [luacheck plugin](https://github.com/mpeterv/luacheck#editor-support) for your editor or running `luacheck .` command (assuming you have luacheck installed).
+
+### Docker
+
+Alternatively, you can run the linter as well as the ([busted](https://olivinelabs.com/busted)) unit tests if you have Docker installed.
+Once docker is installed and running, simply invoke one of the `make` commands:
+
+```sh
+make test  # Run linter and unit tests
+make test-lint  # Just luacheck
+make test-unit  # Just busted
+```

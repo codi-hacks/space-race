@@ -3,8 +3,6 @@
 
 local System = require 'lib/system'
 
-local Love = love
-
 local components = {
     '_entity',
     'body',
@@ -13,7 +11,7 @@ local components = {
 }
 
 local system = function(entity, body, fixture, shape)
-    local loaded_fixture = Love.physics.newFixture(body, shape)
+    local loaded_fixture = love.physics.newFixture(body, shape)
     if fixture.density then
         loaded_fixture:setDensity(fixture.density)
     end
