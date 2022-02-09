@@ -77,10 +77,7 @@ end
 
 ship_menu.load_ship = function()
         State.activeShip = ship_menu.shipSelect
-        print(State.activeShip)
-
         State.shipMenu = not State.shipMenu
-        --ship_menu.unload()
         love.audio.play(sounds.chirp_down)
 end
 
