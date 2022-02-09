@@ -136,6 +136,7 @@ love.graphics.setColor = function()
 end
 love.graphics.setDefaultFilter = function() end
 love.graphics.setNewFont = function() end
+love.graphics.newFont = function() end
 love.graphics.translate = function() end
 
 love.keyboard = {}
