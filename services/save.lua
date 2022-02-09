@@ -15,7 +15,7 @@ save.read = function()
             local data = f()
             state.credits = data.credits
             state.activeMap = data.lastMap
-            local time = data.time -- Placeholder
+            -- local time = data.time -- Placeholder
         else
             print('Error when loading save data: ' .. message)
         end
