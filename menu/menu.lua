@@ -56,6 +56,7 @@ menu.unload = function()
     menu.blinkTimer = nil
     menu.blink = nil
     menu.mapSelect = nil
+    menu.font = nil
     shipMenu.unload()
 end
 

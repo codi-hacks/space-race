@@ -71,6 +71,10 @@ ship_menu.unload = function()
     ship_menu.blinkTimer = nil
     ship_menu.blink = nil
     ship_menu.shipSelect = nil
+
+    ship_menu.title_font = nil
+    ship_menu.font = nil
+    ship_menu.description_font = nil
 end
 
 ship_menu.load_ship = function()
