@@ -137,6 +137,7 @@ end
 love.graphics.setDefaultFilter = function() end
 love.graphics.setNewFont = function() end
 love.graphics.newFont = function() end
+love.graphics.setFont = function() end
 love.graphics.translate = function() end
 
 love.keyboard = {}
