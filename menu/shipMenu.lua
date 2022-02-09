@@ -1,8 +1,8 @@
 local sounds = require('services/sounds')
 local shipList = require('ships/shipList')
-local loadShip = require('menu/loadShip')
-local state = require('services/state')
+local State = require('services/state')
 local Textures = require('services/textures')
+local Entity = require('services/entity')
 
 --[[
    Menu template code by Trevor. Thanks!
@@ -62,7 +62,7 @@ ship_menu.load = function()
     ship_menu.titleImage = love.graphics.newImage("assets/sprites/ship_menu/ship_menu.png")
     ship_menu.blinkTimer = 0
     ship_menu.blink = true
-    ship_menu.shipSelect = state.activeShip
+    ship_menu.shipSelect = State.activeShip
 
     ship_menu.title_font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
     ship_menu.font = love.graphics.newFont(14)
@@ -77,16 +77,17 @@ ship_menu.unload = function()
 end
 
 ship_menu.load_ship = function()
-        loadShip(ship_menu.shipSelect)
+        State.activeShip = ship_menu.shipSelect
+        print(State.activeShip)
 
-        state.shipMenu = not state.shipMenu
+        State.shipMenu = not State.shipMenu
         --ship_menu.unload()
         love.audio.play(sounds.chirp_down)
 end
 
 ship_menu.draw = function()
     -- Alias the true corner coordinates for convienience
-    local corner = { state.camera.pos_x, state.camera.pos_y }
+    local corner = { State.camera.pos_x, State.camera.pos_y }
 
     -- Transparent red background
     love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
@@ -259,7 +260,7 @@ ship_menu.draw = function()
     --[[if ship_menu.blink == true then
         love.graphics.setColor({1, 0, 0, 1})
         love.graphics.rectangle('line', corner[1], corner[2],
-        state.camera.window_width, state.camera.window_height)
+        State.camera.window_width, State.camera.window_height)
     end]]--
 end
 

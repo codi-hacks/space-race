@@ -3,6 +3,7 @@ local mapList = require('maps/mapList')
 local Entity = require('services/entity')
 local State = require 'services/state'
 local background = require('services/background')
+local shipMenu = require('menu/shipMenu')
 
 
 -- Load a map
@@ -22,7 +23,7 @@ return function(mapNumber)
     -- Do the actual map loading/unloading
     map.unload(mapList[State.activeMap].filename)
     State.activeMap = mapNumber
-    map.load(mapList[State.activeMap].filename)
+    map.load(mapList[State.activeMap].filename, State.activeShip)
 
     -- Remove old entities from map
     for k1,v1 in ipairs(Entity.list) do

@@ -102,8 +102,8 @@ end
             menu.state.map_select = false
             menu.state.ship_select = true
         elseif menu.state.ship_select then
-            menu.load_map()
             shipMenu.load_ship()
+            menu.load_map()
         end
     end,
 }
