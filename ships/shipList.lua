@@ -191,17 +191,18 @@ return {
         filename = 'ship_big',
         shape = {
             points = {
-                0, -45,
-                -32, 32,
-                -32, 32,
-                32, 32,
-                32, 32
+                0, -40,
+                -32, 26,
+                -32, 26,
+                32, 26,
+                32, 26
             },
             type = 'polygon'
         },
         spritesheet = {
             image = 'ship_big',
             offset_x = 32,
+            offset_y = 34,
             scale_x = 1
         },
         description =   "The biggest ship in the fleet! " ..
