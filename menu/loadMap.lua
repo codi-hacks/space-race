@@ -3,11 +3,8 @@ local mapList = require('maps/mapList')
 local Entity = require('services/entity')
 local State = require 'services/state'
 local background = require('services/background')
-local shipMenu = require('menu/shipMenu')
 
-
--- Load a map
-
+-- Load a mapW
 return function(mapNumber)
     -- This function is necessary due to how entities are loaded from maps.
     -- I wish a simple Entity.list = {} would work but we don't live in a perfect world.

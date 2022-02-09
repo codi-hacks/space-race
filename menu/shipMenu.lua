@@ -2,7 +2,6 @@ local sounds = require('services/sounds')
 local shipList = require('ships/shipList')
 local State = require('services/state')
 local Textures = require('services/textures')
-local Entity = require('services/entity')
 
 --[[
    Menu template code by Trevor. Thanks!
