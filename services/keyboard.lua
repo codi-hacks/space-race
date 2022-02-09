@@ -1,4 +1,4 @@
-local Entity = require('services/entity')
+-- local Entity = require('services/entity')
 local State = require('services/state')
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
