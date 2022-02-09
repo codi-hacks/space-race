@@ -54,8 +54,6 @@ ship_menu.left = function()
     love.audio.play(sounds.menu_click)
 end
 
-
-
 ship_menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the ship_menu is dismissed.
     ship_menu.titleImage = love.graphics.newImage("assets/sprites/ship_menu/ship_menu.png")
@@ -165,8 +163,6 @@ ship_menu.draw = function()
             0, 1, 1
         )
 
-
-
         -- Draw a preview of the currently selected ship at 128x128
         love.graphics.draw(
             image,
@@ -251,13 +247,6 @@ ship_menu.draw = function()
 
 
     end
-
-
-    --[[if ship_menu.blink == true then
-        love.graphics.setColor({1, 0, 0, 1})
-        love.graphics.rectangle('line', corner[1], corner[2],
-        State.camera.window_width, State.camera.window_height)
-    end]]--
 end
 
 ship_menu.update = function(dt)
