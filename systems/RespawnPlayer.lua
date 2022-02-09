@@ -7,7 +7,7 @@ return System(
         -- If a valid ship index is provided
         if shipNumber then
 
-            --Copy of object data
+            -- Object data template
             local object = {
                 name = 'player',
                 ship_type = shipNumber,

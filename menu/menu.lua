@@ -91,6 +91,12 @@ end
             shipMenu.right()
         end
     end,
+    backspace= function()
+        if menu.state.ship_select then
+            menu.state.map_select = true
+            menu.state.ship_select = false
+        end
+    end,
     ['return'] = function()
         if menu.state.map_select then
             menu.state.map_select = false

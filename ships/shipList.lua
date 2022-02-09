@@ -146,7 +146,19 @@ return {
         spritesheet = {
             image = 'ship_purple',
             offset_x = 16,
-            scale_x = 1
+            scale_x = 1,
+            --[[ actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    duration = 0.05,
+                    frames = { '2-3', 1 },
+                    on_loop = function(animation)
+                        animation:gotoFrame(2)
+                    end
+                },
+            } ]]
         },
         description = "Can the best color help you get the best time?",
         speed = 3,
