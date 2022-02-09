@@ -44,6 +44,11 @@ menu.key_map = {
         save.write()
         love.event.quit()
     end,
+    o = function()
+        -- Become Mr. Krabs and get all the money
+        love.audio.play(sounds.chirp_up)
+        State.credits = State.credits + 1
+    end,
     b = function()
         State.debugOn = not State.debugOn
     end,

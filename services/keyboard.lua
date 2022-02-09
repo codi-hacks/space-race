@@ -14,11 +14,6 @@ keyboard.key_map = {
     b = function()
         State.debugOn = not State.debugOn
     end,
-    o = function()
-        -- Become Mr. Krabs and get all the money
-        love.audio.play(sounds.chirp_up)
-        State.credits = State.credits + 1
-    end,
     p = function()
         State.paused = not State.paused
         menu.load()
