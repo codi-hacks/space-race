@@ -123,12 +123,6 @@ return {
     -- @param {number} width
     -- @param {number} height
     get_dimensions = get_dimensions,
-    load = load,
     loadMap = loadMap,
-    --- Set loaded images and quads for a given map to nil.
-    -- would have a map name of "general".
-    -- @param {string} map_name - name of the tmx file to load
-    -- @param {table} ship_index - index of ship to spawn
-    -- @return {table} - parsed Tiled map data
-    unload = unload
+
 }
