@@ -4,14 +4,6 @@ local State = require 'services/state'
 local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
 
---[[
-    TODO:
-        Fix entities not being cleared upon loading a new map.
-        Add text to title saying SPAAACE RAAAAACE
-]]
-
-
-
 local menu = {
     state = {}
 }

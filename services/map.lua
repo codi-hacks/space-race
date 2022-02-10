@@ -86,16 +86,16 @@ local unload = function(map_name)
 end
 
 local loadMap = function(mapNumber)
-    -- This function is necessary due to how entities are loaded from maps.
-    -- I wish a simple Entity.list = {} would work but we don't live in a perfect world.
-
-    -- Copy the current/old set of entities
-    local oldEntities = {}
-    for k, v in pairs(Entity.list) do
-        oldEntities[k] = v
+    --[[
+    This function is necessary due to how entities are destroyed in box2d.
+    For some reason, setting Entity.list = {} soft-locks the game.
+    So instead we must loop through the entity table and delete them one by one.
+    ]]--
+    for index = #Entity.list, 1, -1 do
+        Entity.list[index].body:destroy()
+        Entity.list[index].shape:release()
+        table.remove(Entity.list, index)
     end
-    local destroyList = {}
-
 
     -- Do the actual map loading/unloading
 
@@ -104,22 +104,6 @@ local loadMap = function(mapNumber)
     end
     State.activeMap = mapNumber
 
-    -- Remove old entities from map
-    for k1, v1 in ipairs(Entity.list) do
-        for _, v2 in ipairs(oldEntities) do
-            if v1 == v2 then
-                v2.body:destroy()
-                v2.shape:release()
-                table.insert(destroyList, k1)
-            end
-        end
-    end
-    table.sort(destroyList, function(a, b)
-        return a > b
-    end)
-    for _, v in ipairs(destroyList) do
-        table.remove(Entity.list, v)
-    end
     if State.activeMap ~= -1 then
         load(mapList[State.activeMap].filename, State.activeShip)
 
