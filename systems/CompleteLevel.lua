@@ -2,21 +2,21 @@
 
 local System = require('lib/system')
 
-local Entity = require 'services/entity'
---local Map = require 'services/map'
+local Map = require 'services/map'
 local Menu = require 'menu/menu'
 local Sounds = require 'services/sounds'
 local State = require 'services/state'
 
 return System(
-    {'checkpoints'},
+    { 'checkpoints' },
     function(checkpoints)
         if checkpoints < 1 then
             State.paused = true
-            Menu.load()
             love.audio.play(Sounds.chirp_up)
-            --map.unload(2)
-            Entity.list = {}
+            Menu.state.map_select = true
+            Menu.state.ship_select = false
+            Menu.load()
+            Map.loadMap(-1)
         end
     end
 )
