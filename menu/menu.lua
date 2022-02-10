@@ -36,7 +36,7 @@ menu.load = function()
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
-    menu.mapSelect = State.activeMap
+    menu.mapSelect = 1
 
     shipMenu.load() -- Load ship menu - J.R.C 2/2/22
 
@@ -65,8 +65,10 @@ menu.key_map = {
     -- P now just pauses and unpauses
     -- use ENTER to select a map and ship - J.R.C 2/7/22
     p = function()
-        menu.state.map_select = not menu.state.map_select
-        State.paused = not State.paused
+        if State.activeMap ~=-1 then
+            menu.state.map_select = not menu.state.map_select
+            State.paused = not State.paused
+        end
     end,
     up = function()
         if menu.state.map_select then

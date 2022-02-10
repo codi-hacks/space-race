@@ -4,7 +4,7 @@ local State = {}
 
 State.paused = true
 State.debugOn = false
-State.activeMap = 1
+State.activeMap = -1
 
 -- Ship stuff duh - J.R.C 2/2/22
 State.shipMenu = false;
