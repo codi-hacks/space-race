@@ -7,11 +7,11 @@ local Util = require('lib/util')
 local World = require('services/world')
 local DrawEntity = require('systems/DrawEntity')
 local DebugPlayer = require('systems/DebugPlayer')
-
-local active_map
+local State = require("services/state")
+local mapList = require("maps/mapList")
+local background = require('services/background')local active_map
 local map_directory = '/maps'
 local maps = Tmx.get_map_tables(map_directory)
-
 local draw_objects = function(layer_idx)
     -- Draw each entity that belongs to this layer
     for _, entity in ipairs(Entity.list) do
@@ -54,7 +54,7 @@ local load = function(map_name, ship_index)
     assert(
         active_map.render_order == 'right-down',
         'Only "right-down" map render order supported, but found order set to "' ..
-        active_map.render_order .. '" ' .. 'for map "' .. map_name .. '".'
+            active_map.render_order .. '" ' .. 'for map "' .. map_name .. '".'
     )
 
     active_map.quads = Tmx.load_quads(active_map)
@@ -85,6 +85,49 @@ local unload = function(map_name)
     maps[map_name].quads = nil
 end
 
+local full_load = function(mapNumber)
+    -- This function is necessary due to how entities are loaded from maps.
+    -- I wish a simple Entity.list = {} would work but we don't live in a perfect world.
+
+    -- Copy the current/old set of entities
+    local oldEntities = {}
+    for k, v in pairs(Entity.list) do
+        oldEntities[k] = v
+    end
+    local destroyList = {}
+
+
+    -- Do the actual map loading/unloading
+
+    if mapNumber ~= -1 and mapList[State.activeMap] ~=nil then
+        unload(mapList[State.activeMap].filename)
+    end
+    State.activeMap = mapNumber
+
+    -- Remove old entities from map
+    for k1, v1 in ipairs(Entity.list) do
+        for _, v2 in ipairs(oldEntities) do
+            if v1 == v2 then
+                v2.body:destroy()
+                v2.shape:release()
+                table.insert(destroyList, k1)
+            end
+        end
+    end
+    table.sort(destroyList, function(a, b)
+        return a > b
+    end)
+    for _, v in ipairs(destroyList) do
+        table.remove(Entity.list, v)
+    end
+    if State.activeMap ~= -1 then
+        load(mapList[State.activeMap].filename, State.activeShip)
+
+    end
+        -- Generate some new stars, because why not?
+    love.starLocations = background.load()
+end
+
 return {
     --- Render a map on screen. Map names are based
     -- on the filename. For instance, "general.tmx"
@@ -97,6 +140,7 @@ return {
     -- @param {number} height
     get_dimensions = get_dimensions,
     load = load,
+    full_load = full_load,
     --- Set loaded images and quads for a given map to nil.
     -- would have a map name of "general".
     -- @param {string} map_name - name of the tmx file to load

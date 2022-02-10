@@ -1,4 +1,3 @@
-
 local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
 local loadMap = require('menu/loadMap')
@@ -18,8 +17,6 @@ local menu = {
     state = {}
 }
 
-
-
 menu.up = function()
     menu.mapSelect = menu.mapSelect + 1
     if menu.mapSelect > #mapList then
@@ -33,8 +30,6 @@ menu.down = function()
         menu.mapSelect = #mapList
     end
 end
-
-
 
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
@@ -60,7 +55,7 @@ menu.unload = function()
     shipMenu.unload()
 end
 
-    menu.key_map = {
+menu.key_map = {
     escape = function()
         love.event.quit()
     end,
@@ -93,7 +88,7 @@ end
             shipMenu.right()
         end
     end,
-    backspace= function()
+    backspace = function()
         if menu.state.ship_select then
             menu.state.map_select = true
             menu.state.ship_select = false
@@ -110,7 +105,6 @@ end
     end,
 }
 
-
 menu.load_map = function()
     -- If selected map is the same, just unpause...
     --[[
@@ -126,7 +120,7 @@ menu.load_map = function()
             else
 
     ]]
-        --Entity.list = {}
+    --Entity.list = {}
 
     loadMap(menu.mapSelect)
 
@@ -162,8 +156,9 @@ menu.draw = function()
         if menu.blink then
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
         end
-        love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
-            corner[1] + 400, corner[2] + 450, 0, 2, 2)
+        if mapList[State.activeMap] ~=nil then
+            love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName, corner[1] + 400, corner[2] + 450, 0, 2, 2)
+        end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
 
         --[[if menu.blink == true then
@@ -172,7 +167,7 @@ menu.draw = function()
             State.camera.window_width, State.camera.window_height)
         end]]--
 
-    -- Draw ship select Menu
+        -- Draw ship select Menu
     elseif menu.state.ship_select then
         shipMenu.draw()
     end
