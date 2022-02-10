@@ -2,7 +2,6 @@
 
 local System = require('lib/system')
 
-local Entity = require 'services/entity'
 local Map = require 'services/map'
 local Menu = require 'menu/menu'
 local Sounds = require 'services/sounds'
