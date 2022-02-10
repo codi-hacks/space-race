@@ -48,10 +48,9 @@ love.draw = function()
         background.draw( love.starLocations)
 
         map.draw()
-
-    if State.paused == true then
-        menu.draw()
-    end
+        if State.paused == true then
+            menu.draw()
+        end
 
     Camera.unset()
 end
@@ -72,7 +71,9 @@ love.update = function(dt)
         else
             State.camera.scale_x = 1
         end
+
     else
         menu.update(dt)
     end
 end
+

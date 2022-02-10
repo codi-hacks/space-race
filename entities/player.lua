@@ -10,8 +10,8 @@ local function get_ship(index)
 end
 
 return function(props)
-    local ship_index = tonumber(props.ship_type)
-    local ship = get_ship(ship_index)
+    local ship = get_ship(tonumber(props.ship_type))
+
     return {
         body = {
             mass = 1

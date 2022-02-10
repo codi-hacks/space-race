@@ -14,13 +14,13 @@ textures.load = function()
     textures.speedboost         = i 'speedboost.png'
 
     -- Assorted spaceships by Jon
-    textures.ship_2             = i 'ship_2.png'          -- Ship Index 2
-    textures.ship_ufo           = i 'ship_ufo.png'        -- Ship Index 3
-    textures.ship_shuttle       = i 'ship_shuttle.png'    -- Ship Index 4
-    textures.ship_shuttle_2     = i 'ship_shuttle_2.png'  -- Ship Index 5
-    textures.ship_purple        = i 'ship_purple.png'     -- Ship Index 6
-    textures.ship_green         = i 'ship_green.png'      -- Ship Index 7
-    textures.ship_big           = i 'ship_big.png'        -- Ship Index 8
+    textures.ship_2             = i 'ship_2.png'                -- Ship Index 2
+    textures.ship_ufo           = i 'ship_ufo.png'              -- Ship Index 3
+    textures.ship_shuttle       = i 'ship_shuttle.png'          -- Ship Index 4
+    textures.ship_shuttle_2     = i 'ship_shuttle_2.png'        -- Ship Index 5
+    textures.ship_purple        = i 'ship_purple_legacy.png'    -- Ship Index 6
+    textures.ship_green         = i 'ship_green.png'            -- Ship Index 7
+    textures.ship_big           = i 'ship_big.png'              -- Ship Index 8
 end
 
 return textures

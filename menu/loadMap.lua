@@ -4,8 +4,7 @@ local Entity = require('services/entity')
 local State = require 'services/state'
 local background = require('services/background')
 
--- Load a map
-
+-- Load a mapW
 return function(mapNumber)
     -- This function is necessary due to how entities are loaded from maps.
     -- I wish a simple Entity.list = {} would work but we don't live in a perfect world.
@@ -17,10 +16,11 @@ return function(mapNumber)
     end
     local destroyList = {}
 
+
     -- Do the actual map loading/unloading
     map.unload(mapList[State.activeMap].filename)
     State.activeMap = mapNumber
-    map.load(mapList[State.activeMap].filename)
+    map.load(mapList[State.activeMap].filename, State.activeShip)
 
     -- Remove old entities from map
     for k1,v1 in ipairs(Entity.list) do

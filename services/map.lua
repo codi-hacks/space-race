@@ -39,7 +39,7 @@ local get_dimensions = function()
     return active_map.pixel_width, active_map.pixel_height
 end
 
-local load = function(map_name)
+local load = function(map_name, ship_index)
     assert(
         type(map_name) == 'string',
         'Expected map_name string parameter. Got "' .. type(map_name) .. '".'
@@ -62,6 +62,14 @@ local load = function(map_name)
     for layer_idx, layer in ipairs(active_map.layers) do
         -- Apply collision fixtures
         if layer.type == 'objects' then
+
+            --Find the player object - J.R.C
+            for _, obj in ipairs(layer.objects) do
+                if obj.name == 'player' then
+                    -- Set the ship type to the specified index
+                    obj.ship_type = ship_index
+                end
+            end
             active_map.layers[layer_idx].objects = Tmx.load_fixtures(World, layer, layer_idx, Entity.spawn)
         end
     end
@@ -92,6 +100,7 @@ return {
     --- Set loaded images and quads for a given map to nil.
     -- would have a map name of "general".
     -- @param {string} map_name - name of the tmx file to load
+    -- @param {table} ship_index - index of ship to spawn
     -- @return {table} - parsed Tiled map data
     unload = unload
 }
