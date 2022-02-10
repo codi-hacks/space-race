@@ -16,7 +16,7 @@ return System(
             Menu.state.map_select = true
             Menu.state.ship_select = false
             Menu.load()
-            Map.full_load(-1)
+            Map.loadMap(-1)
         end
     end
 )

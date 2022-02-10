@@ -1,8 +1,7 @@
 local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
-local loadMap = require('menu/loadMap')
 local State = require 'services/state'
-
+local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
 
 --[[
@@ -65,7 +64,7 @@ menu.key_map = {
     -- P now just pauses and unpauses
     -- use ENTER to select a map and ship - J.R.C 2/7/22
     p = function()
-        if State.activeMap ~=-1 then
+        if State.activeMap ~= -1 then
             menu.state.map_select = not menu.state.map_select
             State.paused = not State.paused
         end
@@ -124,7 +123,7 @@ menu.load_map = function()
     ]]
     --Entity.list = {}
 
-    loadMap(menu.mapSelect)
+    map.loadMap(menu.mapSelect)
 
     State.paused = not State.paused
     State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
@@ -158,7 +157,7 @@ menu.draw = function()
         if menu.blink then
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
         end
-        if mapList[State.activeMap] ~=nil then
+        if mapList[State.activeMap] ~= nil then
             love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
                 corner[1] + 400, corner[2] + 450, 0, 2, 2)
         end

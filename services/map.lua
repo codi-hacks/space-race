@@ -85,7 +85,7 @@ local unload = function(map_name)
     maps[map_name].quads = nil
 end
 
-local full_load = function(mapNumber)
+local loadMap = function(mapNumber)
     -- This function is necessary due to how entities are loaded from maps.
     -- I wish a simple Entity.list = {} would work but we don't live in a perfect world.
 
@@ -140,7 +140,7 @@ return {
     -- @param {number} height
     get_dimensions = get_dimensions,
     load = load,
-    full_load = full_load,
+    loadMap = loadMap,
     --- Set loaded images and quads for a given map to nil.
     -- would have a map name of "general".
     -- @param {string} map_name - name of the tmx file to load
