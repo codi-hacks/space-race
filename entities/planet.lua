@@ -10,7 +10,7 @@ return function(props)
             friction = 0,
             mask = 65535
         },
-        gravitational_mass = 150,
+        gravitational_mass = 300,
         spritesheet = {
             image = 'planet',
             offset_x = 16,

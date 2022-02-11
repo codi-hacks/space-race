@@ -1,4 +1,4 @@
-local Entity = require('services/entity')
+-- local Entity = require('services/entity')
 local State = require('services/state')
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
@@ -13,11 +13,6 @@ keyboard.key_map = {
     end,
     b = function()
         State.debugOn = not State.debugOn
-    end,
-    o = function()
-        local player = Entity.grab('player')
-        player.body:setX(player.position.x)
-        player.body:setY(player.position.y)
     end,
     p = function()
         State.paused = not State.paused

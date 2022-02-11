@@ -6,6 +6,7 @@ local save = {}
 --[[
 Save relevant game state data into a save file.
 The current data is stored:
+
 credits <number>: The player's hoard of space gold.
 time <number>: Placeholder for storing stopwatch times.
 lastShip <number>: The ID of the last ship selected.
