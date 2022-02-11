@@ -3,6 +3,8 @@ local mapList = require('maps/mapList')
 local State = require 'services/state'
 local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
+local save = require('services/save')
+
 
 local menu = {
     state = {}
@@ -35,6 +37,9 @@ menu.load = function()
     menu.state.map_select = true
     menu.state.ship_select = false
     menu.font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+
+    -- Save data when opening menu since this is likely right before a player will quit.
+    save.write()
 end
 
 menu.unload = function()
@@ -48,7 +53,13 @@ end
 
 menu.key_map = {
     escape = function()
+        save.write()
         love.event.quit()
+    end,
+    o = function()
+        -- Become Mr. Krabs and get all the money
+        love.audio.play(sounds.chirp_up)
+        State.credits = State.credits + 1
     end,
     b = function()
         State.debugOn = not State.debugOn
@@ -148,18 +159,14 @@ menu.draw = function()
         -- Draw text
         if menu.blink then
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+            love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
         end
         if mapList[State.activeMap] ~= nil then
             love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
                 corner[1] + 400, corner[2] + 450, 0, 2, 2)
         end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
-
-        --[[if menu.blink == true then
-            love.graphics.setColor({1, 0, 0, 1})
-            love.graphics.rectangle('line', corner[1], corner[2],
-            State.camera.window_width, State.camera.window_height)
-        end]]--
+        love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
 
         -- Draw ship select Menu
     elseif menu.state.ship_select then

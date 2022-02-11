@@ -96,6 +96,18 @@ love.filesystem.read = function(file_path)
     file:close()
     return content
 end
+love.filesystem.load = function(file_path)
+    return function()
+        local v1={["lastShip"]=1,["time"]="2:33:44",["credits"]=18}
+        return v1
+    end
+end
+love.filesystem.write = function(file_path, data)
+    return {}
+end
+love.filesystem.getInfo = function(file_path)
+    return {}
+end
 
 love.graphics = {}
 love.graphics.circle = function() end
