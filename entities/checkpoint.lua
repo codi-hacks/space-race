@@ -9,8 +9,10 @@ return function()
             category = 1,
             mask = 65535
         },
-        on_begin_contact = function(_, entity_b)
-            CompleteLevel(entity_b)
+        on_begin_contact = function(self, entity_b)
+            if self.sprite.name ~= 'close' then
+                CompleteLevel(entity_b)
+            end
         end,
         on_end_contact = function(self, entity_b)
             if entity_b.isControlled and self.sprite.name ~= 'close' then
