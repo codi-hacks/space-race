@@ -158,11 +158,11 @@ menu.draw = function()
         -- Draw text
         if menu.blink then
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+            love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
         end
         if mapList[State.activeMap] ~= nil then
             love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
                 corner[1] + 400, corner[2] + 450, 0, 2, 2)
-            love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
         end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
         love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
