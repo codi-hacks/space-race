@@ -2,11 +2,13 @@ local Entity = require('services/entity')
 local State = require('services/state')
 local sounds = require('services/sounds')
 local menu = require('menu/menu')
+local save = require('services/save')
 
 local keyboard = {}
 
 keyboard.key_map = {
     escape = function()
+        save.write()
         love.event.quit()
     end,
     b = function()
