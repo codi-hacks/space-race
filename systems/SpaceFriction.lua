@@ -41,7 +41,6 @@ return System(
 
         if math.abs(angular_velocity) > entity.max_spin then
             body:setAngularVelocity( entity.max_spin )
-            print("TORQUE: " .. angular_velocity)
         end
     end
 
