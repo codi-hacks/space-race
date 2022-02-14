@@ -42,6 +42,7 @@ return function(props)
         braking_force = ship.braking_force,
         turning_force = ship.turning_force,
         thrust_force = ship.thrust_force,
+        max_spin = ship.max_spin,
         max_velocity = ship.max_velocity
     }
 end

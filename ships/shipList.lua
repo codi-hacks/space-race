@@ -42,6 +42,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 2.0,
+        max_spin = 15.0,
         max_velocity = 550.0
     },
     [2] = {
@@ -70,6 +71,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 2.0,
+        max_spin = 5.0,
         max_velocity = 550.0
     },
     [3] = {
@@ -97,6 +99,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 2.0,
+        max_spin = 5.0,
         max_velocity = 850.0
     },
     [4] = {
@@ -125,6 +128,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 6.0,
+        max_spin = 5.0,
         max_velocity = 1050.0
     },
     [5] = {
@@ -153,6 +157,7 @@ return {
         braking_force = 1.15,
         turning_force = 3.0,
         thrust_force = 2.0,
+        max_spin = 5.0,
         max_velocity = 850.0
     },
     [6] = {
@@ -188,10 +193,11 @@ return {
         description = "Can the best color help you get the best time?",
         speed = 3,
         handling = 3,
-        damping_force = 0.25,
+        damping_force = 0.45,
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 2.0,
+        max_spin = 5.0,
         max_velocity = 850.0
     },
     [7] = {
@@ -219,6 +225,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 2.0,
+        max_spin = 5.0,
         max_velocity = 850.0
     },
     [8] = {
@@ -248,6 +255,7 @@ return {
         braking_force = 1.15,
         turning_force = 2.0,
         thrust_force = 8.0,
+        max_spin = 5.0,
         max_velocity = 550.0
     }
 }
