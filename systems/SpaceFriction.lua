@@ -1,5 +1,4 @@
 local System = require('lib/system')
-local keyboard = require('services/keyboard')
 
 return System(
     {'_entity','-isControlled'},
@@ -18,8 +17,6 @@ return System(
             velocityAngle = velocityAngle + math.pi * 2 + math.pi / 2
         end
 
-        local difference = targetAngle - velocityAngle
-
         -- Get x and y components of the target angle
         local target_x = math.cos(targetAngle)
         local target_y = math.sin(targetAngle)
@@ -34,7 +31,7 @@ return System(
             -- Change force based on how much of a difference
             -- Between player angle and velocity angle
 
-            mod = abs_dif / 360
+            local mod = abs_dif / 360
 
             body:applyForce(dif_x * mod * entity.damping_force , dif_y * mod * entity.damping_force)
         end
