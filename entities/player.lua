@@ -33,7 +33,15 @@ return function(props)
         },
         gravitational_mass = 1,
         isControlled = true,
+
         shape = ship.shape,
-        spritesheet = ship.spritesheet
+        spritesheet = ship.spritesheet,
+
+        --Physics Improvements force-modifiers - J.R.C 2/9/22
+        damping_force = ship.damping_force,
+        braking_force = ship.braking_force,
+        turning_force = ship.turning_force,
+        thrust_force = ship.thrust_force,
+        max_velocity = ship.max_velocity
     }
 end

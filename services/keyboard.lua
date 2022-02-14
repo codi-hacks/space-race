@@ -27,7 +27,7 @@ keyboard.key_map = {
 keyboard.move = function(entity, time)
     local body = entity.body;
     -- Standard amount of force to base movement off of
-    local movementForce = 100
+    local movementForce = 100 * entity.thrust_force
     if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
         movementForce = movementForce + entity.powerUps.speedBoost.value
     end
@@ -40,7 +40,11 @@ keyboard.move = function(entity, time)
 
     -- Fly spaceship forwards and backwards
     if love.keyboard.isScancodeDown('w') then
-        body:applyForce(ratiox * movementForce, ratioy * movementForce)
+        local vel_x, vel_y = body:getLinearVelocity()
+        -- Only apply force if below max speed J.R.C 2/13/22
+        if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity then
+            body:applyForce(ratiox * movementForce, ratioy * movementForce)
+        end
     end
     if love.keyboard.isScancodeDown('s') then
         body:applyForce(-ratiox * movementForce, -ratioy * movementForce)
@@ -51,10 +55,10 @@ keyboard.move = function(entity, time)
     local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isScancodeDown('a') then
-            body:applyTorque(-600)
+            body:applyTorque(-600 * entity.turning_force)
         end
         if love.keyboard.isScancodeDown('d') then
-            body:applyTorque(600)
+            body:applyTorque(600* entity.turning_force)
         end
     end
 
@@ -70,7 +74,7 @@ keyboard.move = function(entity, time)
             end
         end
 
-        body:applyForce(brakeForce[1], brakeForce[2])
+        body:applyForce(brakeForce[1] * entity.braking_force, brakeForce[2] * entity.braking_force)
     end
 
     -- This slows player left/right spin to a halt once they are not holding the button
@@ -78,9 +82,9 @@ keyboard.move = function(entity, time)
     -- so that it doesn't need to.
     if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
         if angVel < 0 then
-            body:applyAngularImpulse(2)
+            body:applyAngularImpulse(2 * entity.turning_force)
         elseif angVel > 0 then
-            body:applyAngularImpulse(-2)
+            body:applyAngularImpulse(-2 * entity.turning_force)
         end
     end
 
