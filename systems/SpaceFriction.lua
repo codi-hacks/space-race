@@ -37,7 +37,7 @@ return System(
         end
 
         -- Also correct over-spin
-        angular_velocity = body:getAngularVelocity()
+        local angular_velocity = body:getAngularVelocity()
 
         if math.abs(angular_velocity) > entity.max_spin then
             body:setAngularVelocity( entity.max_spin )
