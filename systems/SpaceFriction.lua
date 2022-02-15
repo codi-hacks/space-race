@@ -40,11 +40,9 @@ return System(
         local angular_velocity = body:getAngularVelocity()
 
         if math.abs(angular_velocity) > entity.max_spin then
-            if angular_velocity > 1 then
-                body:applyTorque((angular_velocity-entity.max_spin)*2)
-            else
-                body:applyTorque((angular_velocity-entity.max_spin)*2)
-            end
+
+            body:applyTorque((angular_velocity-entity.max_spin)*2)
+
         end
     end
 
