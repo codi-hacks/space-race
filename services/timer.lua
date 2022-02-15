@@ -31,7 +31,7 @@ timer.getBestTimes = function(mapID, x)
     end
 
     for i = 1, x do
-        if i < #requestedTimesTable then
+        if i <= #requestedTimesTable then
             table.insert(bestTimes, timer.convertSeconds(requestedTimesTable[i]))
         else
             table.insert(bestTimes, '0:00:000')

@@ -23,13 +23,7 @@
   <object id="16" name="checkpoint-ball" x="611" y="618">
    <point/>
   </object>
-  <object id="18" name="planet" x="701" y="57">
-   <properties>
-    <property name="radius" type="int" value="40"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="19" name="planet" x="167" y="529">
+  <object id="19" name="planet" x="712" y="798">
    <properties>
     <property name="radius" type="int" value="40"/>
    </properties>

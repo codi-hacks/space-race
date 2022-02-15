@@ -14,6 +14,7 @@ return System(
         if checkpoints < 1 then
             Timer.saveNewTime(State.seconds)
             State.paused = true
+            love.audio.stop()
             love.audio.play(Sounds.chirp_up)
             Menu.state.map_select = true
             Menu.state.ship_select = false
