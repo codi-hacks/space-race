@@ -4,7 +4,7 @@ local State = require 'services/state'
 local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
 local save = require('services/save')
-
+local timer = require('services/timer')
 
 local menu = {
     state = {}
@@ -15,6 +15,8 @@ menu.up = function()
     if menu.mapSelect > #mapList then
         menu.mapSelect = 1
     end
+
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
 end
 
 menu.down = function()
@@ -22,6 +24,8 @@ menu.down = function()
     if menu.mapSelect < 1 then
         menu.mapSelect = #mapList
     end
+
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
 end
 
 menu.load = function()
@@ -29,7 +33,12 @@ menu.load = function()
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
-    menu.mapSelect = 1
+    if State.activeMap ~= -1 then
+        menu.mapSelect = State.activeMap
+    else
+        menu.mapSelect = 1
+    end
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
 
     shipMenu.load() -- Load ship menu - J.R.C 2/2/22
 
@@ -47,6 +56,7 @@ menu.unload = function()
     menu.blinkTimer = nil
     menu.blink = nil
     menu.mapSelect = nil
+    menu.threeBest = nil
     menu.font = nil
     shipMenu.unload()
 end
@@ -158,15 +168,21 @@ menu.draw = function()
 
         -- Draw text
         if menu.blink then
-            love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
             love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
-        end
-        if mapList[State.activeMap] ~= nil then
-            love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
-                corner[1] + 400, corner[2] + 450, 0, 2, 2)
+
+            -- Highlight map name in red if it is the active map.
+            if menu.mapSelect == State.activeMap then
+                love.graphics.setColor(1, 0, 0.25, 1)
+            end
+            love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+            love.graphics.setColor(1, 1, 1, 1)
         end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
         love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
+
+        for i = 0, 2 do
+            love.graphics.print(menu.threeBest[i + 1], corner[1] + 550, corner[2] + 430 + (i * 45), 0, 1.5, 1.5)
+        end
 
         -- Draw ship select Menu
     elseif menu.state.ship_select then
