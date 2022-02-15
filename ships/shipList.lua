@@ -37,12 +37,12 @@ return {
         description = "Big T's ORIGINAL ship! Nothing beats the classics",
         speed = 1,
         handling = 1,
-        damping_force = 0.25,
-        braking_force = 1.15,
-        turning_force = 2.0,
-        thrust_force = 2.0,
+        damping_force = 0.00,
+        braking_force = 1.00,
+        turning_force = 1.0,
+        thrust_force = 1.0,
         max_spin = 15.0,
-        max_velocity = 550.0
+        max_velocity = 5500.0
     },
     [2] = {
         displayName = 'Ship Two', -- Index 2
@@ -65,11 +65,11 @@ return {
                         "Beat your best time in luxurious style",
         speed = 2,
         handling = 1,
-        damping_force = 0.25,
-        braking_force = 1.15,
-        turning_force = 2.0,
-        thrust_force = 2.0,
-        max_spin = 5.0,
+        damping_force = 0.45,
+        braking_force = 1.25,
+        turning_force = 4.0,
+        thrust_force = 4.0,
+        max_spin = 1.0,
         max_velocity = 550.0
     },
     [3] = {
@@ -92,12 +92,12 @@ return {
         description = "This ship is out of this world! *X-files theme music intensifies*",
         speed = 2,
         handling = 2,
-        damping_force = 0.25,
+        damping_force = 0.85,
         braking_force = 1.15,
-        turning_force = 2.0,
-        thrust_force = 2.0,
+        turning_force = 8.0,
+        thrust_force = 4.0,
         max_spin = 5.0,
-        max_velocity = 850.0
+        max_velocity = 900.0
     },
     [4] = {
         displayName = 'Shuttle Rocket', -- Index 4
