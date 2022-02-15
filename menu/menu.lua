@@ -1,24 +1,14 @@
-
 local sounds = require('services/sounds')
 local mapList = require('maps/mapList')
-local loadMap = require('menu/loadMap')
 local State = require 'services/state'
-
+local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
-
---[[
-    TODO:
-        Fix entities not being cleared upon loading a new map.
-        Add text to title saying SPAAACE RAAAAACE
-]]
-
+local save = require('services/save')
 
 
 local menu = {
     state = {}
 }
-
-
 
 menu.up = function()
     menu.mapSelect = menu.mapSelect + 1
@@ -34,14 +24,12 @@ menu.down = function()
     end
 end
 
-
-
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
-    menu.mapSelect = State.activeMap
+    menu.mapSelect = 1
 
     shipMenu.load() -- Load ship menu - J.R.C 2/2/22
 
@@ -49,6 +37,9 @@ menu.load = function()
     menu.state.map_select = true
     menu.state.ship_select = false
     menu.font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+
+    -- Save data when opening menu since this is likely right before a player will quit.
+    save.write()
 end
 
 menu.unload = function()
@@ -60,9 +51,15 @@ menu.unload = function()
     shipMenu.unload()
 end
 
-    menu.key_map = {
+menu.key_map = {
     escape = function()
+        save.write()
         love.event.quit()
+    end,
+    o = function()
+        -- Become Mr. Krabs and get all the money
+        love.audio.play(sounds.chirp_up)
+        State.credits = State.credits + 1
     end,
     b = function()
         State.debugOn = not State.debugOn
@@ -70,8 +67,10 @@ end
     -- P now just pauses and unpauses
     -- use ENTER to select a map and ship - J.R.C 2/7/22
     p = function()
-        menu.state.map_select = not menu.state.map_select
-        State.paused = not State.paused
+        if State.activeMap ~= -1 then
+            menu.state.map_select = not menu.state.map_select
+            State.paused = not State.paused
+        end
     end,
     up = function()
         if menu.state.map_select then
@@ -93,7 +92,7 @@ end
             shipMenu.right()
         end
     end,
-    backspace= function()
+    backspace = function()
         if menu.state.ship_select then
             menu.state.map_select = true
             menu.state.ship_select = false
@@ -110,7 +109,6 @@ end
     end,
 }
 
-
 menu.load_map = function()
     -- If selected map is the same, just unpause...
     --[[
@@ -126,9 +124,9 @@ menu.load_map = function()
             else
 
     ]]
-        --Entity.list = {}
+    --Entity.list = {}
 
-    loadMap(menu.mapSelect)
+    map.loadMap(menu.mapSelect)
 
     State.paused = not State.paused
     State.shipMenu = true -- Go to ship select menu - J.R.C 2/2/22
@@ -161,18 +159,16 @@ menu.draw = function()
         -- Draw text
         if menu.blink then
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+            love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
         end
-        love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
-            corner[1] + 400, corner[2] + 450, 0, 2, 2)
+        if mapList[State.activeMap] ~= nil then
+            love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
+                corner[1] + 400, corner[2] + 450, 0, 2, 2)
+        end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
+        love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
 
-        --[[if menu.blink == true then
-            love.graphics.setColor({1, 0, 0, 1})
-            love.graphics.rectangle('line', corner[1], corner[2],
-            State.camera.window_width, State.camera.window_height)
-        end]]--
-
-    -- Draw ship select Menu
+        -- Draw ship select Menu
     elseif menu.state.ship_select then
         shipMenu.draw()
     end
