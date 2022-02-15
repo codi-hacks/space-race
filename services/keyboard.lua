@@ -35,6 +35,13 @@ keyboard.move = function(entity, time)
     local ratiox = (topx - body:getX()) * 0.04
     local ratioy = (topy - body:getY()) * 0.04
 
+    -- Set player drift key
+    if love.keyboard.isScancodeDown('lshift') then
+        entity.drift_key = true
+    else
+        entity.drift_key = false
+    end
+
     -- Fly spaceship forwards and backwards
     if love.keyboard.isScancodeDown('w') then
         local vel_x, vel_y = body:getLinearVelocity()
@@ -129,6 +136,8 @@ keyboard.move = function(entity, time)
 
     -- Move using arrow keys (while holding shift) with "teleportation".
     -- A.K.A. adjusting the x/y of an object.
+
+    --[[ REMOVED FOR FREE DRIFT -J.R.C 2/15/22
     if love.keyboard.isScancodeDown('lshift') then
         body:setLinearVelocity(0, 0)
         body:setAngularVelocity(0)
@@ -154,6 +163,7 @@ keyboard.move = function(entity, time)
         body:setX(xpos)
         body:setY(ypos)
     end
+    ]]
 
     -- Induce crazy spin
     if love.keyboard.isScancodeDown('l') then
