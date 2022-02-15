@@ -21,7 +21,7 @@ keyboard.key_map = {
     end
 }
 
-keyboard.move = function(entity, time)
+keyboard.move = function(entity)
     local body = entity.body;
     -- Standard amount of force to base movement off of
     local movementForce = 100 * entity.thrust_force
@@ -175,8 +175,5 @@ keyboard.move = function(entity, time)
             data.time = data.time - 1
         end
     end
-
-    time = 0 -- Unused variable
-
 end
 return keyboard
