@@ -10,7 +10,7 @@ local get_entity_factories = function(directory)
     local file_list = love.filesystem.getDirectoryItems(directory)
     for _, file_name in ipairs(file_list) do
         -- Ignore non-lua files
-        if file_name:match('[^.]+$') == 'lua' then
+        if file_name:sub(-#'.lua') == '.lua' and not (file_name:sub(-#'.spec.lua') == '.spec.lua') then
             local file_name_without_ext = file_name:match('(.+)%..+')
             local entity = require(directory .. '/' .. file_name_without_ext)
             entities[file_name_without_ext] = entity
