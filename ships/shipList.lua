@@ -19,7 +19,6 @@
 return {
     [1] = {
         displayName = 'Trevor\'s OG Ship', -- Index 1
-        filename = 'ship',
         shape = {
             points = {
                 0, -25,
@@ -47,7 +46,6 @@ return {
     },
     [2] = {
         displayName = 'Ship Two', -- Index 2
-        filename = 'ship_2',
         shape = {
             points = {
                 0, -25,
@@ -76,7 +74,6 @@ return {
     },
     [3] = {
         displayName = 'UFO', -- Index 3
-        filename = 'ship_ufo',
         shape = {
             points = {
                 0, -25,
@@ -104,7 +101,6 @@ return {
     },
     [4] = {
         displayName = 'Shuttle Rocket', -- Index 4
-        filename = 'ship_shuttle',
         shape = {
             points = {
                 0, -32,
@@ -133,7 +129,6 @@ return {
     },
     [5] = {
         displayName = 'Shuttle', -- Index 5
-        filename = 'ship_shuttle_2',
         shape = {
             points = {
                 0, -32,
@@ -162,7 +157,6 @@ return {
     },
     [6] = {
         displayName = 'Purple', -- Index 6
-        filename = 'ship_purple',
         shape = {
             points = {
                 0, -26,
@@ -202,7 +196,6 @@ return {
     },
     [7] = {
         displayName = 'Green', -- Index 7
-        filename = 'ship_green',
         shape = {
             points = {
                 0, -26,
@@ -230,7 +223,6 @@ return {
     },
     [8] = {
         displayName = 'Big One', -- Index 8
-        filename = 'ship_big',
         shape = {
             points = {
                 0, -40,
