@@ -2,7 +2,6 @@
     This is a table of all ships available
     All ships have a:
     displayName - The display name of the ship.
-    filename - The filename of the ship sprite
     shape with:
         points
         type

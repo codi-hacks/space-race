@@ -10,6 +10,8 @@ local function get_ship(index)
 end
 
 return function(props)
+    assert(type(props) == 'table', 'no props passed to player entity factory')
+
     local ship = get_ship(tonumber(props.ship_type))
 
     return {
