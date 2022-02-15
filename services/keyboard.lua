@@ -176,6 +176,7 @@ keyboard.move = function(entity, time)
         end
     end
 
+    time = 0 -- Unused variable
 
 end
 return keyboard

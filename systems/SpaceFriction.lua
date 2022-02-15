@@ -37,16 +37,19 @@ return System(
 
                 body:applyForce(dif_x * mod * entity.damping_force , dif_y * mod * entity.damping_force)
             end
+
+                -- Also correct over-spin
+            local angular_velocity = body:getAngularVelocity()
+
+            if math.abs(angular_velocity) > entity.max_spin then
+
+                body:applyTorque((angular_velocity-entity.max_spin)*2)
+
+            end
+
         end
 
-            -- Also correct over-spin
-        local angular_velocity = body:getAngularVelocity()
 
-        if math.abs(angular_velocity) > entity.max_spin then
-
-            body:applyTorque((angular_velocity-entity.max_spin)*2)
-
-        end
     end
 
 )
