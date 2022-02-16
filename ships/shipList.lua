@@ -242,9 +242,9 @@ return {
                         "It takes a master vessel commander to handle one THIS big!",
         speed = 0.5,
         handling = 4,
-        damping_force = 0.25,
+        damping_force = 0.45,
         braking_force = 1.15,
-        turning_force = 2.0,
+        turning_force = 8.0,
         thrust_force = 8.0,
         max_spin = 5.0,
         max_velocity = 550.0
