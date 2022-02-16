@@ -58,6 +58,9 @@ timer.saveNewTime = function(timeInSeconds)
         table.insert(currentMapTimesTable, timeInSeconds)
         table.sort(currentMapTimesTable)
     end
+
+    -- Let game know to keep track of this time to display on the menu
+    State.lastCompletedTime = timeInSeconds
 end
 
 return timer
