@@ -46,10 +46,6 @@ return System(
                 body:applyTorque((angular_velocity-entity.max_spin)*2* time)
 
             end
-
         end
-
-
     end
-
 )
