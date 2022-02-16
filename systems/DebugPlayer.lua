@@ -24,9 +24,6 @@ local function debug(entity)
         local pos_x = State.camera.pos_x
         local pos_y = State.camera.pos_y
         love.graphics.setColor({ 1, 1, 1, 1 })
-        -- Time
-        local clock_display = 'Time: ' .. roundOff(love.seconds)
-        love.graphics.print(clock_display, pos_x, pos_y, 0, 0.9, 0.9)
         -- The Position
         local playerPosition = 'X/Y Pos: ' .. roundOff(entity.body:getX()) .. '/' .. roundOff(entity.body:getY())
         love.graphics.print(playerPosition, pos_x, pos_y + 25, 0, 0.9, 0.9)

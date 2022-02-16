@@ -14,4 +14,7 @@ State.camera = {} -- Initialized in /camera.lua
 
 State.credits = 0 -- True value loaded in services/save.lua
 
+State.seconds = 0 -- Keep track of map times.
+State.lastCompletedTime = 0
+
 return State
