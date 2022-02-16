@@ -10,6 +10,8 @@ local function get_ship(index)
 end
 
 return function(props)
+    assert(type(props) == 'table', 'no props passed to player entity factory')
+
     local ship = get_ship(tonumber(props.ship_type))
 
     return {
@@ -33,7 +35,18 @@ return function(props)
         },
         gravitational_mass = 1,
         isControlled = true,
+
         shape = ship.shape,
-        spritesheet = ship.spritesheet
+        spritesheet = ship.spritesheet,
+
+        --Physics Improvements force-modifiers - J.R.C 2/9/22
+        damping_force = ship.damping_force,
+        braking_force = ship.braking_force,
+        turning_force = ship.turning_force,
+        thrust_force = ship.thrust_force,
+        max_spin = ship.max_spin,
+        max_velocity = ship.max_velocity,
+
+        drift_key = false
     }
 end

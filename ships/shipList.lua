@@ -2,7 +2,6 @@
     This is a table of all ships available
     All ships have a:
     displayName - The display name of the ship.
-    filename - The filename of the ship sprite
     shape with:
         points
         type
@@ -19,7 +18,6 @@
 return {
     [1] = {
         displayName = 'Trevor\'s OG Ship', -- Index 1
-        filename = 'ship',
         shape = {
             points = {
                 0, -25,
@@ -37,11 +35,16 @@ return {
         },
         description = "Big T's ORIGINAL ship! Nothing beats the classics",
         speed = 1,
-        handling = 1
+        handling = 1,
+        damping_force = 0.00,
+        braking_force = 1.00,
+        turning_force = 1.0,
+        thrust_force = 1.0,
+        max_spin = 15.0,
+        max_velocity = 5500.0
     },
     [2] = {
         displayName = 'Ship Two', -- Index 2
-        filename = 'ship_2',
         shape = {
             points = {
                 0, -25,
@@ -60,11 +63,16 @@ return {
         description =   "This small ship boasts three thrusters and leather seats! " ..
                         "Beat your best time in luxurious style",
         speed = 2,
-        handling = 1
+        handling = 1,
+        damping_force = 0.45,
+        braking_force = 1.25,
+        turning_force = 4.0,
+        thrust_force = 4.0,
+        max_spin = 1.0,
+        max_velocity = 550.0
     },
     [3] = {
         displayName = 'UFO', -- Index 3
-        filename = 'ship_ufo',
         shape = {
             points = {
                 0, -25,
@@ -82,11 +90,16 @@ return {
         },
         description = "This ship is out of this world! *X-files theme music intensifies*",
         speed = 2,
-        handling = 2
+        handling = 2,
+        damping_force = 0.85,
+        braking_force = 1.15,
+        turning_force = 8.0,
+        thrust_force = 4.0,
+        max_spin = 5.0,
+        max_velocity = 900.0
     },
     [4] = {
         displayName = 'Shuttle Rocket', -- Index 4
-        filename = 'ship_shuttle',
         shape = {
             points = {
                 0, -32,
@@ -105,11 +118,16 @@ return {
         description =   "The space shuttle has boosters engaged for insane speed. " ..
                         "Blaassssttt off! ",
         speed = 4,
-        handling = 1
+        handling = 1,
+        damping_force = 0.15,
+        braking_force = 1.15,
+        turning_force = 2.0,
+        thrust_force = 6.0,
+        max_spin = 5.0,
+        max_velocity = 1050.0
     },
     [5] = {
         displayName = 'Shuttle', -- Index 5
-        filename = 'ship_shuttle_2',
         shape = {
             points = {
                 0, -32,
@@ -128,11 +146,16 @@ return {
         description =   "The boosters have disengaged from the space shuttle. " ..
                         "Speed has been sacrificed for a major improvement to the handling stats.",
         speed = 1,
-        handling = 3
+        handling = 3,
+        damping_force = 0.25,
+        braking_force = 1.15,
+        turning_force = 3.0,
+        thrust_force = 2.0,
+        max_spin = 5.0,
+        max_velocity = 850.0
     },
     [6] = {
         displayName = 'Purple', -- Index 6
-        filename = 'ship_purple',
         shape = {
             points = {
                 0, -26,
@@ -162,11 +185,16 @@ return {
         },
         description = "Can the best color help you get the best time?",
         speed = 3,
-        handling = 3
+        handling = 3,
+        damping_force = 0.45,
+        braking_force = 1.15,
+        turning_force = 2.0,
+        thrust_force = 2.0,
+        max_spin = 5.0,
+        max_velocity = 850.0
     },
     [7] = {
         displayName = 'Green', -- Index 7
-        filename = 'ship_green',
         shape = {
             points = {
                 0, -26,
@@ -184,11 +212,16 @@ return {
         },
         description = "Make the competition GREEN with envy",
         speed = 3,
-        handling = 3
+        handling = 3,
+        damping_force = 0.25,
+        braking_force = 1.15,
+        turning_force = 2.0,
+        thrust_force = 2.0,
+        max_spin = 5.0,
+        max_velocity = 850.0
     },
     [8] = {
         displayName = 'Big One', -- Index 8
-        filename = 'ship_big',
         shape = {
             points = {
                 0, -40,
@@ -208,6 +241,12 @@ return {
         description =   "The biggest ship in the fleet! " ..
                         "It takes a master vessel commander to handle one THIS big!",
         speed = 0.5,
-        handling = 4
+        handling = 4,
+        damping_force = 0.25,
+        braking_force = 1.15,
+        turning_force = 2.0,
+        thrust_force = 8.0,
+        max_spin = 5.0,
+        max_velocity = 550.0
     }
 }

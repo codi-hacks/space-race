@@ -18,6 +18,8 @@ local Gravitate = require('systems/Gravitate')
 local UpdateCamera = require('systems/UpdateCamera')
 local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 
+local SpaceFriction = require('systems/SpaceFriction')
+
 love.load = function()
     love.window.setMode(800, 600)
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -66,6 +68,7 @@ love.update = function(dt)
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
             Gravitate(entity)
+            SpaceFriction(entity)
             UpdateCamera(entity)
             UpdateEntityAnimation(entity, dt)
         end

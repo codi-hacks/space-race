@@ -21,10 +21,10 @@ keyboard.key_map = {
     end
 }
 
-keyboard.move = function(entity, time)
+keyboard.move = function(entity)
     local body = entity.body;
     -- Standard amount of force to base movement off of
-    local movementForce = 100
+    local movementForce = 100 * entity.thrust_force
     if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
         movementForce = movementForce + entity.powerUps.speedBoost.value
     end
@@ -35,9 +35,20 @@ keyboard.move = function(entity, time)
     local ratiox = (topx - body:getX()) * 0.04
     local ratioy = (topy - body:getY()) * 0.04
 
+    -- Set player drift key
+    if love.keyboard.isScancodeDown('lshift') then
+        entity.drift_key = true
+    else
+        entity.drift_key = false
+    end
+
     -- Fly spaceship forwards and backwards
     if love.keyboard.isScancodeDown('w') then
-        body:applyForce(ratiox * movementForce, ratioy * movementForce)
+        local vel_x, vel_y = body:getLinearVelocity()
+        -- Only apply force if below max speed J.R.C 2/13/22
+        if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity then
+            body:applyForce(ratiox * movementForce, ratioy * movementForce)
+        end
     end
     if love.keyboard.isScancodeDown('s') then
         body:applyForce(-ratiox * movementForce, -ratioy * movementForce)
@@ -48,10 +59,10 @@ keyboard.move = function(entity, time)
     local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isScancodeDown('a') then
-            body:applyTorque(-600)
+            body:applyTorque(-600 * entity.turning_force)
         end
         if love.keyboard.isScancodeDown('d') then
-            body:applyTorque(600)
+            body:applyTorque(600* entity.turning_force)
         end
     end
 
@@ -67,7 +78,7 @@ keyboard.move = function(entity, time)
             end
         end
 
-        body:applyForce(brakeForce[1], brakeForce[2])
+        body:applyForce(brakeForce[1] * entity.braking_force, brakeForce[2] * entity.braking_force)
     end
 
     -- This slows player left/right spin to a halt once they are not holding the button
@@ -75,9 +86,9 @@ keyboard.move = function(entity, time)
     -- so that it doesn't need to.
     if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
         if angVel < 0 then
-            body:applyAngularImpulse(2)
+            body:applyAngularImpulse(2 * entity.turning_force)
         elseif angVel > 0 then
-            body:applyAngularImpulse(-2)
+            body:applyAngularImpulse(-2 * entity.turning_force)
         end
     end
 
@@ -125,31 +136,6 @@ keyboard.move = function(entity, time)
 
     -- Move using arrow keys (while holding shift) with "teleportation".
     -- A.K.A. adjusting the x/y of an object.
-    if love.keyboard.isScancodeDown('lshift') then
-        body:setLinearVelocity(0, 0)
-        body:setAngularVelocity(0)
-        local movespeed = 200
-        if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
-            movespeed = movespeed + entity.powerUps.speedBoost.value
-        end
-        local xpos = body:getX()
-        local ypos = body:getY()
-        if love.keyboard.isScancodeDown('up') then
-            ypos = ypos - time * movespeed
-        end
-        if love.keyboard.isScancodeDown('down') then
-            ypos = ypos + time * movespeed
-        end
-        if love.keyboard.isScancodeDown('left') then
-            xpos = xpos - time * movespeed
-        end
-        if love.keyboard.isScancodeDown('right') then
-            xpos = xpos + time * movespeed
-        end
-
-        body:setX(xpos)
-        body:setY(ypos)
-    end
 
     -- Induce crazy spin
     if love.keyboard.isScancodeDown('l') then
@@ -161,7 +147,5 @@ keyboard.move = function(entity, time)
             data.time = data.time - 1
         end
     end
-
-
 end
 return keyboard
