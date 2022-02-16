@@ -2,9 +2,9 @@ local System = require('lib/system')
 
 return System(
     {'_entity','-isControlled'},
-    function(entity)
+    function(entity, dt)
         local body = entity.body;
-
+        local time = dt * 35 -- Time adjustment for frame independence
         -- If the player isn't holding down free drift
         if entity.drift_key == false then
             -- Dampen Velocity Vars
@@ -35,7 +35,7 @@ return System(
 
                 local mod = abs_dif / 360
 
-                body:applyForce(dif_x * mod * entity.damping_force , dif_y * mod * entity.damping_force)
+                body:applyForce(dif_x * mod * entity.damping_force * time , dif_y * mod * entity.damping_force * time)
             end
 
                 -- Also correct over-spin
@@ -43,7 +43,7 @@ return System(
 
             if math.abs(angular_velocity) > entity.max_spin then
 
-                body:applyTorque((angular_velocity-entity.max_spin)*2)
+                body:applyTorque((angular_velocity-entity.max_spin)*2* time)
 
             end
 

@@ -186,11 +186,11 @@ return {
         description = "Can the best color help you get the best time?",
         speed = 3,
         handling = 3,
-        damping_force = 0.45,
+        damping_force = 0.55,
         braking_force = 1.15,
-        turning_force = 2.0,
+        turning_force = 4.0,
         thrust_force = 2.0,
-        max_spin = 5.0,
+        max_spin = 1.0,
         max_velocity = 850.0
     },
     [7] = {
