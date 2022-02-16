@@ -31,7 +31,7 @@ end
 local function displayTime()
     -- Draw current time and best times.
     local isNewBest = false
-    local convertedTime = '1:23:456'
+    local convertedTime
     local corner = { State.camera.pos_x, State.camera.pos_y }
 
     -- Display either the last finish time (if map has finished) or current time.
@@ -49,7 +49,8 @@ local function displayTime()
             love.graphics.setColor(255, 215, 0, 1)
         end
         -- Print out times
-        love.graphics.print('#' .. i + 1 .. ': ' .. menu.threeBest[i + 1], corner[1] + 448, corner[2] + 430 + (i * 45), 0, 1.5, 1.5)
+        love.graphics.print('#' .. i + 1 .. ': ' .. menu.threeBest[i + 1],
+                            corner[1] + 448, corner[2] + 430 + (i * 45), 0, 1.5, 1.5)
         love.graphics.setColor(1, 1, 1, 1)
     end
 

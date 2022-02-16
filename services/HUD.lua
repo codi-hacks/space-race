@@ -1,7 +1,7 @@
 local State = require('services/state')
 local timer = require('services/timer')
 
-HUD = {}
+local HUD = {}
 
 -- Holds all drawing and updating relating to in-game Heads Up Display
 

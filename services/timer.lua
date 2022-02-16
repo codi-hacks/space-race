@@ -1,7 +1,7 @@
 local State = require('services/state')
 local mapList = require('maps/mapList')
 
-timer = {}
+local timer = {}
 
 timer.timesTable = {} -- Holds times
 
@@ -45,7 +45,7 @@ timer.saveNewTime = function(timeInSeconds)
     -- Inserts new time to the current map's timesTable.
 
     -- Grab the currennt map's table of times (or create it)
-    local currentMapTimesTable = {}
+    local currentMapTimesTable
     if not timer.timesTable[mapList[State.activeMap].filename] then
         timer.timesTable[mapList[State.activeMap].filename] = {}
     end
