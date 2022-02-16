@@ -137,34 +137,6 @@ keyboard.move = function(entity)
     -- Move using arrow keys (while holding shift) with "teleportation".
     -- A.K.A. adjusting the x/y of an object.
 
-    --[[ REMOVED FOR FREE DRIFT -J.R.C 2/15/22
-    if love.keyboard.isScancodeDown('lshift') then
-        body:setLinearVelocity(0, 0)
-        body:setAngularVelocity(0)
-        local movespeed = 200
-        if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
-            movespeed = movespeed + entity.powerUps.speedBoost.value
-        end
-        local xpos = body:getX()
-        local ypos = body:getY()
-        if love.keyboard.isScancodeDown('up') then
-            ypos = ypos - time * movespeed
-        end
-        if love.keyboard.isScancodeDown('down') then
-            ypos = ypos + time * movespeed
-        end
-        if love.keyboard.isScancodeDown('left') then
-            xpos = xpos - time * movespeed
-        end
-        if love.keyboard.isScancodeDown('right') then
-            xpos = xpos + time * movespeed
-        end
-
-        body:setX(xpos)
-        body:setY(ypos)
-    end
-    ]]
-
     -- Induce crazy spin
     if love.keyboard.isScancodeDown('l') then
         body:setAngularVelocity(20)
