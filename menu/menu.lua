@@ -4,7 +4,7 @@ local State = require 'services/state'
 local map = require('services/map')
 local shipMenu = require('menu/shipMenu')
 local save = require('services/save')
-
+local timer = require('services/timer')
 
 local menu = {
     state = {}
@@ -15,12 +15,57 @@ menu.up = function()
     if menu.mapSelect > #mapList then
         menu.mapSelect = 1
     end
+
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
 end
 
 menu.down = function()
     menu.mapSelect = menu.mapSelect - 1
     if menu.mapSelect < 1 then
         menu.mapSelect = #mapList
+    end
+
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
+end
+
+local function displayTime()
+    -- Draw current time and best times.
+    local isNewBest = false
+    local convertedTime
+    local corner = { State.camera.pos_x, State.camera.pos_y }
+
+    -- Display either the last finish time (if map has finished) or current time.
+    if State.activeMap ~= -1 then
+        convertedTime = timer.convertSeconds(State.seconds)
+    else
+        convertedTime = timer.convertSeconds(State.lastCompletedTime)
+    end
+
+    -- Display three best times on record
+    for i = 0, 2 do
+        -- If map was completed and time is one of the best, display it in gold.
+        if menu.threeBest[i + 1] == convertedTime then
+            isNewBest = true
+            love.graphics.setColor(255, 215, 0, 1)
+        end
+        -- Print out times
+        love.graphics.print('#' .. i + 1 .. ': ' .. menu.threeBest[i + 1],
+                            corner[1] + 448, corner[2] + 430 + (i * 45), 0, 1.5, 1.5)
+        love.graphics.setColor(1, 1, 1, 1)
+    end
+
+    -- If map was completed and time is not the best, display it above best times.
+    if isNewBest == false then
+        -- If map was completed, display time in green, else in red.
+        if State.activeMap == -1 then
+            love.graphics.setColor(0.1, 0.8, 0.3, 1)
+        else
+            love.graphics.setColor(1, 0, 0.25, 1)
+        end
+        -- Print current time.
+        love.graphics.print(convertedTime, corner[1] + 550, corner[2] + 340, 0, 1.5, 1.5)
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.print('-----', corner[1] + 550, corner[2] + 385, 0, 1.5, 1.5)
     end
 end
 
@@ -29,7 +74,12 @@ menu.load = function()
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
     menu.blinkTimer = 0
     menu.blink = true
-    menu.mapSelect = 1
+    if State.activeMap ~= -1 then
+        menu.mapSelect = State.activeMap
+    else
+        menu.mapSelect = 1
+    end
+    menu.threeBest = timer.getBestTimes(menu.mapSelect, 3)
 
     shipMenu.load() -- Load ship menu - J.R.C 2/2/22
 
@@ -47,6 +97,7 @@ menu.unload = function()
     menu.blinkTimer = nil
     menu.blink = nil
     menu.mapSelect = nil
+    menu.threeBest = nil
     menu.font = nil
     shipMenu.unload()
 end
@@ -158,15 +209,20 @@ menu.draw = function()
 
         -- Draw text
         if menu.blink then
-            love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
             love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
-        end
-        if mapList[State.activeMap] ~= nil then
-            love.graphics.print('Current Map:\n' .. mapList[State.activeMap].displayName,
-                corner[1] + 400, corner[2] + 450, 0, 2, 2)
+
+            -- Highlight map name in red if it is the active map.
+            if menu.mapSelect == State.activeMap then
+                love.graphics.setColor(1, 0, 0.25, 1)
+            end
+            love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
+            love.graphics.setColor(1, 1, 1, 1)
         end
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
         love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
+
+        -- Draw best times and current time.
+        displayTime()
 
         -- Draw ship select Menu
     elseif menu.state.ship_select then

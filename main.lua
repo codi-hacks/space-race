@@ -8,6 +8,7 @@ local menu = require('menu/menu')
 
 local textures = require('services/textures')
 local background = require('services/background')
+local HUD = require('services/HUD')
 local map = require('services/map')
 local State = require 'services/state'
 local save = require('services/save')
@@ -20,11 +21,11 @@ local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 local SpaceFriction = require('systems/SpaceFriction')
 
 love.load = function()
-    love.seconds =0
     love.window.setMode(800, 600)
     love.graphics.setDefaultFilter('nearest', 'nearest')
     textures.load()
-    love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
+    love.globalFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+    love.graphics.setFont(love.globalFont)
     love.starLocations = background.load()
     save.read()
     menu.load()
@@ -45,14 +46,17 @@ love.keypressed = function(pressed_key)
 end
 
 love.draw = function()
-        Camera.set()
+    Camera.set()
 
-        background.draw( love.starLocations)
+    background.draw(love.starLocations)
 
-        map.draw()
-        if State.paused == true then
-            menu.draw()
-        end
+    map.draw()
+
+    if State.paused == true then
+        menu.draw()
+    else
+        HUD.draw()
+    end
 
     Camera.unset()
 end
@@ -60,7 +64,7 @@ end
 love.update = function(dt)
     if State.paused == false then
         world:update(dt)
-        love.seconds = love.seconds + dt
+        State.seconds = State.seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity)
             Gravitate(entity)
@@ -68,13 +72,6 @@ love.update = function(dt)
             UpdateCamera(entity)
             UpdateEntityAnimation(entity, dt)
         end
-
-        if love.seconds <= 0.25 then
-            State.camera.scale_x = 1 / (love.seconds*4)
-        else
-            State.camera.scale_x = 1
-        end
-
     else
         menu.update(dt)
     end

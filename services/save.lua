@@ -1,5 +1,6 @@
 local state = require('services/state')
 local Serialize = require('lib/serialize')
+local timer = require('services/timer')
 
 local save = {}
 
@@ -26,7 +27,7 @@ save.read = function()
         -- Stuff the save data into the necessary places.
         if data then
             state.credits = data.credits or 0
-            -- local time = data.time -- Placeholder
+            timer.timesTable = data.times or {}
             state.activeShip = data.lastShip or 1
 
         -- Check for errors
@@ -46,7 +47,7 @@ save.write = function()
     -- Grab the current data
     local data = {}
     data.credits = state.credits
-    data.time = '2:33:44'
+    data.times = timer.timesTable
     data.lastShip = state.activeShip
 
     -- Serialize data

@@ -97,6 +97,9 @@ local loadMap = function(mapNumber)
         table.remove(Entity.list, index)
     end
 
+    -- Reset game stopwatch
+    State.seconds = 0
+
     -- Do the actual map loading/unloading
 
     if mapNumber ~= -1 and mapList[State.activeMap] ~=nil then
