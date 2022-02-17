@@ -82,6 +82,13 @@ local unload = function(map_name)
         maps[map_name] ~= nil,
         'Could not find indexed map "' .. map_name .. '".'
     )
+    for layer_idx, layer in ipairs(active_map.layers) do
+        if layer.type == 'objects' then
+            for _, object in ipairs(active_map.layers[layer_idx].objects) do
+                object:destroy();
+            end
+        end
+    end
     maps[map_name].quads = nil
 end
 
@@ -92,6 +99,7 @@ local loadMap = function(mapNumber)
     So instead we must loop through the entity table and delete them one by one.
     ]]--
     for index = #Entity.list, 1, -1 do
+        Entity.list[index].fixture:destroy()
         Entity.list[index].body:destroy()
         Entity.list[index].shape:release()
         table.remove(Entity.list, index)
