@@ -19,6 +19,11 @@ return System(
                 velocityAngle = velocityAngle + math.pi * 2 + math.pi / 2
             end
 
+            -- Quick and dirty bug fix that had difference off
+            -- By 360 degrees when aiming along the negative Y axis 2/16/22
+            velocityAngle = velocityAngle % (math.pi * 2)
+            targetAngle = targetAngle % (math.pi * 2)
+
             -- Get x and y components of the target angle
             local target_x = math.cos(targetAngle)
             local target_y = math.sin(targetAngle)
