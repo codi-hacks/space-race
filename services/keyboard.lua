@@ -21,9 +21,8 @@ keyboard.key_map = {
     end
 }
 
-keyboard.move = function(entity, dt)
+keyboard.move = function(entity)
     local body = entity.body;
-    local time = dt * 35 -- Timestep adjustment for zoomin' -J.R.C 2/16/22
     -- Standard amount of force to base movement off of
     local movementForce = 100 * entity.thrust_force
     if entity.powerUps.speedBoost ~= nil and entity.powerUps.speedBoost.time > 0 then
@@ -48,11 +47,11 @@ keyboard.move = function(entity, dt)
         local vel_x, vel_y = body:getLinearVelocity()
         -- Only apply force if below max speed J.R.C 2/13/22
         if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity then
-            body:applyForce(ratiox * (movementForce * time), ratioy * (movementForce * time))
+            body:applyForce(ratiox * movementForce, ratioy * movementForce)
         end
     end
     if love.keyboard.isScancodeDown('s') then
-        body:applyForce(-ratiox * movementForce * time, -ratioy * movementForce * time)
+        body:applyForce(-ratiox * movementForce, -ratioy * movementForce)
     end
 
     -- Steer spaceship left and right
@@ -60,10 +59,10 @@ keyboard.move = function(entity, dt)
     local maxAngVel = 2
     if angVel > -maxAngVel and angVel < maxAngVel then
         if love.keyboard.isScancodeDown('a') then
-            body:applyTorque(-600 * entity.turning_force * time)
+            body:applyTorque(-600 * entity.turning_force)
         end
         if love.keyboard.isScancodeDown('d') then
-            body:applyTorque(600* entity.turning_force * time)
+            body:applyTorque(600* entity.turning_force)
         end
     end
 
@@ -79,7 +78,7 @@ keyboard.move = function(entity, dt)
             end
         end
 
-        body:applyForce(brakeForce[1] * entity.braking_force * time, brakeForce[2] * entity.braking_force * time)
+        body:applyForce(brakeForce[1] * entity.braking_force, brakeForce[2] * entity.braking_force)
     end
 
     -- This slows player left/right spin to a halt once they are not holding the button
@@ -87,9 +86,9 @@ keyboard.move = function(entity, dt)
     -- so that it doesn't need to.
     if not love.keyboard.isScancodeDown('a', 'd') or math.abs(angVel) > maxAngVel then
         if angVel < 0 then
-            body:applyAngularImpulse(2 * entity.turning_force * time)
+            body:applyAngularImpulse(2 * entity.turning_force)
         elseif angVel > 0 then
-            body:applyAngularImpulse(-2 * entity.turning_force * time)
+            body:applyAngularImpulse(-2 * entity.turning_force)
         end
     end
 

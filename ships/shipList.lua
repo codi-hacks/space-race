@@ -36,7 +36,7 @@ return {
         description = "Big T's ORIGINAL ship! Nothing beats the classics",
         speed = 1,
         handling = 1,
-        damping_force = 0.00,
+        damping_force = 0.00, -- No space friction
         braking_force = 1.00,
         turning_force = 1.0,
         thrust_force = 1.0,
@@ -147,9 +147,9 @@ return {
                         "Speed has been sacrificed for a major improvement to the handling stats.",
         speed = 1,
         handling = 3,
-        damping_force = 0.25,
+        damping_force = 0.30,
         braking_force = 1.15,
-        turning_force = 3.0,
+        turning_force = 4.0,
         thrust_force = 2.0,
         max_spin = 5.0,
         max_velocity = 850.0
@@ -188,9 +188,9 @@ return {
         handling = 3,
         damping_force = 0.55,
         braking_force = 1.15,
-        turning_force = 4.0,
+        turning_force = 2.0,
         thrust_force = 2.0,
-        max_spin = 1.0,
+        max_spin = 5.0,
         max_velocity = 850.0
     },
     [7] = {

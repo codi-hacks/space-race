@@ -6,8 +6,8 @@ local keyboard = require('services/keyboard')
 
 return System(
     {'_entity','-isControlled'},
-    function(entity, time)
-        keyboard.move(entity, time)
+    function(entity)
+        keyboard.move(entity)
 
     end
 )
