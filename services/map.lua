@@ -92,6 +92,7 @@ local loadMap = function(mapNumber)
     So instead we must loop through the entity table and delete them one by one.
     ]]--
     for index = #Entity.list, 1, -1 do
+        Entity.list[index].fixture:destroy()
         Entity.list[index].body:destroy()
         Entity.list[index].shape:release()
         table.remove(Entity.list, index)
