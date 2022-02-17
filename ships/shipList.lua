@@ -64,7 +64,7 @@ return {
                         "Beat your best time in luxurious style",
         speed = 2,
         handling = 1,
-        damping_force = 0.45,
+        damping_force = 1.65,
         braking_force = 1.25,
         turning_force = 4.0,
         thrust_force = 4.0,
@@ -91,7 +91,7 @@ return {
         description = "This ship is out of this world! *X-files theme music intensifies*",
         speed = 2,
         handling = 2,
-        damping_force = 0.85,
+        damping_force = 4.85,
         braking_force = 1.15,
         turning_force = 8.0,
         thrust_force = 4.0,
@@ -147,7 +147,7 @@ return {
                         "Speed has been sacrificed for a major improvement to the handling stats.",
         speed = 1,
         handling = 3,
-        damping_force = 0.25,
+        damping_force = 0.55,
         braking_force = 1.15,
         turning_force = 3.0,
         thrust_force = 2.0,
@@ -189,9 +189,9 @@ return {
         damping_force = 0.55,
         braking_force = 1.15,
         turning_force = 4.0,
-        thrust_force = 2.0,
+        thrust_force = 2.1,
         max_spin = 1.0,
-        max_velocity = 850.0
+        max_velocity = 870.0
     },
     [7] = {
         displayName = 'Green', -- Index 7
@@ -213,11 +213,11 @@ return {
         description = "Make the competition GREEN with envy",
         speed = 3,
         handling = 3,
-        damping_force = 0.25,
+        damping_force = 0.55,
         braking_force = 1.15,
-        turning_force = 2.0,
+        turning_force = 4.0,
         thrust_force = 2.0,
-        max_spin = 5.0,
+        max_spin = 1.0,
         max_velocity = 850.0
     },
     [8] = {
@@ -242,7 +242,7 @@ return {
                         "It takes a master vessel commander to handle one THIS big!",
         speed = 0.5,
         handling = 4,
-        damping_force = 0.45,
+        damping_force = 1.5,
         braking_force = 1.15,
         turning_force = 8.0,
         thrust_force = 8.0,

@@ -76,4 +76,3 @@ love.update = function(dt)
         menu.update(dt)
     end
 end
-
