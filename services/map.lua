@@ -4,7 +4,6 @@
 local Entity = require('services/entity')
 local Tmx = require('lib/tmx')
 local Util = require('lib/util')
-local World = require('services/world')
 local DrawEntity = require('systems/DrawEntity')
 local DebugPlayer = require('systems/DebugPlayer')
 local State = require("services/state")
@@ -70,7 +69,7 @@ local load = function(map_name, ship_index)
                     obj.ship_type = ship_index
                 end
             end
-            active_map.layers[layer_idx].objects = Tmx.load_fixtures(World, layer, layer_idx, Entity.spawn)
+            active_map.layers[layer_idx].objects = Tmx.load_fixtures(State.world, layer, layer_idx, Entity.spawn)
         end
     end
 
