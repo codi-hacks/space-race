@@ -66,7 +66,7 @@ love.update = function(dt)
         world:update(dt)
         State.seconds = State.seconds + dt
         for _, entity in ipairs(Entity.list) do
-            ControlPlayer(entity)
+            ControlPlayer(entity, dt)
             Gravitate(entity)
             SpaceFriction(entity, dt)
             UpdateCamera(entity)
@@ -76,4 +76,3 @@ love.update = function(dt)
         menu.update(dt)
     end
 end
-
