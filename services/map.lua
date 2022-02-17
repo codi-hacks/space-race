@@ -82,6 +82,13 @@ local unload = function(map_name)
         maps[map_name] ~= nil,
         'Could not find indexed map "' .. map_name .. '".'
     )
+    for layer_idx, layer in ipairs(active_map.layers) do
+        if layer.type == 'objects' then
+            for _, object in ipairs(active_map.layers[layer_idx].objects) do
+                object:destroy();
+            end
+        end
+    end
     maps[map_name].quads = nil
 end
 
