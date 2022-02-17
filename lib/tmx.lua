@@ -394,7 +394,7 @@ local load_fixtures = function(world, layer, layer_idx, entity_spawn_callback)
     if object.name then
       entity_spawn_callback(object, layer_idx)
     else
-      local collision_fixture = spawn_fixture(world, object, layer_idx)
+      local collision_fixture = spawn_fixture(State.world, object, layer_idx)
       if collision_fixture then
         table.insert(fixtures, collision_fixture)
       end

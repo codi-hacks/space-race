@@ -1,4 +1,3 @@
-local world = require('services/world')
 
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
@@ -63,7 +62,7 @@ end
 
 love.update = function(dt)
     if State.paused == false then
-        world:update(dt)
+        State.world:update(dt)
         State.seconds = State.seconds + dt
         for _, entity in ipairs(Entity.list) do
             ControlPlayer(entity, dt)
