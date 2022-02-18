@@ -78,7 +78,8 @@ return System(
 
                 body:applyForce( force_x, force_y)
                     -- Also apply force in direction the player is facing
-                    if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity  and (math.abs(vel_x) + math.abs(vel_y)) / 2 > 40 then
+                    if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity
+                    and (math.abs(vel_x) + math.abs(vel_y)) / 2 > 40 then
                         if targetAngle > velocityAngle then
                             body:applyForce(steer_x * entity.damping_force, steer_y * entity.damping_force)
                         else
