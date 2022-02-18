@@ -93,7 +93,7 @@ return {
         handling = 2,
         damping_force = 4.85,
         braking_force = 1.15,
-        turning_force = 8.0,
+        turning_force = 15.0,
         thrust_force = 4.0,
         max_spin = 5.0,
         max_velocity = 900.0
@@ -150,9 +150,9 @@ return {
         damping_force = 0.55,
         braking_force = 1.15,
         turning_force = 3.0,
-        thrust_force = 2.0,
+        thrust_force = 8.0,
         max_spin = 5.0,
-        max_velocity = 850.0
+        max_velocity = 450.0
     },
     [6] = {
         displayName = 'Purple', -- Index 6
