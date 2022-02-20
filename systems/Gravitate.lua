@@ -28,6 +28,7 @@ local gravityMaker = System(
                 local forcex = force * (x2 - x1)
                 local forcey = force * (y2 - y1)
                 body1:applyForce(forcex, forcey)
+
             end
         end
     end

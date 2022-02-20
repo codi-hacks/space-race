@@ -31,7 +31,16 @@ return {
         spritesheet = {
             image = 'spaceship',
             offset_x = 12.5,
-            scale_x = 2
+            scale_x = 2,
+            width = 25,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    frames = { 1, 1 }
+                },
+            }
         },
         description = "Big T's ORIGINAL ship! Nothing beats the classics",
         speed = 1,
@@ -58,7 +67,16 @@ return {
         spritesheet = {
             image = 'ship_2',
             offset_x = 12.5,
-            scale_x = 2
+            scale_x = 2,
+            width = 25,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    frames = { 1, 1 }
+                },
+            }
         },
         description =   "This small ship boasts three thrusters and leather seats! " ..
                         "Beat your best time in luxurious style",
@@ -86,7 +104,16 @@ return {
         spritesheet = {
             image = 'ship_ufo',
             offset_x = 12.5,
-            scale_x = 2
+            scale_x = 2,
+            width = 25,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    frames = { 1, 1 }
+                },
+            }
         },
         description = "This ship is out of this world! *X-files theme music intensifies*",
         speed = 2,
@@ -113,7 +140,16 @@ return {
         spritesheet = {
             image = 'ship_shuttle',
             offset_x = 16,
-            scale_x = 2
+            scale_x = 2,
+            width = 32,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    frames = { 1, 1 }
+                },
+            }
         },
         description =   "The space shuttle has boosters engaged for insane speed. " ..
                         "Blaassssttt off! ",
@@ -141,7 +177,16 @@ return {
         spritesheet = {
             image = 'ship_shuttle_2',
             offset_x = 16,
-            scale_x = 2
+            scale_x = 2,
+            width = 32,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    frames = { 1, 1 }
+                },
+            }
         },
         description =   "The boosters have disengaged from the space shuttle. " ..
                         "Speed has been sacrificed for a major improvement to the handling stats.",
@@ -170,18 +215,20 @@ return {
             image = 'ship_purple',
             offset_x = 16,
             scale_x = 1,
-            --[[ actions = {
+            width = 32,
+            actions = {
                 default = {
                     frames = { 1, 1 }
+
                 },
                 thrust_front = {
                     duration = 0.05,
-                    frames = { '2-3', 1 },
+                    frames = { '1-3', 1},
                     on_loop = function(animation)
                         animation:gotoFrame(2)
                     end
                 },
-            } ]]
+            }
         },
         description = "Can the best color help you get the best time?",
         speed = 3,
@@ -208,7 +255,20 @@ return {
         spritesheet = {
             image = 'ship_green',
             offset_x = 16,
-            scale_x = 1
+            scale_x = 1,
+            width = 32,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    duration = 0.05,
+                    frames = { '1-3', 1},
+                    on_loop = function(animation)
+                        animation:gotoFrame(2)
+                    end
+                },
+            }
         },
         description = "Make the competition GREEN with envy",
         speed = 3,
@@ -236,7 +296,20 @@ return {
             image = 'ship_big',
             offset_x = 32,
             offset_y = 34,
-            scale_x = 1
+            scale_x = 1,
+            width = 64,
+            actions = {
+                default = {
+                    frames = { 1, 1 }
+                },
+                thrust_front = {
+                    duration = 0.05,
+                    frames = { '1-3', 1},
+                    on_loop = function(animation)
+                        animation:gotoFrame(2)
+                    end
+                },
+            }
         },
         description =   "The biggest ship in the fleet! " ..
                         "It takes a master vessel commander to handle one THIS big!",
