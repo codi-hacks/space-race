@@ -122,7 +122,7 @@ return {
         damping_force = 0.15,
         braking_force = 1.15,
         turning_force = 2.0,
-        thrust_force = 6.0,
+        thrust_force = 7.0,
         max_spin = 5.0,
         max_velocity = 1050.0
     },
@@ -150,7 +150,7 @@ return {
         damping_force = 0.55,
         braking_force = 1.15,
         turning_force = 3.0,
-        thrust_force = 8.0,
+        thrust_force = 4.0,
         max_spin = 5.0,
         max_velocity = 450.0
     },

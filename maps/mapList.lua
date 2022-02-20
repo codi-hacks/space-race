@@ -23,33 +23,8 @@ return {
         thumbnail = nil
     },
     {
-        displayName = 'ship_1',
-        filename = 'ship_1',
+        displayName = 'Slingshot',
+        filename = 'mp_two',
         thumbnail = nil
-    },
-    {
-        displayName = 'ship_2',
-        filename = 'ship_2',
-        thumbnail = nil
-    },
-    {
-        displayName = 'ship_ufo',
-        filename = 'ship_ufo',
-        thumbnail = nil
-    },
-    {
-        displayName = 'ship_shuttle_1',
-        filename = 'ship_shuttle_1',
-        thumbnail = nil
-    },
-    {
-        displayName = 'ship_shuttle_2',
-        filename = 'ship_shuttle_2',
-        thumbnail = nil
-    },
-    {
-        displayName = 'BIG MAP',
-        filename = 'mp_big',
-        thumbnail = nil
-    },
+    }
 }
