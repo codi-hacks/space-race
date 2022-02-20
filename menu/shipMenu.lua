@@ -215,10 +215,6 @@ ship_menu.draw = function()
         shift_x = left_image:getPixelWidth() * (left_scale_x) / 2
         shift_y = left_image:getPixelHeight() * (left_scale_y) / 2
 
-        scale_mod_x = (
-            left_image:getWidth() / left_ship.spritesheet.width
-        )
-
         -- Draw a preview of the left option at 64x64
         love.graphics.draw(
             left_image, quad_left,
