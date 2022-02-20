@@ -24,7 +24,7 @@ return {
     },
     {
         displayName = 'Slingshot',
-        filename = 'mp_two',
+        filename = 'mp_slingshot',
         thumbnail = nil
     }
 }
