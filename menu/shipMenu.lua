@@ -197,13 +197,6 @@ ship_menu.draw = function()
             center_scale_x * scale_mod_x,
             center_scale_y * scale_mod_y
         )
-        scale_mod_x = (
-           image:getWidth() / ship.spritesheet.width
-        )
-
-        scale_mod_y =(
-             image:getHeight() / ship.bottom_y
-        )
 
         -- Also draw the preview at actual scale
         shift_x =
