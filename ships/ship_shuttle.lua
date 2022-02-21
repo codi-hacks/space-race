@@ -20,7 +20,11 @@ return {
                 frames = { 1, 1 }
             },
             thrust_front = {
-                frames = { 1, 1 }
+                duration = 0.05,
+                frames = { '1-3', 1},
+                on_loop = function(animation)
+                    animation:gotoFrame(2)
+                end
             },
         }
     },
