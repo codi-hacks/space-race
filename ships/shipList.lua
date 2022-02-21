@@ -18,7 +18,7 @@
 
 local ship = require('ships/ship')
 local ship_2 = require('ships/ship_2')
-local ship_ufo = require('ships/ship_2')
+local ship_ufo = require('ships/ship_ufo')
 local ship_shuttle = require('ships/ship_shuttle')
 local ship_shuttle_2 = require('ships/ship_shuttle_2')
 local ship_purple = require('ships/ship_purple')

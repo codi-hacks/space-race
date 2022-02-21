@@ -32,6 +32,10 @@ return{
     turning_force = 1.0,
     thrust_force = 1.0,
     max_spin = 15.0,
-    max_velocity = 5500.0
+    max_velocity = 5500.0,
+
+    -- Describes y coordinate of the last row
+    -- Of the actual ship for drawing preview
+    bottom_y = 25
 }
 

@@ -175,6 +175,9 @@ ship_menu.draw = function()
         local scale_mod_x = (
             image:getWidth() / ship.spritesheet.width
         )
+        local scale_mod_y = (
+            image:getHeight() / ship.bottom_y
+        )
 
         -- Draw Actual Size Text
         love.graphics.setFont(ship_menu.font)
@@ -192,10 +195,14 @@ ship_menu.draw = function()
             corner[1] + 400 - shift_x, corner[2] + 200 + shift_y,
             0,
             center_scale_x * scale_mod_x,
-            center_scale_y
+            center_scale_y * scale_mod_y
         )
         scale_mod_x = (
            image:getWidth() / ship.spritesheet.width
+        )
+
+        scale_mod_y =(
+             image:getHeight() / ship.bottom_y
         )
 
         -- Also draw the preview at actual scale
@@ -203,7 +210,10 @@ ship_menu.draw = function()
         (
             image:getPixelWidth() / 3 * shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
         )
-        shift_y = image:getPixelHeight() * shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
+        shift_y = (
+            ship.bottom_y *
+            shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
+        )
         love.graphics.draw(
             image, quad,
             corner[1] + 680 - shift_x, corner[2] + 480 - shift_y,
@@ -215,6 +225,13 @@ ship_menu.draw = function()
         shift_x = left_image:getPixelWidth() * (left_scale_x) / 2
         shift_y = left_image:getPixelHeight() * (left_scale_y) / 2
 
+        scale_mod_x = (
+            left_image:getWidth() / left_ship.spritesheet.width
+        )
+        scale_mod_y = (
+            left_image:getHeight() / left_ship.bottom_y
+        )
+
 
         -- Draw a preview of the left option at 64x64
         love.graphics.draw(
@@ -222,7 +239,7 @@ ship_menu.draw = function()
             corner[1] + 220 - shift_x, corner[2] + 240 + shift_y,
             0,
             left_scale_x * scale_mod_x,
-            left_scale_y
+            left_scale_y * scale_mod_y
         )
 
         shift_x = -right_image:getPixelWidth() * (right_scale_x) / 2
@@ -231,6 +248,9 @@ ship_menu.draw = function()
         scale_mod_x = (
             right_image:getWidth() / right_ship.spritesheet.width
         )
+        scale_mod_y = (
+            right_image:getHeight() / right_ship.bottom_y
+        )
 
         -- Draw a preview of the right option at 64x64
         love.graphics.draw(
@@ -238,7 +258,7 @@ ship_menu.draw = function()
             corner[1] + 580 + shift_x, corner[2] + 240 + shift_y,
             0,
             right_scale_x * scale_mod_x,
-            right_scale_y
+            right_scale_y * scale_mod_y
         )
 
         -- Draw description text
