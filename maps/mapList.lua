@@ -26,5 +26,10 @@ return {
         displayName = 'Slingshot',
         filename = 'mp_slingshot',
         thumbnail = nil
+    },
+    {
+        displayName = 'Slingshot 2',
+        filename = 'mp_slingshot2',
+        thumbnail = nil
     }
 }
