@@ -16,22 +16,22 @@
         - J.R.C 2/1/22
 ]]
 
-local ship = require('ships/ship')
-local ship_2 = require('ships/ship_2')
-local ship_ufo = require('ships/ship_ufo')
-local ship_shuttle = require('ships/ship_shuttle')
-local ship_shuttle_2 = require('ships/ship_shuttle_2')
-local ship_purple = require('ships/ship_purple')
-local ship_green = require('ships/ship_green')
-local ship_big = require('ships/ship_big')
+local get_ships = function(directory)
+    local ships = {}
+    local file_list = love.filesystem.getDirectoryItems(directory)
+    count = 1
+    for _, file_name in ipairs(file_list) do
+        -- Ignore non-lua files
+        if file_name:sub(-#'.lua') == '.lua' and not (file_name:sub(-#'.spec.lua') == '.spec.lua') and not (file_name:sub(-#'shipList.lua') == 'shipList.lua') then
+            local file_name_without_ext = file_name:match('(.+)%..+')
+            local ship = require(directory .. '/' .. file_name_without_ext)
+            ships[count] = ship
+            count = count + 1
+        end
+    end
+    return ships
 
-return {
-    [1] = ship,
-    [2] = ship_2,
-    [3] = ship_ufo,
-    [4] = ship_shuttle,
-    [5] = ship_shuttle_2,
-    [6] = ship_purple,
-    [7] = ship_green,
-    [8] = ship_big
-}
+end
+
+return get_ships('ships')
+
