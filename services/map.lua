@@ -7,8 +7,10 @@ local Util = require('lib/util')
 local DrawEntity = require('systems/DrawEntity')
 local DebugPlayer = require('systems/DebugPlayer')
 local State = require("services/state")
+local world = require("services/world")
 local mapList = require("maps/mapList")
-local background = require('services/background')local active_map
+local background = require('services/background')
+local active_map
 local map_directory = '/maps'
 local maps = Tmx.get_map_tables(map_directory)
 local draw_objects = function(layer_idx)
@@ -109,16 +111,22 @@ local loadMap = function(mapNumber)
 
     -- Do the actual map loading/unloading
 
-    if mapNumber ~= -1 and mapList[State.activeMap] ~=nil then
+    if mapNumber ~= -1 and mapList[State.activeMap] ~= nil then
         unload(mapList[State.activeMap].filename)
     end
+    State.world:destroy();
+    State.world = love.physics.newWorld(0, 0)
+
+    State.world:setCallbacks(world.begin_contact_callback, world.end_contact_callback, world.pre_solve_callback, nil)
+
+
     State.activeMap = mapNumber
 
     if State.activeMap ~= -1 then
         load(mapList[State.activeMap].filename, State.activeShip)
 
     end
-        -- Generate some new stars, because why not?
+    -- Generate some new stars, because why not?
     love.starLocations = background.load()
 end
 
