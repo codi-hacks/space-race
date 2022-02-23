@@ -111,6 +111,10 @@ local function split(str, sep)
   end
 end
 
+local function ends_with(str, endstr)
+    return str:sub(-#endstr) == endstr
+end
+
 return {
   -- Get the arctangent between two vectors.
   -- @param {number} x1 first x coordinate
@@ -167,5 +171,10 @@ return {
   -- @param {string} str - the string to split
   -- @param {string} sep - the separator identifying where to split
   -- @returns {table} array of strings with the original separators removed
-  split = split
+  split = split,
+  -- Whether or not a given string ends with a certain substring
+  -- @param {string} str - the string to check the ending of
+  -- @param {string} endstr - the ending string
+  -- @returns true if str ends with endstr
+  ends_with = ends_with
 }
