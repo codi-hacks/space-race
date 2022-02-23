@@ -25,5 +25,4 @@ end
 textures.load = function()
     get_textures('assets/sprites/')
 end
-
 return textures

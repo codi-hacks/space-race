@@ -1,35 +1,30 @@
 --[[
     This is a table of all maps available
-    All maps have a:
-    displayName - The display name of the map.
-    filename - The filename of the map that the game will load from.
-    thumbnail - A little picture to display when the map is selected.
+    They are automatically indexed from the maps directory
+    The display name is the name of the file without the .tmx extension
 ]]
 
-return {
-    {
-        displayName = 'Test',
-        filename = 'test',
-        thumbnail = nil
-    },
-    {
-        displayName = 'Happy',
-        filename = 'happy',
-        thumbnail = nil
-    },
-    {
-        displayName = 'No Planets',
-        filename = 'no_planets',
-        thumbnail = nil
-    },
-    {
-        displayName = 'Slingshot',
-        filename = 'mp_slingshot',
-        thumbnail = nil
-    },
-    {
-        displayName = 'Slingshot 2',
-        filename = 'mp_slingshot2',
-        thumbnail = nil
-    }
-}
+local util = require('lib/util')
+
+
+local get_maps = function(directory)
+    local maps = {}
+    local file_list = love.filesystem.getDirectoryItems(directory)
+    local count = 1
+    for _, file_name in ipairs(file_list) do
+        -- Ignore non-lua files and the shipList file
+        if util.ends_with(file_name, '.tmx') then
+            local map = {}
+            local file_name_without_ext = file_name:match('(.+)%..+')
+            map.displayName =  file_name_without_ext
+            map.filename = file_name_without_ext
+            map.thumbnail = nil
+            maps[count] = map
+            count = count + 1
+        end
+    end
+
+    return maps
+end
+
+return get_maps("maps")
