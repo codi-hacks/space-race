@@ -24,7 +24,7 @@ local get_ships = function(directory)
         -- Ignore non-lua files and the shipList file
         if file_name:sub(-#'.lua') == '.lua'
             and not (file_name:sub(-#'.spec.lua') == '.spec.lua')
-            and not (file_name:sub(-#'shipList.lua') == 'shipList.lua')
+            and not (file_name == 'shipList.lua')
         then
             local file_name_without_ext = file_name:match('(.+)%..+')
             local ship = require(directory .. '/' .. file_name_without_ext)
