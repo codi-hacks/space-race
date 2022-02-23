@@ -21,7 +21,7 @@ local get_ships = function(directory)
     local file_list = love.filesystem.getDirectoryItems(directory)
     local count = 1
     for _, file_name in ipairs(file_list) do
-        -- Ignore non-lua files
+        -- Ignore non-lua files and the shipList file
         if file_name:sub(-#'.lua') == '.lua'
             and not (file_name:sub(-#'.spec.lua') == '.spec.lua')
             and not (file_name:sub(-#'shipList.lua') == 'shipList.lua')
