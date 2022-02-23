@@ -157,6 +157,28 @@ ship_menu.draw = function()
             love.graphics.setColor(1, 1, 1, 1)
         end
 
+        local quad = love.graphics.newQuad(
+            0, 0, ship.spritesheet.width, image:getHeight(),
+            image:getWidth(), image:getHeight()
+        )
+
+        local quad_left = love.graphics.newQuad(
+            0, 0, left_ship.spritesheet.width, left_image:getHeight(),
+            left_image:getWidth(), left_image:getHeight()
+        )
+
+        local quad_right = love.graphics.newQuad(
+            0, 0, right_ship.spritesheet.width, right_image:getHeight(),
+            right_image:getWidth(), right_image:getHeight()
+        )
+
+        local scale_mod_x = (
+            image:getWidth() / ship.spritesheet.width
+        )
+        local scale_mod_y = (
+            image:getHeight() / ship.bottom_y
+        )
+
         -- Draw Actual Size Text
         love.graphics.setFont(ship_menu.font)
         love.graphics.printf(
@@ -169,45 +191,67 @@ ship_menu.draw = function()
 
         -- Draw a preview of the currently selected ship at 128x128
         love.graphics.draw(
-            image,
+            image, quad,
             corner[1] + 400 - shift_x, corner[2] + 200 + shift_y,
             0,
-            center_scale_x,
-            center_scale_y
+            center_scale_x * scale_mod_x,
+            center_scale_y * scale_mod_y
         )
 
         -- Also draw the preview at actual scale
-        shift_x = image:getPixelWidth() * shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
-        shift_y = image:getPixelHeight() * shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
+        shift_x =
+        (
+            image:getPixelWidth() / 3 * shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
+        )
+        shift_y = (
+            ship.bottom_y *
+            shipList[ship_menu.shipSelect].spritesheet.scale_x / 2
+        )
         love.graphics.draw(
-            image,
+            image, quad,
             corner[1] + 680 - shift_x, corner[2] + 480 - shift_y,
             0,
-            shipList[ship_menu.shipSelect].spritesheet.scale_x
+            ship.spritesheet.scale_x
         )
 
 
         shift_x = left_image:getPixelWidth() * (left_scale_x) / 2
         shift_y = left_image:getPixelHeight() * (left_scale_y) / 2
 
+        scale_mod_x = (
+            left_image:getWidth() / left_ship.spritesheet.width
+        )
+        scale_mod_y = (
+            left_image:getHeight() / left_ship.bottom_y
+        )
+
+
         -- Draw a preview of the left option at 64x64
         love.graphics.draw(
-            left_image, corner[1] + 220 - shift_x, corner[2] + 240 + shift_y,
+            left_image, quad_left,
+            corner[1] + 220 - shift_x, corner[2] + 240 + shift_y,
             0,
-            left_scale_x,
-            left_scale_y
+            left_scale_x * scale_mod_x,
+            left_scale_y * scale_mod_y
         )
 
         shift_x = -right_image:getPixelWidth() * (right_scale_x) / 2
         shift_y = right_image:getPixelHeight() * (right_scale_y) / 2
 
+        scale_mod_x = (
+            right_image:getWidth() / right_ship.spritesheet.width
+        )
+        scale_mod_y = (
+            right_image:getHeight() / right_ship.bottom_y
+        )
+
         -- Draw a preview of the right option at 64x64
         love.graphics.draw(
-            right_image,
+            right_image, quad_right,
             corner[1] + 580 + shift_x, corner[2] + 240 + shift_y,
             0,
-            right_scale_x,
-            right_scale_y
+            right_scale_x * scale_mod_x,
+            right_scale_y * scale_mod_y
         )
 
         -- Draw description text

@@ -50,7 +50,15 @@ keyboard.move = function(entity, dt)
         if (math.abs(vel_x) + math.abs(vel_y)) / 2 < entity.max_velocity then
             body:applyForce(ratiox * (movementForce * time), ratioy * (movementForce * time))
         end
+        if entity.sprite.name ~= 'thrust_front' then
+            entity.sprite = entity.spritesheet.actions.thrust_front:clone()
+        end
+    else
+        if entity.sprite.name ~= 'default' then
+            entity.sprite = entity.spritesheet.actions.thrust_front:clone()
+        end
     end
+
     if love.keyboard.isScancodeDown('s') then
         body:applyForce(-ratiox * movementForce * time, -ratioy * movementForce * time)
     end

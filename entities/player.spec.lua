@@ -1,3 +1,4 @@
+_G.love = require 'lib/love'
 local player = require('entities/player')
 
 local assert_props = function(props, idx)
