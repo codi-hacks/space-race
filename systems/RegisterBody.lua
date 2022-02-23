@@ -3,7 +3,7 @@
 
 local System = require 'lib/system'
 
-local World = require 'services/world'
+local State = require 'services/state'
 
 local components = {
     '=body'
@@ -11,7 +11,7 @@ local components = {
 
 local system = function(body, pos_x, pos_y, rotation)
     local new_body = love.physics.newBody(
-        World,
+        State.world,
         pos_x + (body.offset_x or 0),
         pos_y + (body.offset_y or 0),
         body.type or 'dynamic'
