@@ -16,7 +16,7 @@ local get_maps = function(directory)
         if util.ends_with(file_name, '.tmx') then
             local map = {}
             local file_name_without_ext = file_name:match('(.+)%..+')
-            map.displayName =  file_name_without_ext
+            map.displayName =  file_name_without_ext:sub(5,file_name_without_ext:len())
             map.filename = file_name_without_ext
             map.thumbnail = nil
             maps[count] = map
