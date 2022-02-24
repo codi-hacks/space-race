@@ -6,7 +6,7 @@ local mapList = require 'maps/mapList'
 describe('Map Service', function()
     Textures.load()
 
-    for map in mapList do
+    for _, map in ipairs(mapList) do
         it('loads & draws ' .. map.displayName , function()
             Map.load(map.filename)
             Map.draw()
