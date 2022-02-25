@@ -12,6 +12,8 @@ State.activeShip = 1
 
 State.camera = {} -- Initialized in /camera.lua
 
+State.windowScale = {x = 1, y = 1}
+
 State.credits = 0 -- True value loaded in services/save.lua
 
 State.seconds = 0 -- Keep track of map times.

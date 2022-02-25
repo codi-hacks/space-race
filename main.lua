@@ -20,7 +20,7 @@ local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 local SpaceFriction = require('systems/SpaceFriction')
 
 love.load = function()
-    love.window.setMode(800, 600)
+    love.window.updateMode(800, 600)
     love.graphics.setDefaultFilter('nearest', 'nearest')
     textures.load()
     love.globalFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
@@ -58,6 +58,16 @@ love.draw = function()
     end
 
     Camera.unset()
+end
+
+love.resize = function(w, h)
+    print(w, h)
+    State.windowScale.x = w / 800
+    State.windowScale.y = h / 600
+    State.camera.window_width, State.camera.window_height = w, h
+    State.camera.scale_x = State.windowScale.x
+    State.camera.scale_y = State.windowScale.y
+    print(State.windowScale.x, State.windowScale.y)
 end
 
 love.update = function(dt)

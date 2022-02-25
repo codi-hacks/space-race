@@ -10,12 +10,12 @@ State.camera.boundary_size = 0
 State.camera.pos_x = 0 * .5
 State.camera.pos_y = 0 * .5
 State.camera.rotation = 0
-State.camera.scale_x = 1
-State.camera.scale_y = 1
+State.camera.scale_x = State.windowScale.x
+State.camera.scale_y = State.windowScale.y
 State.camera.window_width, State.camera.window_height = love.graphics:getDimensions()
 
-local window_width = State.camera.window_width / State.camera.scale_x
-local window_height = State.camera.window_height / State.camera.scale_y
+local window_width = State.camera.window_width-- / State.camera.scale_x
+local window_height = State.camera.window_height-- / State.camera.scale_y
 -- https://love2d.org/wiki/FilterMode
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
