@@ -115,19 +115,6 @@ local function ends_with(str, endstr)
     return str:sub(-#endstr) == endstr
 end
 
-local function dump(t)
-    if type(t) == 'table' then
-       local s = ''
-       for k,v in pairs(t) do
-          if type(k) ~= 'number' then k = '"'..k..'"' end
-          s = s .. '['..k..'] = ' .. dump(v)
-       end
-       return s
-    else
-       return tostring(t) .. '\n'
-    end
- end
-
 return {
   -- Get the arctangent between two vectors.
   -- @param {number} x1 first x coordinate
@@ -190,7 +177,4 @@ return {
   -- @param {string} endstr - the ending string
   -- @returns true if str ends with endstr
   ends_with = ends_with,
-  -- Dumps an entire table's contents to console
-  -- @param {table} t - table to dump
-  dump = dump
 }
