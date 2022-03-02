@@ -1,26 +1,28 @@
+local util = require('lib/util')
 local textures = {}
 
-textures.load = function()
-    local i = function(filename)
-        return love.graphics.newImage('assets/sprites/' .. filename)
-    end
-    textures.block1             = i 'block1.png'
-    textures.checkpoint         = i 'checkpoint.png'
-    textures['checkpoint-ball'] = i 'checkpoint-ball.png'
-    textures['checkpoint-gate'] = i 'checkpoint-gate.png'
-    textures.spaceship          = i 'ship.png'
-    textures.star               = i 'star.png'
-    textures.planet             = i 'planet.png'
-    textures.speedboost         = i 'speedboost.png'
+--[[
+    Automatically loads every png located in assets/sprites/
+    Textures are accessible by name-as-index: textures[FILE_NAME]
+        - Where FILE_NAME is the name of the png file without the extension
 
-    -- Assorted spaceships by Jon
-    textures['ship_2']             = i 'ship_2.png'                -- Ship Index 2
-    textures['ship_ufo']           = i 'ship_ufo.png'              -- Ship Index 3
-    textures['ship_shuttle']       = i 'ship_shuttle.png'          -- Ship Index 4
-    textures['ship_shuttle_2']     = i 'ship_shuttle_2.png'        -- Ship Index 5
-    textures['ship_purple']        = i 'ship_purple.png'           -- Ship Index 6
-    textures['ship_green']         = i 'ship_green.png'            -- Ship Index 7
-    textures['ship_big']           = i 'ship_big.png'              -- Ship Index 8
+    To load textures located in a different directory:
+        - Call get_textures(DIRECTORY) in textures.load()
+
+    -J.R.C 2/23/22
+]]
+
+local get_textures = function(directory)
+    local file_list = love.filesystem.getDirectoryItems(directory)
+    for _, file_name in ipairs(file_list) do
+        if util.ends_with(file_name, '.png') then
+            local file_name_without_ext = file_name:match('(.+)%..+')
+            textures[file_name_without_ext] = love.graphics.newImage(directory .. file_name)
+        end
+    end
 end
 
+textures.load = function()
+    get_textures('assets/sprites/')
+end
 return textures
