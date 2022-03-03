@@ -34,7 +34,6 @@ local get_ships = function(directory)
         end
     end
     return ships
-
 end
 
 return get_ships('ships')

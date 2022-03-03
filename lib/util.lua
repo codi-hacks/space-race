@@ -176,5 +176,5 @@ return {
   -- @param {string} str - the string to check the ending of
   -- @param {string} endstr - the ending string
   -- @returns true if str ends with endstr
-  ends_with = ends_with
+  ends_with = ends_with,
 }
