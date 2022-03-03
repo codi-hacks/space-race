@@ -20,7 +20,7 @@ local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 local SpaceFriction = require('systems/SpaceFriction')
 
 love.load = function()
-    love.window.updateMode(800, 600)
+    love.window.updateMode(State.camera.window_width, State.camera.window_height)
     love.graphics.setDefaultFilter('nearest', 'nearest')
     textures.load()
     love.globalFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
@@ -47,7 +47,7 @@ end
 love.draw = function()
     Camera.set()
 
-    background.draw(love.starLocations)
+    background.draw(love.starLocations) -- Currently bugged with how stars update to new resolution
 
     map.draw()
 
@@ -61,13 +61,13 @@ love.draw = function()
 end
 
 love.resize = function(w, h)
-    print(w, h)
-    State.windowScale.x = w / 800
-    State.windowScale.y = h / 600
+    local function roundOff(value)
+        return math.floor(value * 100) / 100
+    end
+    print(w .. ' (' .. roundOff(State.camera.scale_x) .. ') || '.. h .. ' (' .. roundOff(State.camera.scale_y) .. ')')
     State.camera.window_width, State.camera.window_height = w, h
-    State.camera.scale_x = State.windowScale.x
-    State.camera.scale_y = State.windowScale.y
-    print(State.windowScale.x, State.windowScale.y)
+    State.camera.scale_x = w / 800
+    State.camera.scale_y = h / 800
 end
 
 love.update = function(dt)

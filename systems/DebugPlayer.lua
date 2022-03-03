@@ -44,6 +44,12 @@ local function debug(entity)
         love.graphics.setColor({ 1, 0, 0, 1 })
         love.graphics.line(entity.body:getX(), entity.body:getY(), velocityArrowX,velocityArrowY)
         love.graphics.setColor({ 1, 1, 1, 1 }) -- Added this line to fix sprite drawing as red - J.R.C 2/2/22
+
+        -- Window debug information
+        love.graphics.setColor({ 1, 1, 1, 1 })
+        love.graphics.circle('fill', 400 + State.camera.pos_x, State.camera.pos_y + 400, 5)
+        love.graphics.setColor({ 0, 0, 1, 1 })
+        love.graphics.line(pos_x, pos_y + (State.camera.window_height / 2), pos_x + State.camera.window_width, pos_y + State.camera.window_height / 2)
     end
 end
 

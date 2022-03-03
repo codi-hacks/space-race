@@ -3,16 +3,15 @@ local world = require('services/world')
 local State = {}
 
 State.paused = true
-State.debugOn = false
+State.debugOn = true
 State.activeMap = -1
 
+State.menu = {} -- Initialized in /menu/menu.lua
+
 -- Ship stuff duh - J.R.C 2/2/22
-State.shipMenu = false;
 State.activeShip = 1
 
 State.camera = {} -- Initialized in /camera.lua
-
-State.windowScale = {x = 1, y = 1}
 
 State.credits = 0 -- True value loaded in services/save.lua
 
