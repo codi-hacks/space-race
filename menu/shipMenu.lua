@@ -285,7 +285,7 @@ ship_menu.draw = function()
     end
 end
 
-ship_menu.update = function(dt)
+ship_menu.update = function()
     -- nothing for now!
 end
 

@@ -276,12 +276,6 @@ menu.update = function(dt)
         menu.blinkTimer = 0
         State.menu.blink = not State.menu.blink
     end
-
-    if State.menu.state == 'ship_select' then
-        shipMenu.update(dt)
-    elseif State.menu.state == 'settings' then
-        settingsMenu.update(dt)
-    end
 end
 
 return menu

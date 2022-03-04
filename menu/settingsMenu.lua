@@ -180,7 +180,7 @@ settingsMenu.draw = function()
     end
 end
 
-settingsMenu.update = function(dt)
+settingsMenu.update = function()
     -- Nothing for now!
 end
 

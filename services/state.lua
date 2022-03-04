@@ -3,7 +3,7 @@ local world = require('services/world')
 local State = {}
 
 State.paused = true
-State.debugOn = true
+State.debugOn = false
 State.activeMap = -1
 
 State.menu = {} -- Initialized in /menu/menu.lua
