@@ -56,7 +56,7 @@ end
 
 ship_menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the ship_menu is dismissed.
-    ship_menu.titleImage = love.graphics.newImage("assets/sprites/ship_menu/ship_menu.png")
+    ship_menu.titleImage = love.graphics.newImage("assets/sprites/menu_images/ship_menu.png")
     State.menu.blink = true
     ship_menu.shipSelect = State.activeShip
 
@@ -84,18 +84,9 @@ ship_menu.draw = function()
     -- Alias the true corner coordinates for convienience
     local corner = { State.camera.pos_x, State.camera.pos_y }
 
-    -- Transparent red background
-    love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
-    local verticies = {
-        0 + corner[1], 0 + corner[2],
-        0 + corner[1], 600 + corner[2],
-        800 + corner[1], 600 + corner[2],
-        800 + corner[1], 0 + corner[2] }
-    love.graphics.polygon('fill', verticies)
-
     -- Draw ship_menu image background
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(ship_menu.titleImage, verticies[1], verticies[2])
+    love.graphics.draw(ship_menu.titleImage, corner[1], corner[2])
 
     -- Draw text
     if State.menu.blink then

@@ -72,7 +72,7 @@ end
 
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
-    menu.titleImage = love.graphics.newImage("/assets/sprites/menu.png")
+    menu.titleImage = love.graphics.newImage("/assets/sprites/menu_images/menu.png")
     menu.blinkTimer = 0
     if State.activeMap ~= -1 then
         menu.mapSelect = State.activeMap
@@ -96,7 +96,8 @@ menu.load = function()
 
     State.menu.state = 'map_select'
 
-    menu.font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+    menu.smallFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+    menu.bigFont = love.graphics.newFont('assets/gnevejpixel.ttf', 60)
 
     -- Save data when opening menu since this is likely right before a player will quit.
     save.write()
@@ -107,7 +108,8 @@ menu.unload = function()
     menu.blinkTimer = nil
     menu.mapSelect = nil
     menu.threeBest = nil
-    menu.font = nil
+    menu.smallFont = nil
+    menu.bigFont = nil
     menu.corner = nil
     shipMenu.unload()
     settingsMenu.unload()
@@ -115,8 +117,14 @@ end
 
 menu.key_map = {
     escape = function()
-        save.write()
-        love.event.quit()
+        if State.menu.state == 'map_select' then
+            save.write()
+            love.event.quit()
+        elseif State.menu.state == 'ship_select' then
+            State.menu.state = 'map_select'
+        elseif State.menu.state == 'settings' then
+            settingsMenu.escape()
+        end
     end,
     o = function()
         -- Become Mr. Krabs and get all the money
@@ -158,6 +166,8 @@ menu.key_map = {
     right = function()
         if State.menu.state == 'map_select' then
             State.menu.state = 'settings'
+            love.audio.stop(sounds.menu_click)
+            love.audio.play(sounds.menu_click)
         elseif State.menu.state == 'ship_select' then
             shipMenu.right()
         elseif State.menu.state == 'settings' then
@@ -208,19 +218,19 @@ end
 
 menu.draw = function()
 
+    -- Transparent red background to be displayed for all menus
+    love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
+    local verticies = {
+        0 + menu.corner[1], 0 + menu.corner[2],
+        0 + menu.corner[1], State.camera.window_height + menu.corner[2],
+        State.camera.window_width + menu.corner[1], State.camera.window_height + menu.corner[2],
+        State.camera.window_width + menu.corner[1], 0 + menu.corner[2] }
+    love.graphics.polygon('fill', verticies)
+
     -- Draw map select (normal menu)
     if State.menu.state == 'map_select' then
         -- Added this because shipMenu changed the font - J.R.C
-        love.graphics.setFont(menu.font)
-
-        -- Transparent red background
-        love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
-        local verticies = {
-            0 + menu.corner[1], 0 + menu.corner[2],
-            0 + menu.corner[1], 600 + menu.corner[2],
-            800 + menu.corner[1], 600 + menu.corner[2],
-            800 + menu.corner[1], 0 + menu.corner[2] }
-        love.graphics.polygon('fill', verticies)
+        love.graphics.setFont(menu.smallFont)
 
         -- Draw menu image background
         love.graphics.setColor(1, 1, 1, 1)
@@ -234,10 +244,14 @@ menu.draw = function()
             if menu.mapSelect == State.activeMap then
                 love.graphics.setColor(1, 0, 0.25, 1)
             end
-            love.graphics.print(mapList[menu.mapSelect].displayName, menu.corner[1] + 55, menu.corner[2] + 420, 0, 2, 2)
+            love.graphics.setFont(menu.bigFont)
+            love.graphics.print(mapList[menu.mapSelect].displayName, menu.corner[1] + 55, menu.corner[2] + 420)
             love.graphics.setColor(1, 1, 1, 1)
         end
-        love.graphics.print('SPACE RACE', menu.corner[1] + 25, menu.corner[2] + 100, 0, 2, 2)
+
+        love.graphics.setFont(menu.bigFont)
+        love.graphics.print('SPACE RACE', menu.corner[1] + 25, menu.corner[2] + 100)
+        love.graphics.setFont(menu.smallFont)
         love.graphics.print('Credits: ', menu.corner[1] + 550, menu.corner[2] + 30)
 
         -- Draw best times and current time.
@@ -265,6 +279,8 @@ menu.update = function(dt)
 
     if State.menu.state == 'ship_select' then
         shipMenu.update(dt)
+    elseif State.menu.state == 'settings' then
+        settingsMenu.update(dt)
     end
 end
 

@@ -1,4 +1,3 @@
-
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
@@ -58,16 +57,6 @@ love.draw = function()
     end
 
     Camera.unset()
-end
-
-love.resize = function(w, h)
-    local function roundOff(value)
-        return math.floor(value * 100) / 100
-    end
-    print(w .. ' (' .. roundOff(State.camera.scale_x) .. ') || '.. h .. ' (' .. roundOff(State.camera.scale_y) .. ')')
-    State.camera.window_width, State.camera.window_height = w, h
-    State.camera.scale_x = w / 800
-    State.camera.scale_y = h / 800
 end
 
 love.update = function(dt)

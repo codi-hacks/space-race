@@ -12,8 +12,7 @@ State.camera.pos_y = 0 * .5
 State.camera.rotation = 0
 State.camera.scale_x = 1
 State.camera.scale_y = 1
-State.camera.window_width, State.camera.window_height = 800, 800
-State.camera.play_area_width, State.camera.play_area_height = 800, 800
+State.camera.window_width, State.camera.window_height = 800, 600
 
 local window_width = State.camera.window_width
 local window_height = State.camera.window_height
@@ -44,6 +43,16 @@ local move = function(dx, dy)
     State.camera.pos_x = State.camera.pos_x + (dx or 0)
     State.camera.pos_y = State.camera.pos_y + (dy or 0)
 end
+
+local resize = function(dx)
+    State.camera.scale_x = dx
+    State.camera.scale_y = dx
+
+    State.camera.window_width = 800 * dx
+    State.camera.window_height = 600 * dx
+    love.window.updateMode(State.camera.window_width, State.camera.window_height)
+end
+
 
 local rotate = function(dr)
     State.camera.rotation = State.camera.rotation + dr
@@ -77,6 +86,7 @@ return {
     get_boundary_top = get_boundary_top,
     get_position = get_position,
     move = move,
+    resize = resize,
     rotate = rotate,
     set = set,
     set_position = set_position,
