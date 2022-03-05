@@ -81,15 +81,22 @@ settingsMenu.enter = function()
 end
 
 settingsMenu.escape = function()
-    -- Alternate way of leaving settings menu
-    settingsMenu.ready = false
-    settingsMenu.updateSettings()
-    save.write()
-    State.menu.state = 'map_select'
+    -- Alternate way of unreadying/leaving settings menu
+    if settingsMenu.ready == true then
+        settingsMenu.ready = false
+        settingsMenu.updateSettings()
+    elseif settingsMenu.ready == false then
+        love.audio.stop(sounds.menu_click)
+        love.audio.play(sounds.menu_click)
+        State.menu.state = 'map_select'
+        save.write()
+    end
 end
 
 settingsMenu.updateSettings = function()
-    camera.resize(settingsMenu.options[1].value)
+    if settingsMenu.options[1].value ~= State.camera.scale_x then
+        camera.resize(settingsMenu.options[1].value)
+    end
     State.volume = settingsMenu.options[2].value / 100
     love.audio.setVolume(State.volume)
 
@@ -104,8 +111,10 @@ end
 
 settingsMenu.load = function()
     settingsMenu.titleImage = love.graphics.newImage("/assets/sprites/menu_images/settings_menu.png")
-    settingsMenu.smallFont = love.graphics.newFont('assets/gnevejpixel.ttf', 60)
+    settingsMenu.barImage = love.graphics.newImage("/assets/sprites/menu_images/menu_bar.png")
     settingsMenu.bigFont = love.graphics.newFont('assets/gnevejpixel.ttf', 90)
+    settingsMenu.mediumFont = love.graphics.newFont('assets/gnevejpixel.ttf', 60)
+    settingsMenu.smallFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
     settingsMenu.selection = 1
     settingsMenu.ready = false
 
@@ -128,11 +137,14 @@ settingsMenu.load = function()
 end
 
 settingsMenu.unload = function()
-    settingsMenu.font = nil
+    settingsMenu.bigFont = nil
+    settingsMenu.mediumFont = nil
+    settingsMenu.smallFont = nil
     settingsMenu.options = nil
     settingsMenu.selection = nil
     settingsMenu.ready = nil
     settingsMenu.titleImage = nil
+    settingsMenu.barImage = nil
 end
 
 
@@ -147,7 +159,7 @@ settingsMenu.draw = function()
     -- Short message and fancy graphic before the actual settings stuff
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(settingsMenu.titleImage, corner[1], corner[2] + 375)
-    love.graphics.setFont(settingsMenu.smallFont)
+    love.graphics.setFont(settingsMenu.mediumFont)
     local settingsMessage = 'Use arrow keys and enter key \nto adjust settings'
     love.graphics.print(settingsMessage, corner[1] + 50, corner[2] + 500, 0, 0.5, 0.5)
 
@@ -174,10 +186,16 @@ settingsMenu.draw = function()
         end
 
         love.graphics.setFont(settingsMenu.bigFont)
-        love.graphics.print(settingsMenu.options[i + 1].name, corner[1] + 50, corner[2] + 50 + (200 * i))
-        love.graphics.setFont(settingsMenu.smallFont)
-        love.graphics.print(settingsMenu.options[i + 1].value .. unit, corner[1] + 50, corner[2] + 150 + (200 * i))
+        love.graphics.print(settingsMenu.options[i + 1].name, corner[1] + 50, corner[2] + 60 + (210 * i))
+        love.graphics.setFont(settingsMenu.mediumFont)
+        love.graphics.print(settingsMenu.options[i + 1].value .. unit, corner[1] + 50, corner[2] + 160 + (210 * i))
     end
+
+    -- Draw navigation bar
+    love.graphics.setFont(settingsMenu.smallFont)
+    love.graphics.draw(settingsMenu.barImage, corner[1], corner[2])
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print('<< Main Menu ', corner[1] + 10, corner[2] + 8, 0, 0.5, 0.5)
 end
 
 settingsMenu.update = function()

@@ -73,6 +73,7 @@ end
 menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the menu is dismissed.
     menu.titleImage = love.graphics.newImage("/assets/sprites/menu_images/menu.png")
+    menu.barImage = love.graphics.newImage("/assets/sprites/menu_images/menu_bar.png")
     menu.blinkTimer = 0
     if State.activeMap ~= -1 then
         menu.mapSelect = State.activeMap
@@ -105,6 +106,7 @@ end
 
 menu.unload = function()
     menu.titleImage = nil
+    menu.barImage = nil
     menu.blinkTimer = nil
     menu.mapSelect = nil
     menu.threeBest = nil
@@ -238,24 +240,29 @@ menu.draw = function()
 
         -- Draw text
         if State.menu.blink then
-            love.graphics.print(State.credits, menu.corner[1] + 700, menu.corner[2] + 30)
+            love.graphics.print(State.credits, menu.corner[1] + 700, menu.corner[2] + 70)
 
             -- Highlight map name in red if it is the active map.
             if menu.mapSelect == State.activeMap then
                 love.graphics.setColor(1, 0, 0.25, 1)
             end
             love.graphics.setFont(menu.bigFont)
-            love.graphics.print(mapList[menu.mapSelect].displayName, menu.corner[1] + 55, menu.corner[2] + 420)
+            love.graphics.print(mapList[menu.mapSelect].displayName, menu.corner[1] + 55, menu.corner[2] + 410)
             love.graphics.setColor(1, 1, 1, 1)
         end
 
         love.graphics.setFont(menu.bigFont)
-        love.graphics.print('SPACE RACE', menu.corner[1] + 25, menu.corner[2] + 100)
+        love.graphics.print('SPACE RACE', menu.corner[1] + 25, menu.corner[2] + 110)
         love.graphics.setFont(menu.smallFont)
-        love.graphics.print('Credits: ', menu.corner[1] + 550, menu.corner[2] + 30)
+        love.graphics.print('Credits: ', menu.corner[1] + 550, menu.corner[2] + 70)
 
         -- Draw best times and current time.
         displayTime()
+
+        -- Display navigation bar
+        love.graphics.draw(menu.barImage, menu.corner[1], menu.corner[2])
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.print('Settings >>', menu.corner[1] + 690, menu.corner[2] + 8, 0, 0.5, 0.5)
 
         -- Draw ship select Menu
     elseif State.menu.state == 'ship_select' then
