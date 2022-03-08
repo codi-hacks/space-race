@@ -158,6 +158,7 @@ menu.key_map = {
             if menu.mapSelect <= State.unlocked_maps then
                 menu.state.map_select = false
                 menu.state.ship_select = true
+                love.audio.play(sounds.chirp_up)
             else
                 -- Play a denial sound here
                 love.audio.play(sounds.chirp_deny)
