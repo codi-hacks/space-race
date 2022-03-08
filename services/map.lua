@@ -69,11 +69,17 @@ local load = function(map_name, ship_index)
                 if obj.name == 'player' then
                     -- Set the ship type to the specified index
                     obj.ship_type = ship_index
+                    -- Set the State map variables
+                    State.base_creds = tonumber(obj.base_creds)
+                    State.silver = tonumber(obj.silver)
+                    State.gold = tonumber(obj.gold)
                 end
             end
             active_map.layers[layer_idx].objects = Tmx.load_fixtures(State.world, layer, layer_idx, Entity.spawn)
         end
     end
+
+
 
     return active_map
 end

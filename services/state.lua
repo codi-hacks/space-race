@@ -4,11 +4,19 @@ local State = {}
 
 State.paused = true
 State.debugOn = false
+
+-- Active map stuff
 State.activeMap = -1
+State.base_creds = 0 -- Base creds for beating active map
+State.silver = 0.0 -- Time to beat to get x2 cred + unlock next map
+State.gold = 0.0  -- Time to beat to get x3 cred + unlock next map
 
 -- Ship stuff duh - J.R.C 2/2/22
 State.shipMenu = false;
 State.activeShip = 1
+
+-- Unlocks and progess - J.R.C 3/8/22
+State.unlocked_maps = 2 -- Starts at 1 (Happy.tmx)
 
 State.camera = {} -- Initialized in /camera.lua
 

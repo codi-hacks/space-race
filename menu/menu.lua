@@ -6,6 +6,9 @@ local shipMenu = require('menu/shipMenu')
 local save = require('services/save')
 local timer = require('services/timer')
 
+local textures = require('services/textures')
+
+
 local menu = {
     state = {}
 }
@@ -151,8 +154,14 @@ menu.key_map = {
     end,
     ['return'] = function()
         if menu.state.map_select then
-            menu.state.map_select = false
-            menu.state.ship_select = true
+            -- If map is unlocked - J.R.C 3/8/22
+            if menu.mapSelect <= State.unlocked_maps then
+                menu.state.map_select = false
+                menu.state.ship_select = true
+            else
+                -- Play a denial sound here
+
+            end
         elseif menu.state.ship_select then
             shipMenu.load_ship()
             menu.load_map()
@@ -207,19 +216,41 @@ menu.draw = function()
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.draw(menu.titleImage, verticies[1], verticies[2])
 
+         -- Highlight map name in red if it is the active map.
+         if menu.mapSelect == State.activeMap then
+            love.graphics.setColor(1, 0, 0.25, 1)
+        end
+
+        -- If map is not unlocked - J.R.C 3/8/22
+        if menu.mapSelect > State.unlocked_maps then
+            local verts = {
+                500 + corner[1], 160 + corner[2],
+                500 + corner[1], 260 + corner[2],
+                750 + corner[1], 260 + corner[2],
+                750 + corner[1], 160 + corner[2]
+            }
+            love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
+            love.graphics.polygon('fill', verts)
+            -- Draw lock icon
+            love.graphics.draw(textures['lock'], corner[1] + 505, corner[2] + 170)
+            love.graphics.draw(textures['lock'], corner[1] + 713, corner[2] + 170)
+
+            love.graphics.setColor(1, 0, 0, 1)
+            love.graphics.print('Map', corner[1] + 601, corner[2] + 170)
+            love.graphics.print('Locked', corner[1] + 575, corner[2] + 215)
+            love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
+
+        end
+
         -- Draw text
         if menu.blink then
-            love.graphics.print(State.credits, corner[1] + 700, corner[2] + 30)
-
-            -- Highlight map name in red if it is the active map.
-            if menu.mapSelect == State.activeMap then
-                love.graphics.setColor(1, 0, 0.25, 1)
-            end
             love.graphics.print(mapList[menu.mapSelect].displayName, corner[1] + 55, corner[2] + 420, 0, 2, 2)
             love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.print(State.credits, corner[1] + 655, corner[2] + 30)
         end
+        love.graphics.setColor(1, 1, 1, 1)
         love.graphics.print('SPACE RACE', corner[1] + 25, corner[2] + 100, 0, 2, 2)
-        love.graphics.print('Credits: ', corner[1] + 550, corner[2] + 30)
+        love.graphics.print('Credits: ', corner[1] + 505, corner[2] + 30)
 
         -- Draw best times and current time.
         displayTime()

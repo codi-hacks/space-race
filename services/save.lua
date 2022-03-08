@@ -30,6 +30,8 @@ save.read = function()
             timer.timesTable = data.times or {}
             state.activeShip = data.lastShip or 1
 
+            state.unlocked_maps = data.unlocked_maps or 1
+
         -- Check for errors
         else
             print('Error when loading save data: ' .. message)
@@ -49,6 +51,8 @@ save.write = function()
     data.credits = state.credits
     data.times = timer.timesTable
     data.lastShip = state.activeShip
+
+    data.unlocked_maps = state.unlocked_maps
 
     -- Serialize data
     local serializedData = Serialize(data)
