@@ -1,4 +1,3 @@
-
 local Entity = require('services/entity')
 local keyboard = require('services/keyboard')
 local Camera = require('services/camera')
@@ -20,7 +19,7 @@ local UpdateEntityAnimation = require('systems/UpdateEntityAnimation')
 local SpaceFriction = require('systems/SpaceFriction')
 
 love.load = function()
-    love.window.setMode(800, 600)
+    love.window.updateMode(State.camera.window_width, State.camera.window_height)
     love.graphics.setDefaultFilter('nearest', 'nearest')
     textures.load()
     love.globalFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
@@ -34,9 +33,7 @@ end
 -- Game time
 love.keypressed = function(pressed_key)
     if State.paused then
-        if menu.key_map[pressed_key] then
-            menu.key_map[pressed_key]()
-        end
+        menu.current_menu_keys(pressed_key)
     else
         if keyboard.key_map[pressed_key] then
             keyboard.key_map[pressed_key]()
@@ -47,7 +44,7 @@ end
 love.draw = function()
     Camera.set()
 
-    background.draw(love.starLocations)
+    background.draw(love.starLocations) -- Currently bugged with how stars update to new resolution
 
     map.draw()
 

@@ -1,6 +1,7 @@
 local state = require('services/state')
 local Serialize = require('lib/serialize')
 local timer = require('services/timer')
+local camera = require('services/camera')
 
 local save = {}
 
@@ -29,6 +30,9 @@ save.read = function()
             state.credits = data.credits or 0
             timer.timesTable = data.times or {}
             state.activeShip = data.lastShip or 1
+            camera.resize(data.windowScale or 1)
+            state.volume = data.volume or 1; love.audio.setVolume(state.volume)
+
 
             state.unlocked_maps = data.unlocked_maps or 1
 
@@ -51,6 +55,8 @@ save.write = function()
     data.credits = state.credits
     data.times = timer.timesTable
     data.lastShip = state.activeShip
+    data.windowScale = state.camera.scale_x
+    data.volume = state.volume
 
     data.unlocked_maps = state.unlocked_maps
 

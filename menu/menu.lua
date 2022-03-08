@@ -97,6 +97,7 @@ menu.load = function()
 
     State.menu.state = 'map_select'
 
+
     menu.smallFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
     menu.bigFont = love.graphics.newFont('assets/gnevejpixel.ttf', 60)
 
