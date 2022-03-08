@@ -160,7 +160,7 @@ menu.key_map = {
                 menu.state.ship_select = true
             else
                 -- Play a denial sound here
-
+                love.audio.play(sounds.chirp_deny)
             end
         elseif menu.state.ship_select then
             shipMenu.load_ship()
