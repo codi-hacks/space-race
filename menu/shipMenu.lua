@@ -33,32 +33,39 @@ local function get_right()
     return shipList[right_index]
 end
 
-ship_menu.right = function()
-
-    if ship_menu.shipSelect >= #shipList then
-        ship_menu.shipSelect = 1
-    else
-        ship_menu.shipSelect = ship_menu.shipSelect + 1
+ship_menu.key_map = {
+    escape = function()
+        -- Go back to main menu
+        State.menu.state = 'map_select'
+    end,
+    backspace = function()
+        -- See above
+        State.menu.state = 'map_select'
+    end,
+    right = function()
+        if ship_menu.shipSelect >= #shipList then
+            ship_menu.shipSelect = 1
+        else
+            ship_menu.shipSelect = ship_menu.shipSelect + 1
+        end
+        love.audio.stop()
+        love.audio.play(sounds.menu_click)
+    end,
+    left = function()
+        if ship_menu.shipSelect <= 1 then
+            ship_menu.shipSelect = #shipList
+        else
+            ship_menu.shipSelect = ship_menu.shipSelect - 1
+        end
+        love.audio.stop()
+        love.audio.play(sounds.menu_click)
     end
-    love.audio.stop()
-    love.audio.play(sounds.menu_click)
-end
-
-ship_menu.left = function()
-    if ship_menu.shipSelect <= 1 then
-        ship_menu.shipSelect = #shipList
-    else
-        ship_menu.shipSelect = ship_menu.shipSelect - 1
-    end
-    love.audio.stop()
-    love.audio.play(sounds.menu_click)
-end
+}
 
 ship_menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the ship_menu is dismissed.
-    ship_menu.titleImage = love.graphics.newImage("assets/sprites/ship_menu/ship_menu.png")
-    ship_menu.blinkTimer = 0
-    ship_menu.blink = true
+    ship_menu.titleImage = love.graphics.newImage("assets/sprites/menu_images/ship_menu.png")
+    State.menu.blink = true
     ship_menu.shipSelect = State.activeShip
 
     ship_menu.title_font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
@@ -68,8 +75,6 @@ end
 
 ship_menu.unload = function()
    -- ship_menu.titleImage = nil
-    ship_menu.blinkTimer = nil
-    ship_menu.blink = nil
     ship_menu.shipSelect = nil
 
     ship_menu.title_font = nil
@@ -79,7 +84,7 @@ end
 
 ship_menu.load_ship = function()
         State.activeShip = ship_menu.shipSelect
-        State.shipMenu = not State.shipMenu
+        State.menu.state = nil
         love.audio.play(sounds.chirp_down)
 end
 
@@ -87,21 +92,12 @@ ship_menu.draw = function()
     -- Alias the true corner coordinates for convienience
     local corner = { State.camera.pos_x, State.camera.pos_y }
 
-    -- Transparent red background
-    love.graphics.setColor(0.1, 0.0, 0.0, 0.6)
-    local verticies = {
-        0 + corner[1], 0 + corner[2],
-        0 + corner[1], 600 + corner[2],
-        800 + corner[1], 600 + corner[2],
-        800 + corner[1], 0 + corner[2] }
-    love.graphics.polygon('fill', verticies)
-
     -- Draw ship_menu image background
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(ship_menu.titleImage, verticies[1], verticies[2])
+    love.graphics.draw(ship_menu.titleImage, corner[1], corner[2])
 
     -- Draw text
-    if ship_menu.blink then
+    if State.menu.blink then
         love.graphics.setFont(ship_menu.font)
         local name = shipList[ship_menu.shipSelect].displayName
         love.graphics.printf(name, corner[1] + 208 / 2, corner[2] + 143,  300, "center", 0, 2, 2)
@@ -139,7 +135,7 @@ ship_menu.draw = function()
         local shift_y = image:getPixelHeight() * (center_scale_y) / 2
 
         -- Draw blinking Square around currently selected ship
-        if ship_menu.blink then
+        if State.menu.blink then
             love.graphics.setColor(1, 0, 0, 1)
             love.graphics.rectangle("line", corner[1] + 400 - shift_x  - 10, corner[2] + 200 + shift_y - 10,  148, 148)
 
@@ -297,16 +293,8 @@ ship_menu.draw = function()
     end
 end
 
-ship_menu.update = function(dt)
-    -- Blink timer for visual effect
-    ship_menu.blinkTimer = ship_menu.blinkTimer + dt
-    if ship_menu.blinkTimer > 0.40 and ship_menu.blink == true then
-        ship_menu.blinkTimer = 0
-        ship_menu.blink = not ship_menu.blink
-    elseif ship_menu.blinkTimer > 0.2 and ship_menu.blink == false then
-        ship_menu.blinkTimer = 0
-        ship_menu.blink = not ship_menu.blink
-    end
+ship_menu.update = function()
+    -- nothing for now!
 end
 
 return ship_menu

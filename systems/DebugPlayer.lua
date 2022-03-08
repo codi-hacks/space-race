@@ -21,6 +21,7 @@ local function debug(entity)
         print('=================================')
     end
     if State.debugOn then
+        love.graphics.setNewFont('assets/gnevejpixel.ttf', 30)
         local pos_x = State.camera.pos_x
         local pos_y = State.camera.pos_y
         love.graphics.setColor({ 1, 1, 1, 1 })
@@ -44,6 +45,14 @@ local function debug(entity)
         love.graphics.setColor({ 1, 0, 0, 1 })
         love.graphics.line(entity.body:getX(), entity.body:getY(), velocityArrowX,velocityArrowY)
         love.graphics.setColor({ 1, 1, 1, 1 }) -- Added this line to fix sprite drawing as red - J.R.C 2/2/22
+
+        -- Window debug information
+        love.graphics.setColor({ 1, 0, 1, 1 })
+        love.graphics.line(pos_x, pos_y + 300, pos_x + 800, pos_y + 300)
+        love.graphics.line(pos_x + 400, pos_y, pos_x + 400, pos_y + 600)
+
+        love.graphics.setColor({ 1, 1, 1, 1 })
+        love.graphics.circle('fill', 400 + State.camera.pos_x, 300 + State.camera.pos_y, 5)
     end
 end
 

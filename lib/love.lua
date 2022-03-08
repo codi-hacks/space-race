@@ -64,6 +64,7 @@ local base64 = {
 love.audio = {}
 love.audio.newSource = function() end
 love.audio.play = function() end
+love.audio.setVolume = function() end
 
 love.data = {}
 love.data.decode = function(container, format, str)
@@ -245,5 +246,6 @@ love.physics.setMeter = function() end
 
 love.window = {}
 love.window.setMode = function() end
+love.window.updateMode = function() end
 
 return love

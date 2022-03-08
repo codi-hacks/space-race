@@ -16,8 +16,6 @@ return System(
             State.paused = true
             love.audio.stop()
             love.audio.play(Sounds.chirp_up)
-            Menu.state.map_select = true
-            Menu.state.ship_select = false
             Menu.load()
             Map.loadMap(-1)
         end
