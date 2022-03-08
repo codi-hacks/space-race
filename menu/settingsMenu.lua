@@ -14,9 +14,7 @@ settingsMenu.key_map = {
         if settingsMenu.selection > #settingsMenu.options then
             settingsMenu.selection = 1
         end
-    
         settingsMenu.ready = false
-    
         love.audio.stop(sounds.boop)
         love.audio.play(sounds.boop)
     end,
@@ -26,15 +24,12 @@ settingsMenu.key_map = {
         if settingsMenu.selection < 1 then
             settingsMenu.selection = #settingsMenu.options
         end
-    
         settingsMenu.ready = false
-    
         love.audio.stop(sounds.boop)
         love.audio.play(sounds.boop)
     end,
     left = function()
         -- Decrement settings value, else if player is not entering values leave the settings menu.
-    
         -- If setting a setting, set the setting with the setting set
         if settingsMenu.ready then
             -- Change value and take a sanity check
@@ -43,7 +38,6 @@ settingsMenu.key_map = {
             if setting.value < setting.min then
                 setting.value = setting.min
             end
-    
             -- Play essential sound effects
             love.audio.stop(sounds.boop)
             love.audio.play(sounds.boop)
@@ -60,7 +54,6 @@ settingsMenu.key_map = {
             if setting.value > setting.max then
                 setting.value = setting.max
             end
-    
             love.audio.stop(sounds.boop)
             love.audio.play(sounds.boop)
         end
@@ -81,7 +74,6 @@ settingsMenu.key_map = {
     ['return'] = function()
         -- Player must press enter to enable setting changes
         settingsMenu.ready = not settingsMenu.ready
-    
         if settingsMenu.ready == false then
             settingsMenu.updateSettings()
         end
