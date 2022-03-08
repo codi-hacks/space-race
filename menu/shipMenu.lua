@@ -33,26 +33,34 @@ local function get_right()
     return shipList[right_index]
 end
 
-ship_menu.right = function()
-
-    if ship_menu.shipSelect >= #shipList then
-        ship_menu.shipSelect = 1
-    else
-        ship_menu.shipSelect = ship_menu.shipSelect + 1
+ship_menu.key_map = {
+    escape = function()
+        -- Go back to main menu
+        State.menu.state = 'map_select'
+    end,
+    backspace = function()
+        -- See above
+        State.menu.state = 'map_select'
+    end,
+    right = function()
+        if ship_menu.shipSelect >= #shipList then
+            ship_menu.shipSelect = 1
+        else
+            ship_menu.shipSelect = ship_menu.shipSelect + 1
+        end
+        love.audio.stop()
+        love.audio.play(sounds.menu_click)
+    end,
+    left = function()
+        if ship_menu.shipSelect <= 1 then
+            ship_menu.shipSelect = #shipList
+        else
+            ship_menu.shipSelect = ship_menu.shipSelect - 1
+        end
+        love.audio.stop()
+        love.audio.play(sounds.menu_click)
     end
-    love.audio.stop()
-    love.audio.play(sounds.menu_click)
-end
-
-ship_menu.left = function()
-    if ship_menu.shipSelect <= 1 then
-        ship_menu.shipSelect = #shipList
-    else
-        ship_menu.shipSelect = ship_menu.shipSelect - 1
-    end
-    love.audio.stop()
-    love.audio.play(sounds.menu_click)
-end
+}
 
 ship_menu.load = function()
     -- Yes, these are global variables. They will be unloaded when the ship_menu is dismissed.

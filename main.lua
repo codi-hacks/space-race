@@ -33,9 +33,7 @@ end
 -- Game time
 love.keypressed = function(pressed_key)
     if State.paused then
-        if menu.key_map[pressed_key] then
-            menu.key_map[pressed_key]()
-        end
+        menu.current_menu_keys(pressed_key)
     else
         if keyboard.key_map[pressed_key] then
             keyboard.key_map[pressed_key]()

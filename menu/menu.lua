@@ -117,16 +117,21 @@ menu.unload = function()
     settingsMenu.unload()
 end
 
+menu.current_menu_keys = function(pressed_key)
+    -- Prioritize current menu's key_map, otherwise fall back on main menu key_map
+    if State.menu.state == 'ship_select' and shipMenu.key_map[pressed_key] then
+        shipMenu.key_map[pressed_key]()
+    elseif State.menu.state == 'settings' and settingsMenu.key_map[pressed_key] then
+        settingsMenu.key_map[pressed_key]()
+    elseif menu.key_map[pressed_key] then
+        menu.key_map[pressed_key]()
+    end
+end
+
 menu.key_map = {
     escape = function()
-        if State.menu.state == 'map_select' then
-            save.write()
-            love.event.quit()
-        elseif State.menu.state == 'ship_select' then
-            State.menu.state = 'map_select'
-        elseif State.menu.state == 'settings' then
-            settingsMenu.escape()
-        end
+        save.write()
+        love.event.quit()
     end,
     o = function()
         -- Become Mr. Krabs and get all the money
@@ -145,52 +150,24 @@ menu.key_map = {
         end
     end,
     up = function()
-        if State.menu.state == 'map_select' then
-            menu.up()
-        elseif State.menu.state == 'settings' then
-            settingsMenu.up()
-        end
+        menu.up()
     end,
     down = function()
-        if State.menu.state == 'map_select' then
-            menu.down()
-        elseif State.menu.state == 'settings' then
-            settingsMenu.down()
-        end
-    end,
-    left = function()
-        if State.menu.state == 'ship_select' then
-            shipMenu.left()
-        elseif State.menu.state == 'settings' then
-            settingsMenu.left()
-        end
+        menu.down()
     end,
     right = function()
-        if State.menu.state == 'map_select' then
-            State.menu.state = 'settings'
-            love.audio.stop(sounds.menu_click)
-            love.audio.play(sounds.menu_click)
-        elseif State.menu.state == 'ship_select' then
-            shipMenu.right()
-        elseif State.menu.state == 'settings' then
-            settingsMenu.right()
-        end
-    end,
-    backspace = function()
-        if State.menu.state == 'ship_select' then
-            State.menu.state = 'map_select'
-        end
+        State.menu.state = 'settings'
+        love.audio.stop(sounds.menu_click)
+        love.audio.play(sounds.menu_click)
     end,
     ['return'] = function()
-        if State.menu.state == 'map_select' then
-            State.menu.state = 'ship_select'
-        elseif State.menu.state == 'ship_select' then
+        if State.menu.state == 'ship_select' then
             shipMenu.load_ship()
             menu.load_map()
-        elseif State.menu.state == 'settings' then
-            settingsMenu.enter()
+        else
+            State.menu.state = 'ship_select'
         end
-    end,
+    end
 }
 
 menu.load_map = function()

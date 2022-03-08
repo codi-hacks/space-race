@@ -7,91 +7,86 @@ local settingsMenu = {}
 
 -- Next section: Actions
 
-settingsMenu.up = function()
-    -- Loop up the list of settings
-    settingsMenu.selection = settingsMenu.selection + 1
-    if settingsMenu.selection > #settingsMenu.options then
-        settingsMenu.selection = 1
-    end
-
-    settingsMenu.ready = false
-
-    love.audio.stop(sounds.boop)
-    love.audio.play(sounds.boop)
-end
-
-settingsMenu.down = function()
-    -- Loop down the list of settings
-    settingsMenu.selection = settingsMenu.selection - 1
-    if settingsMenu.selection < 1 then
-        settingsMenu.selection = #settingsMenu.options
-    end
-
-    settingsMenu.ready = false
-
-    love.audio.stop(sounds.boop)
-    love.audio.play(sounds.boop)
-end
-
-settingsMenu.left = function()
-    -- Decrement settings value, else if player is not entering values leave the settings menu.
-
-    -- If setting a setting, set the setting with the setting set
-    if settingsMenu.ready then
-        -- Change value and take a sanity check
-        local setting = settingsMenu.options[settingsMenu.selection]
-        setting.value = setting.value - setting.increment
-        if setting.value < setting.min then
-            setting.value = setting.min
+settingsMenu.key_map = {
+    up = function()
+        -- Loop up the list of settings
+        settingsMenu.selection = settingsMenu.selection + 1
+        if settingsMenu.selection > #settingsMenu.options then
+            settingsMenu.selection = 1
         end
-
-        -- Play essential sound effects
-        love.audio.stop(sounds.boop)
-        love.audio.play(sounds.boop)
-    else
-        -- If not setting a setting, leave
-        love.audio.stop(sounds.menu_click)
-        love.audio.play(sounds.menu_click)
-        State.menu.state = 'map_select'
-        save.write()
-    end
-end
-
-settingsMenu.right = function()
-    -- If player is entering values, increment settings value
-    if settingsMenu.ready then
-        local setting = settingsMenu.options[settingsMenu.selection]
-        setting.value = setting.value + setting.increment
-        if setting.value > setting.max then
-            setting.value = setting.max
-        end
-
-        love.audio.stop(sounds.boop)
-        love.audio.play(sounds.boop)
-    end
-end
-
-settingsMenu.enter = function()
-    -- Player must press enter to enable setting changes
-    settingsMenu.ready = not settingsMenu.ready
-
-    if settingsMenu.ready == false then
-        settingsMenu.updateSettings()
-    end
-end
-
-settingsMenu.escape = function()
-    -- Alternate way of unreadying/leaving settings menu
-    if settingsMenu.ready == true then
+    
         settingsMenu.ready = false
-        settingsMenu.updateSettings()
-    elseif settingsMenu.ready == false then
-        love.audio.stop(sounds.menu_click)
-        love.audio.play(sounds.menu_click)
-        State.menu.state = 'map_select'
-        save.write()
+    
+        love.audio.stop(sounds.boop)
+        love.audio.play(sounds.boop)
+    end,
+    down = function()
+        -- Loop down the list of settings
+        settingsMenu.selection = settingsMenu.selection - 1
+        if settingsMenu.selection < 1 then
+            settingsMenu.selection = #settingsMenu.options
+        end
+    
+        settingsMenu.ready = false
+    
+        love.audio.stop(sounds.boop)
+        love.audio.play(sounds.boop)
+    end,
+    left = function()
+        -- Decrement settings value, else if player is not entering values leave the settings menu.
+    
+        -- If setting a setting, set the setting with the setting set
+        if settingsMenu.ready then
+            -- Change value and take a sanity check
+            local setting = settingsMenu.options[settingsMenu.selection]
+            setting.value = setting.value - setting.increment
+            if setting.value < setting.min then
+                setting.value = setting.min
+            end
+    
+            -- Play essential sound effects
+            love.audio.stop(sounds.boop)
+            love.audio.play(sounds.boop)
+        else
+            -- If not setting a setting, leave
+            settingsMenu.backToMainMenu()
+        end
+    end,
+    right = function()
+        -- If player is entering values, increment settings value
+        if settingsMenu.ready then
+            local setting = settingsMenu.options[settingsMenu.selection]
+            setting.value = setting.value + setting.increment
+            if setting.value > setting.max then
+                setting.value = setting.max
+            end
+    
+            love.audio.stop(sounds.boop)
+            love.audio.play(sounds.boop)
+        end
+    end,
+    escape = function()
+        -- Alternate way of unreadying/leaving settings menu
+        if settingsMenu.ready == true then
+            settingsMenu.ready = false
+            settingsMenu.updateSettings()
+        elseif settingsMenu.ready == false then
+            settingsMenu.backToMainMenu()
+        end
+    end,
+    backspace = function()
+        -- Another alternate way to leave settings menu
+        settingsMenu.key_map.escape()
+    end,
+    ['return'] = function()
+        -- Player must press enter to enable setting changes
+        settingsMenu.ready = not settingsMenu.ready
+    
+        if settingsMenu.ready == false then
+            settingsMenu.updateSettings()
+        end
     end
-end
+}
 
 settingsMenu.updateSettings = function()
     if settingsMenu.options[1].value ~= State.camera.scale_x then
@@ -106,6 +101,12 @@ settingsMenu.updateSettings = function()
     settingsMenu.ready = false -- Don't ask
 end
 
+settingsMenu.backToMainMenu = function()
+    love.audio.stop(sounds.menu_click)
+    love.audio.play(sounds.menu_click)
+    State.menu.state = 'map_select'
+    save.write()
+end
 
 -- Next section: Loading
 
