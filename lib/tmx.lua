@@ -246,6 +246,7 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
   parsed_map.pixel_height = parsed_map.rows * parsed_map.tile_height
   parsed_map.pixel_width = parsed_map.columns * parsed_map.tile_width
   for _, element in ipairs(parsed_xml) do
+    -- "Custom Properties" set at the map level
     if element.label == 'properties' then
         for _, arg in ipairs(element) do
             if arg.xarg.type == 'int' or arg.xarg.type == 'float' then
@@ -271,9 +272,6 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
       table.insert(parsed_map.tilesets, tileset_tables[element.xarg.source])
     elseif element.label == 'tileset' then
       table.insert(parsed_map.tilesets, parse_tileset(element, error_suffix))
-    -- "Custom Properties" set at the map level
-    elseif element.label == 'property' then
-
     end
   end
   assert(

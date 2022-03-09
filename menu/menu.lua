@@ -176,6 +176,7 @@ menu.key_map = {
                 love.audio.play(sounds.chirp_up)
             else
                 -- Play a denial sound here
+                love.audio.stop()
                 love.audio.play(sounds.chirp_deny)
             end
         end
@@ -247,7 +248,7 @@ menu.draw = function()
          if State.menu.blink then
             love.graphics.print(
                 mapList[menu.mapSelect].displayName,
-                menu.corner[1] + 55, menu.corner[2] + 420, 0, 2, 2
+                menu.corner[1] + 55, menu.corner[2] + 413, 0, 2, 2
             )
             love.graphics.setColor(1, 1, 1, 1)
             love.graphics.setFont(menu.smallFont)
