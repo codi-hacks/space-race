@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="671">
  <properties>
+    <property name="base_creds" type="int" value="30"/>
+    <property name="gold" type="float" value="28"/>
+    <property name="silver" type="float" value="45"/>
  </properties>
  <tileset firstgid="1" source="star_map.tsx"/>
  <tileset firstgid="2" source="block1.tsx"/>
@@ -49,9 +52,6 @@
   <object id="118" name="player" x="152" y="196">
    <properties>
     <property name="checkpoints" type="int" value="12"/>
-    <property name="base_creds" type="int" value="30"/>
-    <property name="gold" type="float" value="28"/>
-    <property name="silver" type="float" value="45"/>
    </properties>
    <point/>
   </object>

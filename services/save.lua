@@ -39,9 +39,11 @@ save.read = function()
         -- Check for errors
         else
             print('Error when loading save data: ' .. message)
+            state.unlocked_maps =  1
         end
     else
         print('No save file found!\nEither this is your first time, or your save data has done a Houdini.')
+        state.unlocked_maps =  1
     end
 end
 

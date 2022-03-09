@@ -69,10 +69,6 @@ local load = function(map_name, ship_index)
                 if obj.name == 'player' then
                     -- Set the ship type to the specified index
                     obj.ship_type = ship_index
-                    -- Set the State map variables
-                    State.base_creds = tonumber(obj.base_creds)
-                    State.silver = tonumber(obj.silver)
-                    State.gold = tonumber(obj.gold)
                 end
             end
             active_map.layers[layer_idx].objects = Tmx.load_fixtures(State.world, layer, layer_idx, Entity.spawn)
@@ -99,12 +95,23 @@ local unload = function(map_name)
     maps[map_name].quads = nil
 end
 
+local function set_state_map_data(mapNumber)
+    if mapNumber > -1 then
+        State.base_creds = maps[mapList[mapNumber].filename].properties.base_creds
+        State.silver = maps[mapList[mapNumber].filename].properties.silver
+        State.gold = maps[mapList[mapNumber].filename].properties.gold
+    end
+end
+
 local loadMap = function(mapNumber)
     --[[
     This function is necessary due to how entities are destroyed in box2d.
     For some reason, setting Entity.list = {} soft-locks the game.
     So instead we must loop through the entity table and delete them one by one.
     ]]--
+
+    set_state_map_data(mapNumber)
+
     for index = #Entity.list, 1, -1 do
         Entity.list[index].fixture:destroy()
         Entity.list[index].body:destroy()

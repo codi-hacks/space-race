@@ -215,7 +215,8 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
   -- This will be our map's final table:
   local parsed_map = {
     layers = {},
-    tilesets = {}
+    tilesets = {},
+    properties = {}
   }
   -- We get an array of elements, but only need the map element
   local parsed_xml = Xml.parse(raw_file_content)[2]
@@ -240,11 +241,20 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
   parsed_map.render_order = parsed_xml.xarg.renderorder
   parsed_map.tile_height = tonumber(parsed_xml.xarg.tileheight)
   parsed_map.tile_width = tonumber(parsed_xml.xarg.tilewidth)
+
   -- This will save doing the calculation in-game
   parsed_map.pixel_height = parsed_map.rows * parsed_map.tile_height
   parsed_map.pixel_width = parsed_map.columns * parsed_map.tile_width
   for _, element in ipairs(parsed_xml) do
-    if element.label == 'layer' then
+    if element.label == 'properties' then
+        for _, arg in ipairs(element) do
+            if arg.xarg.type == 'int' or arg.xarg.type == 'float' then
+                parsed_map.properties[arg.xarg.name] = tonumber(arg.xarg.value)
+            else
+                parsed_map.properties[argt.xarg.name] = arg.xarg.value
+            end
+        end
+    elseif element.label == 'layer' then
       table.insert(parsed_map.layers, parse_tile_layer(element, error_suffix))
     elseif element.label == 'objectgroup' then
       table.insert(parsed_map.layers, parse_object_layer(element))
@@ -261,6 +271,9 @@ local parse = function(file_name, raw_file_content, map_directory, tileset_table
       table.insert(parsed_map.tilesets, tileset_tables[element.xarg.source])
     elseif element.label == 'tileset' then
       table.insert(parsed_map.tilesets, parse_tileset(element, error_suffix))
+    -- "Custom Properties" set at the map level
+    elseif element.label == 'property' then
+
     end
   end
   assert(

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="11">
  <properties>
+    <property name="base_creds" type="int" value="10"/>
+    <property name="gold" type="float" value="1"/>
+    <property name="silver" type="float" value="2"/>
  </properties>
  <tileset firstgid="1" source="star_map.tsx"/>
  <layer id="1" name="Background" width="20" height="20">
@@ -17,9 +20,6 @@
   </object>
   <object id="3" name="player" type="entity" x="174.667" y="156.333">
     <properties>
-        <property name="base_creds" type="int" value="10"/>
-        <property name="gold" type="float" value="1"/>
-        <property name="silver" type="float" value="2"/>
     </properties>
    <point/>
   </object>
