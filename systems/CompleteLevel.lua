@@ -8,12 +8,6 @@ local Sounds = require 'services/sounds'
 local State = require 'services/state'
 local Timer = require 'services/timer'
 
-local Tmx = require('lib/tmx')
-local map_directory = '/maps'
-local maps = Tmx.get_map_tables(map_directory)
-
-local mapList = require 'maps/mapList'
-
  -- Very poorly designed function to get credits and unlock next maps
 local function update_creds()
      -- base credit amount for finishing the map
