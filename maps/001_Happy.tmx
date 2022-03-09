@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="11">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="13">
  <properties>
-    <property name="base_creds" type="int" value="10"/>
-    <property name="gold" type="float" value="1"/>
-    <property name="silver" type="float" value="2"/>
+  <property name="base_creds" type="int" value="10"/>
+  <property name="gold" type="float" value="1"/>
+  <property name="silver" type="float" value="2"/>
  </properties>
  <tileset firstgid="1" source="star_map.tsx"/>
  <layer id="1" name="Background" width="20" height="20">
@@ -12,21 +12,31 @@
   </data>
  </layer>
  <objectgroup id="2" name="Objects">
+  <properties>
+   <property name="checkpoints" type="int" value="1"/>
+  </properties>
   <object id="1" name="planet" type="entity" x="504.667" y="78.333">
    <properties>
     <property name="radius" type="int" value="15"/>
    </properties>
    <point/>
   </object>
-  <object id="3" name="player" type="entity" x="174.667" y="156.333">
-    <properties>
-    </properties>
+  <object id="3" name="player" type="entity" x="264.839" y="297.181">
+   <properties>
+    <property name="checkpoints" type="int" value="1"/>
+   </properties>
    <point/>
   </object>
   <object id="10" name="planet" type="entity" x="593.108" y="564.864">
    <properties>
     <property name="gravitational_mass" type="int" value="5000"/>
    </properties>
+   <point/>
+  </object>
+  <object id="11" name="checkpoint-ball" x="537.308" y="132.65">
+   <point/>
+  </object>
+  <object id="12" name="checkpoint" x="415.091" y="93.8985">
    <point/>
   </object>
  </objectgroup>

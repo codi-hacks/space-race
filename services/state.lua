@@ -7,6 +7,7 @@ State.debugOn = false
 
 -- Active map stuff
 State.activeMap = -1
+-- True values loaded in map->loadmap
 State.base_creds = 0 -- Base creds for beating active map
 State.silver = 0.0 -- Time to beat to get x2 cred + unlock next map
 State.gold = 0.0  -- Time to beat to get x3 cred + unlock next map
