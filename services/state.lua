@@ -4,7 +4,12 @@ local State = {}
 
 State.paused = true
 State.debugOn = false
+
+-- Active map stuff
 State.activeMap = -1
+State.base_creds = 0 -- Base creds for beating active map
+State.silver = 0.0 -- Time to beat to get x2 cred + unlock next map
+State.gold = 0.0  -- Time to beat to get x3 cred + unlock next map
 
 State.menu = {} -- Initialized in /menu/menu.lua
 
