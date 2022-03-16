@@ -248,11 +248,11 @@ ship_menu.draw_unlock_store = function(corner)
     end
     love.graphics.setFont(ship_menu.x2p5font)
     local title_string = 'Unlock for ' .. price .. ' Credits?'
-    love.graphics.printf(title_string, corner[1] + 155, corner[2] + 210,  500, "center", 0, 1, 1)
+    love.graphics.printf(title_string, corner[1] + 100, corner[2] + 210,  600, "center", 0, 1, 1)
     love.graphics.setColor(1, 1, 1, 1)
     local credit_string = 'You have ' .. State.credits .. " Credits"
     love.graphics.setFont(ship_menu.x2font)
-    love.graphics.printf(credit_string, corner[1] + 260, corner[2] + 260,  300, "center", 0, 1, 1)
+    love.graphics.printf(credit_string, corner[1] + 100, corner[2] + 260,  600, "center", 0, 1, 1)
 
     -- Draw preview of the ship in the center
     -- Center ship variables
