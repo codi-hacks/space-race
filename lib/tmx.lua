@@ -5,8 +5,6 @@ local Love = love
 local Xml = require('lib/xml')
 local Util = require('lib/util')
 
-local State = require('services/state')
-
 -- Typical parsed map table:
 -- {
 --   columns = 2,
@@ -309,29 +307,6 @@ local get_map_tables = function(map_directory, map_file_ext)
   end
 
   return map_tables
-end
-
-local draw_tiles = function(layer, map)
-  for i, tile in ipairs(layer.data) do
-    -- Skip unset tiles
-    if tile ~= 0 then
-      local tile_pos_x = map.tile_width * ((i - 1) % map.columns)
-      local tile_pos_y = map.tile_height * math.floor((i - 1) / map.columns)
-
-      if tile_pos_x + map.tile_width > State.camera.pos_x and tile_pos_x < State.camera.pos_x + State.camera.window_width then
-        if tile_pos_y + map.tile_height > State.camera.pos_y and tile_pos_y < State.camera.pos_y + State.camera.window_height then
-            local _, _, _, texture_height = map.quads[tile].quad:getViewport()
-            Love.graphics.draw(
-                map.quads[tile].image,
-                map.quads[tile].quad,
-                tile_pos_x,
-                -- Tiled counts image y position from bottom to top
-                tile_pos_y - texture_height + map.tile_height
-            )
-        end
-    end
-    end
-  end
 end
 
 local load_quads = function(map)
