@@ -39,11 +39,11 @@ local draw_tiles = function(layer, map)
                 )then
                     local _, _, _, texture_height = map.quads[tile].quad:getViewport()
                     love.graphics.draw(
-                    map.quads[tile].image,
-                    map.quads[tile].quad,
-                    tile_pos_x,
-                    -- Tiled counts image y position from bottom to top
-                    tile_pos_y - texture_height + map.tile_height
+                        map.quads[tile].image,
+                        map.quads[tile].quad,
+                        tile_pos_x,
+                        -- Tiled counts image y position from bottom to top
+                        tile_pos_y - texture_height + map.tile_height
                     )
                 end
             end
