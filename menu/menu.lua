@@ -166,9 +166,10 @@ menu.key_map = {
     end,
     ['return'] = function()
         if State.menu.state == 'ship_select' then
-
-                shipMenu.load_ship()
-                menu.load_map()
+                -- Only load the map if ship is unlocked
+                if shipMenu.enter() then
+                    menu.load_map()
+                end
         else
             -- If map is unlocked - J.R.C 3/8/22
             if menu.mapSelect <= State.unlocked_maps then

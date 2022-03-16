@@ -29,12 +29,12 @@ save.read = function()
         if data then
             state.credits = data.credits or 0
             timer.timesTable = data.times or {}
-            state.activeShip = data.lastShip or 1
+            state.activeShip = data.lastShip or 2
             camera.resize(data.windowScale or 1)
             state.volume = data.volume or 1; love.audio.setVolume(state.volume)
 
-
             state.unlocked_maps = data.unlocked_maps or 1
+            state.unlocked_ships = data.unlocked_ships or {2}
 
         -- Check for errors
         else
@@ -61,6 +61,7 @@ save.write = function()
     data.volume = state.volume
 
     data.unlocked_maps = state.unlocked_maps
+    data.unlocked_ships = state.unlocked_ships
 
     -- Serialize data
     local serializedData = Serialize(data)

@@ -18,20 +18,18 @@ HUD.draw = function()
     -- Draw time to beat to unlock next map
     if State.seconds <= State.gold then
         love.graphics.print(
-            "Beat " .. timer.convertSeconds(State.gold) ..
-            " for " .. State.base_creds * 3 .. " credits",
+            State.base_creds * 3 .. " credits",
             corner[1], corner[2] + 570
         )
         love.graphics.draw(textures['gold'], corner[1] + 768, corner[2])
     elseif State.seconds <= State.silver then
         love.graphics.print(
-            "Beat " .. timer.convertSeconds(State.silver) ..
-            " for " .. State.base_creds * 2 .. " credits",
+            State.base_creds * 2 .. " credits",
             corner[1], corner[2] + 570
         )
         love.graphics.draw(textures['silver'], corner[1] + 768, corner[2])
     else
-        love.graphics.print("Beat the map for " .. State.base_creds  .. " credits", corner[1], corner[2] + 570)
+        love.graphics.print(State.base_creds  .. " credits", corner[1], corner[2] + 570)
     end
 
 end

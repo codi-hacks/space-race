@@ -15,7 +15,9 @@ State.gold = 0.0  -- Time to beat to get x3 cred + unlock next map
 State.menu = {} -- Initialized in /menu/menu.lua
 
 -- Ship stuff duh - J.R.C 2/2/22
-State.activeShip = 1
+State.activeShip = 2
+-- Ships that are currently unlocked
+State.unlocked_ships = {2} -- Starts off with only ship two
 
 State.camera = {} -- Initialized in /camera.lua
 
