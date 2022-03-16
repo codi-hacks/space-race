@@ -3,7 +3,6 @@
 
 local System = require 'lib/system'
 local State = require 'services/state'
-local inspect = require 'lib/inspect'
 
 local components = {
     'body',
@@ -28,7 +27,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
         local low_y, high_y
         -- If entity is a polygon
         if shape:getType() == 'polygon' then
-            cull_points = {body:getWorldPoints(shape:getPoints())}
+            local cull_points = {body:getWorldPoints(shape:getPoints())}
             -- Find min and max on each axis
             for i, v in pairs(cull_points) do
                if i == 1 then
@@ -124,7 +123,6 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
 
             love.graphics.setColor(255, 255, 255, 255)
         end
-    else
     end
 end
 
