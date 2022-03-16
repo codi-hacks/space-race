@@ -88,6 +88,24 @@ local function unlock_ship()
     end
 end
 
+local function unlock_all_ships()
+    for i, ship in ipairs(shipList) do
+        local unlocked = false
+        for k, v in ipairs(State.unlocked_ships) do
+            if i == v then
+                unlocked = true
+                break
+            end
+        end
+
+        if not unlocked then
+            table.insert(State.unlocked_ships, i)
+            -- Save the ship and new credit amount
+        end
+    end
+    Save.write()
+end
+
 ship_menu.enter = function()
 
     if ship_menu.unlock_store ~= true then
@@ -110,6 +128,10 @@ ship_menu.enter = function()
     end
 end
 ship_menu.key_map = {
+    -- DEBUG REMOVE BEFORE RELEASE
+    a = function()
+        unlock_all_ships()
+    end,
     escape = function()
         if ship_menu.unlock_store then
             ship_menu.unlock_store = false
