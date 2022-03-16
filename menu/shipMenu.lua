@@ -89,9 +89,9 @@ local function unlock_ship()
 end
 
 local function unlock_all_ships()
-    for i, ship in ipairs(shipList) do
+    for i, _ in ipairs(shipList) do
         local unlocked = false
-        for k, v in ipairs(State.unlocked_ships) do
+        for _, v in ipairs(State.unlocked_ships) do
             if i == v then
                 unlocked = true
                 break
