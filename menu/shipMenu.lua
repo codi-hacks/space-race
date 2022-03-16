@@ -233,8 +233,8 @@ ship_menu.draw_unlock_store = function(corner)
     -- Draw background rect
     local verticies = {
         100 + corner[1], 200 + corner[2],
-        100 + corner[1], 405 + corner[2],
-        700 + corner[1], 405 + corner[2],
+        100 + corner[1], 398 + corner[2],
+        700 + corner[1], 398 + corner[2],
         700 + corner[1], 200 + corner[2] }
     love.graphics.polygon('fill', verticies)
     -- Draw text stating price of ship
