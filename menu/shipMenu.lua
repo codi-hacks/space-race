@@ -195,7 +195,10 @@ ship_menu.load = function()
     ship_menu.shipSelect = State.activeShip
 
     ship_menu.title_font = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
+    ship_menu.medium_font = love.graphics.newFont('assets/gnevejpixel.ttf', 24)
     ship_menu.font = love.graphics.newFont(14)
+    ship_menu.x2font = love.graphics.newFont(28)
+    ship_menu.x2p5font = love.graphics.newFont(35)
     ship_menu.description_font = love.graphics.newFont(12)
 
     -- Flag to present unlock store
@@ -210,6 +213,7 @@ ship_menu.unload = function()
     ship_menu.shipSelect = nil
 
     ship_menu.title_font = nil
+    ship_menu.medium_font = nil
     ship_menu.font = nil
     ship_menu.description_font = nil
 
@@ -242,12 +246,13 @@ ship_menu.draw_unlock_store = function(corner)
     else
         love.graphics.setColor(1, 0, 0, 1)
     end
-    love.graphics.setFont(ship_menu.font)
+    love.graphics.setFont(ship_menu.x2p5font)
     local title_string = 'Unlock for ' .. price .. ' Credits?'
-    love.graphics.printf(title_string, corner[1] + 32, corner[2] + 210,  300, "center", 0, 2.5, 2.5)
+    love.graphics.printf(title_string, corner[1] + 155, corner[2] + 210,  500, "center", 0, 1, 1)
     love.graphics.setColor(1, 1, 1, 1)
     local credit_string = 'You have ' .. State.credits .. " Credits"
-    love.graphics.printf(credit_string, corner[1] + 208 / 2, corner[2] + 260,  300, "center", 0, 2, 2)
+    love.graphics.setFont(ship_menu.x2font)
+    love.graphics.printf(credit_string, corner[1] + 260, corner[2] + 260,  300, "center", 0, 1, 1)
 
     -- Draw preview of the ship in the center
     -- Center ship variables
@@ -283,18 +288,19 @@ ship_menu.draw_unlock_store = function(corner)
 
 
     -- Draw Yes/No options
+    love.graphics.setFont(ship_menu.x2font)
     if ship_menu.unlock_option == 0 then
-        love.graphics.printf("> No <", corner[1] + 160, corner[2] + 320,  300, "center", 0, 2.5, 2.5)
+        love.graphics.printf("> No <", corner[1] + 370, corner[2] + 320,  300, "center", 0, 1.0, 1.0)
         if can_afford ~= true then
             love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
         end
-        love.graphics.printf("Yes", corner[1] - 110, corner[2] + 320,  300, "center", 0, 2.5, 2.5)
+        love.graphics.printf("Yes", corner[1] + 130, corner[2] + 320,  300, "center", 0, 1.0, 1.0)
     else
-        love.graphics.printf("No", corner[1] + 160, corner[2] + 320,  300, "center", 0, 2.5, 2.5)
+        love.graphics.printf("No", corner[1] + 370, corner[2] + 320,  300, "center", 0, 1.0, 1.0)
         if can_afford ~= true then
             love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
         end
-        love.graphics.printf("> Yes <", corner[1] - 110, corner[2] + 320,  300, "center", 0, 2.5, 2.5)
+        love.graphics.printf("> Yes <", corner[1] + 130, corner[2] + 320,  300, "center", 0, 1.0, 1.0)
     end
 
 
@@ -311,9 +317,9 @@ ship_menu.draw = function()
 
     -- Draw text
     if State.menu.blink then
-        love.graphics.setFont(ship_menu.font)
+        love.graphics.setFont(ship_menu.x2font)
         local name = shipList[ship_menu.shipSelect].displayName
-        love.graphics.printf(name, corner[1] + 208 / 2, corner[2] + 143,  300, "center", 0, 2, 2)
+        love.graphics.printf(name, corner[1] + 252, corner[2] + 143,  300, "center", 0, 1, 1)
        -- love.graphics.print(name, corner[1] + 400 - string.len(name) * 8, corner[2] + 145, 0, 2, 2)
     end
     love.graphics.setFont(ship_menu.title_font)
