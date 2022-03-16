@@ -29,8 +29,14 @@ local draw_tiles = function(layer, map)
             local tile_pos_x = map.tile_width * ((i - 1) % map.columns)
             local tile_pos_y = map.tile_height * math.floor((i - 1) / map.columns)
 
-            if tile_pos_x + map.tile_width > State.camera.pos_x and tile_pos_x < State.camera.pos_x + State.camera.window_width then
-                if tile_pos_y + map.tile_height > State.camera.pos_y and tile_pos_y < State.camera.pos_y + State.camera.window_height then
+            if(
+                tile_pos_x + map.tile_width > State.camera.pos_x and
+                tile_pos_x < State.camera.pos_x + State.camera.window_width
+            )then
+                if(
+                    tile_pos_y + map.tile_height > State.camera.pos_y and
+                    tile_pos_y < State.camera.pos_y + State.camera.window_height
+                )then
                     local _, _, _, texture_height = map.quads[tile].quad:getViewport()
                     love.graphics.draw(
                     map.quads[tile].image,
