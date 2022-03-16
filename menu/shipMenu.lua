@@ -71,9 +71,9 @@ local function unlock_ship()
     local price = shipList[ship_menu.shipSelect].price
     local creds = State.credits
 
-    local can_afford = price < creds
+    local can_afford = price <= creds
 
-    if can_afford == false then
+    if not can_afford then
         -- Play a denial sound here
         love.audio.stop()
         love.audio.play(sounds.chirp_deny)
@@ -236,7 +236,7 @@ ship_menu.draw_unlock_store = function(corner)
     -- Draw text stating price of ship
     local price = shipList[ship_menu.shipSelect].price
     local creds = State.credits
-    local can_afford = price < creds
+    local can_afford = price <= creds
     if can_afford then
         love.graphics.setColor(0, 1, 0, 1)
     else
