@@ -199,7 +199,7 @@ love.physics.newBody = function()
             self.__y = value
         end,
         setFixedRotation = function() end,
-        getWorldPoints = function() end
+        getWorldPoints = function() return 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 end
     }
 end
 love.physics.newCircleShape = function()
@@ -208,7 +208,7 @@ love.physics.newCircleShape = function()
         getType = function()
             return 'circle'
         end,
-        getPoint = function() end,
+        getPoint = function() return 1,2 end,
         getRadius = function() end
     }
 end
@@ -241,7 +241,7 @@ love.physics.newPolygonShape = function()
             return 'polygon'
         end
         ,
-        getPoints = function() end
+        getPoints = function() return 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 end
     }
 end
 love.physics.newRectangleShape = function()
@@ -250,7 +250,7 @@ love.physics.newRectangleShape = function()
         getType = function()
             return 'polygon'
         end,
-        getPoints = function() end
+        getPoints = function() return 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 end
     }
 end
 love.physics.newWorld = function()
