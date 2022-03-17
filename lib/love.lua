@@ -209,7 +209,7 @@ love.physics.newCircleShape = function()
             return 'circle'
         end,
         getPoint = function() return 1,2 end,
-        getRadius = function() end
+        getRadius = function() return 1 end
     }
 end
 love.physics.newFixture = function(body, shape)
