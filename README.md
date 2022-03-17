@@ -1,6 +1,7 @@
 [![Luacheck](https://github.com/codi-hacks/space-race/actions/workflows/auto-lint.yml/badge.svg?branch=master)](https://github.com/codi-hacks/space-race/actions/workflows/auto-lint.yml)
 [![Unit Tests](https://github.com/codi-hacks/space-race/actions/workflows/unit-tests.yml/badge.svg?branch=master)](https://github.com/codi-hacks/space-race/actions/workflows/unit-tests.yml)
 [![Coverage Status](https://coveralls.io/repos/github/codi-hacks/space-race/badge.svg?branch=)](https://coveralls.io/github/codi-hacks/space-race?branch=)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
 
 # Spaceship Game!
 
