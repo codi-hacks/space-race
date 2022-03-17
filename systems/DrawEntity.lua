@@ -25,6 +25,13 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
     if shape then
         local low_x, high_x
         local low_y, high_y
+        -- I did this to appease unit tests
+        -- Literally no other reason
+        -- I hope it works... AGAIN
+        local cam_x = State.camera.pos_x or 1
+        local cam_y = State.camera.pos_y or 1
+        local s_width = State.camera.window_width or 800
+        local s_height = State.camera.window_height or 600
         -- If entity is a polygon
         if shape:getType() == 'polygon' then
             local cull_points = {body:getWorldPoints(shape:getPoints())}
@@ -56,14 +63,6 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
                 end
                end
             end
-
-            -- I did this to appease unit tests
-            -- Literally no other reason
-            -- I hope it works... AGAIN
-            local cam_x = State.camera.pos_x or 1
-            local cam_y = State.camera.pos_y or 1
-            local s_width = State.camera.window_width or 800
-            local s_height = State.camera.window_height or 600
 
             -- Check if min and max are on screen
             if(
