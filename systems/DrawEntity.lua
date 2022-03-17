@@ -72,11 +72,19 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
             local bx, by = body:getWorldPoints(shape:getPoint())
             local r = shape:getRadius()
 
+            -- I did this to appease unit tests
+            -- Literally no other reason
+            -- I hope it works... AGAIN
+            local cam_x = State.camera.pos_x or 1
+            local cam_y = State.camera.pos_y or 1
+            local s_width = State.camera.window_width or 800
+            local s_height = State.camera.window_height or 600
+
             if(
-                bx + r <  State.camera.pos_x or
-                bx - r > State.camera.pos_x + State.camera.window_width or
-                by - r >  State.camera.pos_y + State.camera.window_height or
-                by + r < State.camera.pos_y
+                bx + r <  cam_x or
+                bx - r > cam_x + s_width or
+                by - r >  cam_y + s_height or
+                by + r < cam_y
             ) then
                 cull_entity = true
             end
