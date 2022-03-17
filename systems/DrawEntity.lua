@@ -57,12 +57,20 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
                end
             end
 
+            -- I did this to appease unit tests
+            -- Literally no other reason
+            -- I hope it works... AGAIN
+            local cam_x = State.camera.pos_x or 1
+            local cam_y = State.camera.pos_y or 1
+            local s_width = State.camera.window_width or 800
+            local s_height = State.camera.window_height or 600
+
             -- Check if min and max are on screen
             if(
-                low_x > State.camera.pos_x + State.camera.window_width or
-                high_x < State.camera.pos_x or
-                high_y < State.camera.pos_y or
-                low_y > State.camera.pos_y + State.camera.window_height
+                low_x > cam_x + s_width or
+                high_x < cam_x or
+                high_y < cam_y or
+                low_y > cam_y + s_height
             ) then
                 cull_entity = true
             end
@@ -71,14 +79,6 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
         else
             local bx, by = body:getWorldPoints(shape:getPoint())
             local r = shape:getRadius()
-
-            -- I did this to appease unit tests
-            -- Literally no other reason
-            -- I hope it works... AGAIN
-            local cam_x = State.camera.pos_x or 1
-            local cam_y = State.camera.pos_y or 1
-            local s_width = State.camera.window_width or 800
-            local s_height = State.camera.window_height or 600
 
             if(
                 bx + r <  cam_x or
