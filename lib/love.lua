@@ -204,7 +204,7 @@ end
 love.physics.newCircleShape = function()
     return {
         'circle',
-        getShape = function()
+        getType = function()
             return 'circle'
         end
     }
@@ -234,16 +234,16 @@ end
 love.physics.newPolygonShape = function()
     return {
         'polygon',
-        getShape = function()
-            return 'circle'
+        getType = function()
+            return 'polygon'
         end
     }
 end
 love.physics.newRectangleShape = function()
     return {
         'polygon',
-        getShape = function()
-            return 'circle'
+        getType = function()
+            return 'polygon'
         end
     }
 end
