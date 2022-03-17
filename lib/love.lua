@@ -208,7 +208,8 @@ love.physics.newCircleShape = function()
         getType = function()
             return 'circle'
         end,
-        getPoint = function() end
+        getPoint = function() end,
+        getRadius = function() end
     }
 end
 love.physics.newFixture = function(body, shape)
