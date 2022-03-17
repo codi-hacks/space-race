@@ -206,7 +206,8 @@ love.physics.newCircleShape = function()
         'circle',
         getType = function()
             return 'circle'
-        end
+        end,
+        getPoint = function() end
     }
 end
 love.physics.newFixture = function(body, shape)
@@ -237,6 +238,8 @@ love.physics.newPolygonShape = function()
         getType = function()
             return 'polygon'
         end
+        ,
+        getPoints = function() end
     }
 end
 love.physics.newRectangleShape = function()
@@ -244,7 +247,8 @@ love.physics.newRectangleShape = function()
         'polygon',
         getType = function()
             return 'polygon'
-        end
+        end,
+        getPoints = function() end
     }
 end
 love.physics.newWorld = function()
