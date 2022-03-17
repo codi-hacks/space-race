@@ -29,7 +29,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
         if shape:getType() == 'polygon' then
             local cull_points = {body:getWorldPoints(shape:getPoints())}
             -- Find min and max on each axis
-            for i, v in pairs(cull_points) do
+            for i, v in ipairs(cull_points) do
                if i == 1 then
                 low_x = v
                 high_x = v
@@ -77,7 +77,7 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
                 bx - r > State.camera.pos_x + State.camera.window_width or
                 by - r >  State.camera.pos_y + State.camera.window_height or
                 by + r < State.camera.pos_y
-            )then
+            ) then
                 cull_entity = true
             end
 

@@ -387,7 +387,6 @@ end
 
 
 return {
-  draw_tiles = draw_tiles,
   get_map_tables = get_map_tables,
   load_fixtures = load_fixtures,
   load_quads = load_quads

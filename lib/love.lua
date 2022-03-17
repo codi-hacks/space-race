@@ -202,7 +202,12 @@ love.physics.newBody = function()
     }
 end
 love.physics.newCircleShape = function()
-    return 'circle'
+    return {
+        'circle',
+        getShape = function()
+            return 'circle'
+        end
+    }
 end
 love.physics.newFixture = function(body, shape)
     return {
@@ -227,10 +232,20 @@ love.physics.newFixture = function(body, shape)
     }
 end
 love.physics.newPolygonShape = function()
-    return 'polygon'
+    return {
+        'polygon',
+        getShape = function()
+            return 'circle'
+        end
+    }
 end
 love.physics.newRectangleShape = function()
-    return 'rectangle'
+    return {
+        'polygon',
+        getShape = function()
+            return 'circle'
+        end
+    }
 end
 love.physics.newWorld = function()
     local world = {}
