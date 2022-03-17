@@ -198,7 +198,8 @@ love.physics.newBody = function()
         setY = function(self, value)
             self.__y = value
         end,
-        setFixedRotation = function() end
+        setFixedRotation = function() end,
+        getWorldPoints = function() end
     }
 end
 love.physics.newCircleShape = function()
