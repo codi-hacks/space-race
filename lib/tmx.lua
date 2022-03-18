@@ -309,24 +309,6 @@ local get_map_tables = function(map_directory, map_file_ext)
   return map_tables
 end
 
-local draw_tiles = function(layer, map)
-  for i, tile in ipairs(layer.data) do
-    -- Skip unset tiles
-    if tile ~= 0 then
-      local tile_pos_x = map.tile_width * ((i - 1) % map.columns)
-      local tile_pos_y = map.tile_height * math.floor((i - 1) / map.columns)
-      local _, _, _, texture_height = map.quads[tile].quad:getViewport()
-      Love.graphics.draw(
-        map.quads[tile].image,
-        map.quads[tile].quad,
-        tile_pos_x,
-        -- Tiled counts image y position from bottom to top
-        tile_pos_y - texture_height + map.tile_height
-      )
-    end
-  end
-end
-
 local load_quads = function(map)
   local quads = {}
 
@@ -405,7 +387,6 @@ end
 
 
 return {
-  draw_tiles = draw_tiles,
   get_map_tables = get_map_tables,
   load_fixtures = load_fixtures,
   load_quads = load_quads

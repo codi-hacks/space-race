@@ -20,43 +20,116 @@ local system = function(body, draw_layer, shape, sprite, spritesheet, gravitatio
         return
     end
 
-    if spritesheet then
-        local offset_x = sprite.offset_x or spritesheet.offset_x or 0
-        local offset_y = sprite.offset_y or spritesheet.offset_y or offset_x
-        sprite:draw(
-            spritesheet.image,
-            body:getX(),
-            body:getY(),
-            body:getAngle(),
-            spritesheet.scale_x or 1,
-            spritesheet.scale_y or spritesheet.scale_x or 1,
-            offset_x,
-            offset_y
-        )
+    -- Render culling - J.R.C 3/16/22
+    local cull_entity = false
+    if shape then
+        local low_x, high_x
+        local low_y, high_y
+        -- I did this to appease unit tests
+        -- Literally no other reason
+        -- I hope it works... AGAIN
+        local cam_x = State.camera.pos_x or 1
+        local cam_y = State.camera.pos_y or 1
+        local s_width = State.camera.window_width or 800
+        local s_height = State.camera.window_height or 600
+        -- If entity is a polygon
+        if shape:getType() == 'polygon' then
+            local cull_points = {body:getWorldPoints(shape:getPoints())}
+            -- Find min and max on each axis
+            for i, v in ipairs(cull_points) do
+               if i == 1 then
+                low_x = v
+                high_x = v
+               elseif i == 2 then
+                low_y = v
+                high_y = v
+               else
+                -- If it's an x coordinate
+                if i % 2 == 1 then
+                    if v < low_x then
+                        low_x = v
+                    end
+                    if v > high_x then
+                        high_x = v
+                    end
+                -- If it's a y coordinate
+                else
+                    if v < low_y then
+                        low_y = v
+                    end
+                    if v > high_y then
+                        high_y = v
+                    end
+                end
+               end
+            end
+
+            -- Check if min and max are on screen
+            if(
+                low_x > cam_x + s_width or
+                high_x < cam_x or
+                high_y < cam_y or
+                low_y > cam_y + s_height
+            ) then
+                cull_entity = true
+            end
+
+        -- If entity is a circle
+        else
+            local bx, by = body:getWorldPoints(shape:getPoint())
+            local r = shape:getRadius()
+
+            if(
+                bx + r <  cam_x or
+                bx - r > cam_x + s_width or
+                by - r >  cam_y + s_height or
+                by + r < cam_y
+            ) then
+                cull_entity = true
+            end
+
+        end
     end
 
-    -- Draw fixture shape edges in debug mode
-    if shape and State.debugOn then
-        love.graphics.setColor(160, 72, 14, 255)
-
-        if shape:getType() == 'polygon' then
-            love.graphics.polygon(
-                'line',
-                body:getWorldPoints(shape:getPoints())
-            )
-        else
-            if gravitational_mass then
-                love.graphics.setColor(gravitational_mass / 10, 0.1, 0.1, 1)
-            end
-            love.graphics.circle(
-                'fill',
+    if not cull_entity then
+        if spritesheet then
+            local offset_x = sprite.offset_x or spritesheet.offset_x or 0
+            local offset_y = sprite.offset_y or spritesheet.offset_y or offset_x
+            sprite:draw(
+                spritesheet.image,
                 body:getX(),
                 body:getY(),
-                shape:getRadius()
+                body:getAngle(),
+                spritesheet.scale_x or 1,
+                spritesheet.scale_y or spritesheet.scale_x or 1,
+                offset_x,
+                offset_y
             )
         end
 
-        love.graphics.setColor(255, 255, 255, 255)
+        -- Draw fixture shape edges in debug mode
+        if shape and State.debugOn then
+            love.graphics.setColor(160, 72, 14, 255)
+
+            if shape:getType() == 'polygon' then
+                love.graphics.polygon(
+                    'line',
+                    body:getWorldPoints(shape:getPoints())
+                )
+            else
+                if gravitational_mass then
+                    love.graphics.setColor(gravitational_mass / 10, 0.1, 0.1, 1)
+                end
+                love.graphics.circle(
+                    'fill',
+                    body:getX(),
+                    body:getY(),
+                    shape:getRadius()
+                )
+            end
+
+            love.graphics.setColor(255, 255, 255, 255)
+        end
     end
 end
 
