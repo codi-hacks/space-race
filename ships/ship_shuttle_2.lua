@@ -39,6 +39,8 @@ return {
     max_spin = 5.0,
     max_velocity = 350.0,
 
+    price = 600,
+
     -- Describes y coordinate of the last row
     -- Of the actual ship for drawing preview
     bottom_y = 32

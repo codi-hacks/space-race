@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="35">
+ <properties>
+  <property name="base_creds" type="int" value="15"/>
+  <property name="gold" type="float" value="2"/>
+  <property name="silver" type="float" value="4"/>
+ </properties>
  <tileset firstgid="1" source="star_map.tsx"/>
  <tileset firstgid="2" source="block1.tsx"/>
  <layer id="1" name="Background" width="30" height="30">

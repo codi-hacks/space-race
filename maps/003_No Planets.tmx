@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="110">
+  <properties>
+    <property name="base_creds" type="int" value="25"/>
+    <property name="gold" type="float" value="30"/>
+    <property name="silver" type="float" value="50"/>
+ </properties>
  <tileset firstgid="1" source="star_map.tsx"/>
  <tileset firstgid="2" source="block1.tsx"/>
  <layer id="1" name="Background" width="128" height="128">
@@ -32,6 +37,9 @@
    <properties>
     <property name="checkpoints" type="int" value="9"/>
     <property name="ship_type" type="int" value="3"/>
+    <property name="base_creds" type="int" value="25"/>
+    <property name="gold" type="float" value="30"/>
+    <property name="silver" type="float" value="50"/>
    </properties>
    <point/>
   </object>

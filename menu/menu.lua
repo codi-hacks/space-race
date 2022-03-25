@@ -7,6 +7,8 @@ local settingsMenu = require('menu/settingsMenu')
 local save = require('services/save')
 local timer = require('services/timer')
 
+local textures = require('services/textures')
+
 local menu = {}
 
 State.menu.state = nil
@@ -97,6 +99,7 @@ menu.load = function()
 
     State.menu.state = 'map_select'
 
+
     menu.smallFont = love.graphics.newFont('assets/gnevejpixel.ttf', 30)
     menu.bigFont = love.graphics.newFont('assets/gnevejpixel.ttf', 60)
 
@@ -156,16 +159,27 @@ menu.key_map = {
         menu.down()
     end,
     right = function()
+
         State.menu.state = 'settings'
         love.audio.stop(sounds.menu_click)
         love.audio.play(sounds.menu_click)
     end,
     ['return'] = function()
         if State.menu.state == 'ship_select' then
-            shipMenu.load_ship()
-            menu.load_map()
+                -- Only load the map if ship is unlocked
+                if shipMenu.enter() then
+                    menu.load_map()
+                end
         else
-            State.menu.state = 'ship_select'
+            -- If map is unlocked - J.R.C 3/8/22
+            if menu.mapSelect <= State.unlocked_maps then
+                State.menu.state = 'ship_select'
+                love.audio.play(sounds.chirp_up)
+            else
+                -- Play a denial sound here
+                love.audio.stop()
+                love.audio.play(sounds.chirp_deny)
+            end
         end
     end
 }
@@ -173,17 +187,14 @@ menu.key_map = {
 menu.load_map = function()
     -- If selected map is the same, just unpause...
     --[[
-
             Removed unpause, map is reloaded every time you select now
             - J.R.C 2/7/22
-
             if State.activeMap == menu.mapSelect then
                 State.paused = not State.paused
                 menu.unload()
                 love.audio.play(sounds.chirp_down)
              -- ...or else load a new map
             else
-
     ]]
     --Entity.list = {}
 
@@ -215,25 +226,42 @@ menu.draw = function()
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.draw(menu.titleImage, verticies[1], verticies[2])
 
-        -- Draw text
-        if State.menu.blink then
-            love.graphics.print(State.credits, menu.corner[1] + 700, menu.corner[2] + 70)
+        -- If map is not unlocked - J.R.C 3/8/22
+        if menu.mapSelect > State.unlocked_maps then
+            local verts = {
+                500 + menu.corner[1], 160 + menu.corner[2],
+                500 + menu.corner[1], 260 + menu.corner[2],
+                750 + menu.corner[1], 260 + menu.corner[2],
+                750 + menu.corner[1], 160 + menu.corner[2]
+            }
+            love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
+            love.graphics.polygon('fill', verts)
+            -- Draw lock icon
+            love.graphics.draw(textures['lock'], menu.corner[1] + 505, menu.corner[2] + 170)
+            love.graphics.draw(textures['lock'], menu.corner[1] + 713, menu.corner[2] + 170)
 
-            -- Highlight map name in red if it is the active map.
-            if menu.mapSelect == State.activeMap then
-                love.graphics.setColor(1, 0, 0.25, 1)
-            end
-            love.graphics.setFont(menu.bigFont)
-            love.graphics.print(mapList[menu.mapSelect].displayName, menu.corner[1] + 55, menu.corner[2] + 410)
-            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.setColor(1, 0, 0, 1)
+            love.graphics.print('Map', menu.corner[1] + 601, menu.corner[2] + 170)
+            love.graphics.print('Locked', menu.corner[1] + 575, menu.corner[2] + 215)
+            love.graphics.setColor(0.2, 0.2, 0.2, 0.9)
         end
-
+         -- Draw text
+         if State.menu.blink then
+            love.graphics.print(
+                mapList[menu.mapSelect].displayName,
+                menu.corner[1] + 55, menu.corner[2] + 413, 0, 2, 2
+            )
+            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.setFont(menu.smallFont)
+            love.graphics.print(State.credits, menu.corner[1] + 655, menu.corner[2] + 70)
+        end
+        love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
+        love.graphics.print('Credits: ', menu.corner[1] + 505, menu.corner[2] + 70)
         love.graphics.setFont(menu.bigFont)
         love.graphics.print('SPACE RACE', menu.corner[1] + 25, menu.corner[2] + 110)
-        love.graphics.setFont(menu.smallFont)
-        love.graphics.print('Credits: ', menu.corner[1] + 550, menu.corner[2] + 70)
 
         -- Draw best times and current time.
+        love.graphics.setFont(menu.smallFont)
         displayTime()
 
         -- Display navigation bar

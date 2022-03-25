@@ -18,6 +18,12 @@ timer.convertSeconds = function(timeInSeconds)
     -- Maps hopefully won't be 10+ minutes long and milliseconds are too fast to care about.
     if seconds < 10 then timeString = timeString .. '0' end
     timeString = timeString .. seconds .. ':' .. milliseconds
+    if milliseconds < 10 then
+        timeString = timeString .. "0"
+    end
+    if milliseconds < 100 then
+        timeString = timeString .. "0"
+    end
 
     return timeString
 end
